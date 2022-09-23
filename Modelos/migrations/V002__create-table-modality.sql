@@ -1,0 +1,9 @@
+CREATE TABLE modality (
+  id BIGINT NOT NULL,
+  championship_id BIGINT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_modality_championship1
+    FOREIGN KEY (championship_id)
+    REFERENCES championship (id)
+);

@@ -1,0 +1,7 @@
+CREATE TABLE championship (
+  id BIGINT NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  date DATE NOT NULL,
+  locale VARCHAR(150) NOT NULL,
+  PRIMARY KEY (id)
+);
