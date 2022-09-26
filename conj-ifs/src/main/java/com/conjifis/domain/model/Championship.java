@@ -1,11 +1,14 @@
 package com.conjifis.domain.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -34,4 +37,7 @@ public class Championship {
 	@NotBlank
 	@Size(max = 150)
 	private String locale;
+	
+	@OneToMany(mappedBy = "championship", cascade = CascadeType.ALL)
+	private Set<Modality> modalities;
 }

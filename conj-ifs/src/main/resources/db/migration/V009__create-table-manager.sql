@@ -1,0 +1,6 @@
+CREATE TABLE manager (
+  id BIGINT NOT NULL,
+  login VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+);
