@@ -1,5 +1,6 @@
 package com.conjifis.domain.model;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -38,5 +39,6 @@ public class Stage {
 	private NameStage nameStage;
 	
 	@OneToMany(mappedBy = "stage", cascade = CascadeType.ALL)
-	private Set<Bracket> brackets;
+	private Set<Bracket> brackets = new LinkedHashSet<>();
+	
 }

@@ -1,5 +1,6 @@
 package com.conjifis.domain.model;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -41,9 +42,9 @@ public class Team {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-	private Set<Compete> competes;
+	private Set<Compete> competes = new LinkedHashSet<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
-	private Set<Dispute> disputes;
+	private Set<Dispute> disputes = new LinkedHashSet<>();
 }

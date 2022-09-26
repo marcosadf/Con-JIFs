@@ -1,6 +1,7 @@
 package com.conjifis.domain.model;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,5 +40,5 @@ public class Championship {
 	private String locale;
 	
 	@OneToMany(mappedBy = "championship", cascade = CascadeType.ALL)
-	private Set<Modality> modalities;
+	private Set<Modality> modalities = new LinkedHashSet<>();
 }

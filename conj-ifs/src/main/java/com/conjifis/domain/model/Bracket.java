@@ -1,6 +1,7 @@
 package com.conjifis.domain.model;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -45,7 +46,7 @@ public class Bracket {
 	private Bracket parentBracket;
 	
 	@OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)
-	private Set<Match> matchs;
+	private Set<Match> matchs = new LinkedHashSet<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)

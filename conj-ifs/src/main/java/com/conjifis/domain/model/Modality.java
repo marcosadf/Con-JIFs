@@ -1,5 +1,6 @@
 package com.conjifis.domain.model;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -47,8 +48,8 @@ public class Modality {
 	private Integer groupApprovedNumber;
 	
 	@OneToMany(mappedBy = "modality", cascade = CascadeType.ALL)
-	private Set<Stage> stages;
+	private Set<Stage> stages = new LinkedHashSet<>();
 	
 	@OneToMany(mappedBy = "modality", cascade = CascadeType.ALL)
-	private Set<Team> teams;
+	private Set<Team> teams = new LinkedHashSet<>();
 }

@@ -1,6 +1,7 @@
 package com.conjifis.domain.model;
 
 import java.time.OffsetDateTime;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -38,7 +39,7 @@ public class Match {
 	private OffsetDateTime dateTime;
 	
 	@OneToMany(mappedBy = "match", cascade = CascadeType.ALL)
-	private Set<Dispute> disputes;
+	private Set<Dispute> disputes = new LinkedHashSet<>();
 	
 	@JsonIgnore
 	@ManyToOne
