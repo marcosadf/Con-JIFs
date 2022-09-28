@@ -1,6 +1,6 @@
 package com.conjifis.domain.model;
 
-import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -36,7 +36,7 @@ public class Match {
 	
 	@NotNull
 	@Column(name = "date_time")
-	private OffsetDateTime dateTime;
+	private Date dateTime;
 	
 	@OneToMany(mappedBy = "match", cascade = CascadeType.ALL)
 	private Set<Dispute> disputes = new LinkedHashSet<>();
