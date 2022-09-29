@@ -1,5 +1,8 @@
 package com.conjifis.domain.service;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
@@ -7,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.conjifis.config.LocaleConfig;
 import com.conjifis.domain.exception.BusinessException;
+import com.conjifis.domain.exception.EntityNotFoundException;
 import com.conjifis.domain.model.Championship;
 import com.conjifis.domain.repository.ChampionshipRepository;
 
@@ -25,7 +29,17 @@ public class ChampionshipCatalogService {
 	@Transactional
 	public Championship search(Long championshipId) {
 		return championshipRepository.findById(championshipId)
-				.orElseThrow(() -> new BusinessException(messageSource.getMessage("entity.not.found", null, LocaleContextHolder.getLocale())));
+				.orElseThrow(() -> new EntityNotFoundException(messageSource.getMessage("championship.not.found", null, LocaleContextHolder.getLocale())));
+	}
+	
+	@Transactional
+	public Set<Championship> listAll() {
+		return new HashSet<>(championshipRepository.findAll());
+	}
+	
+	@Transactional
+	public Set<Championship> searchName(Championship championship) {
+		return championshipRepository.findByNameContains(championship.getName());
 	}
 	
 	@Transactional
@@ -40,7 +54,16 @@ public class ChampionshipCatalogService {
 	}
 	
 	@Transactional
-	public void delete(Long championshipId) {
-		championshipRepository.deleteById(championshipId);
+	public Championship edit(Long championshipId, Championship championship) {
+		Championship championshipResearched = search(championshipId);
+		championship.setId(championshipResearched.getId());
+		return save(championship);
+	}
+		
+	@Transactional
+	public Championship delete(Long championshipId) {
+		Championship championship = search(championshipId);
+		championshipRepository.delete(championship);
+		return championship;
 	}
 }

@@ -40,13 +40,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		Problem problem = new Problem();
 		problem.setStatus(status.value());
 		problem.setDateTime(LocalDateTime.now());
-		problem.setTitle("Um ou mais campos estão inválidos. Faça o preenchimento correto e tente novamnete");
+		problem.setTitle(messageSource.getMessage("invalid.fields", null, LocaleContextHolder.getLocale()));
 		problem.setFields(fields);
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 	
 	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity<Object> handleNegocio(EntityNotFoundException ex, WebRequest request) {
+	public ResponseEntity<Object> handleBusiness(EntityNotFoundException ex, WebRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		 
 		Problem problem = new Problem();
@@ -57,7 +57,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 	
 	@ExceptionHandler(BusinessException.class)
-	public ResponseEntity<Object> handleNegocio(BusinessException ex, WebRequest request) {
+	public ResponseEntity<Object> handleBusiness(BusinessException ex, WebRequest request) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		 
 		Problem problem = new Problem();
