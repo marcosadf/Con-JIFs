@@ -1,0 +1,1 @@
+INSERT INTO manager (login, password) VALUES ('marcos', '$2a$10$i1HhJ0FNLiWBO4Yiq1W1Se.y091nn2I8Nh89YF.pXY.PZtsc0O0ru');

@@ -15,12 +15,8 @@ import com.conjifis.domain.model.Championship;
 import com.conjifis.domain.repository.ChampionshipRepository;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
 @AllArgsConstructor
-@Getter
-@Setter
 @Service
 public class ChampionshipCatalogService {
 	private ChampionshipRepository championshipRepository;

@@ -19,12 +19,8 @@ import com.conjifis.domain.model.Modality;
 import com.conjifis.domain.repository.ModalityRepository;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
 @AllArgsConstructor
-@Getter
-@Setter
 @Service
 public class ModalityCatalogService {
 	private ModalityRepository modalityRepository;
