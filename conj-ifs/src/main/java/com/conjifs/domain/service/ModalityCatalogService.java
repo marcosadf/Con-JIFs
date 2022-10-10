@@ -1,6 +1,7 @@
 package com.conjifs.domain.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -28,8 +29,11 @@ public class ModalityCatalogService {
 	@Transactional
 	public Modality search(Long championshipId, Long modalityId) {
 		Set<Modality> modalities = listAll(championshipId);
-		Optional<Modality> modality = Optional.of(modalities.stream()
-				.filter(m -> m.getId().equals(modalityId)).toList().get(0));
+		List<Modality> modalitiesList = modalities.stream().filter(m -> m.getId().equals(modalityId)).toList();
+				
+		Optional<Modality> modality = Optional.of(
+				modalitiesList.isEmpty() ? null: modalitiesList.get(0)
+		);
 		return modality.orElseThrow(() -> 
 			new EntityNotFoundException(
 				messageSource.getMessage("modality.not.found", null, LocaleContextHolder.getLocale())

@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +38,11 @@ public class Stage {
 	
 	@NotNull
 	@Column(name = "name_stage")
+	@Enumerated(EnumType.STRING)
 	private NameStage nameStage;
+	
+	@NotNull
+	private Boolean concluded;
 	
 	@OneToMany(mappedBy = "stage", cascade = CascadeType.ALL)
 	private Set<Bracket> brackets = new LinkedHashSet<>();

@@ -33,8 +33,7 @@ public class TeamController {
 
 	@PutMapping("/{teamId}")
 	public Team edit(@PathVariable Long teamId, @Valid @RequestBody Team team) {
-		team.setId(teamId);
-		return teamCatalogService.edit(team);
+		return teamCatalogService.edit(teamId, team);
 	}
 
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}")

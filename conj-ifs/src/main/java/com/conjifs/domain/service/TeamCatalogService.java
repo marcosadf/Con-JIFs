@@ -1,6 +1,7 @@
 package com.conjifs.domain.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -29,8 +30,10 @@ public class TeamCatalogService {
 	public Team search(Long championshipId, Long modalityId, Long teamId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Set<Team> teams = teamRepository.findByModality(modality);
-		Optional<Team> team = Optional.of(teams.stream()
-				.filter(t -> t.getId().equals(teamId)).toList().get(0));
+		List<Team> teamsList = teams.stream().filter(t -> t.getId().equals(teamId)).toList();
+		Optional<Team> team = Optional.of(
+				teams.isEmpty() ? null: teamsList.get(0)
+				);
 		return team.orElseThrow(() -> 
 			new EntityNotFoundException(
 				messageSource.getMessage("team.not.found", null, LocaleContextHolder.getLocale())
@@ -62,12 +65,14 @@ public class TeamCatalogService {
 	}
 	
 	@Transactional
-	public Team edit(Team team) {
+	public Team edit(Long teamId, Team team) {
 		Modality modality = modalityCatalogService.search(
 				team.getModality().getChampionship().getId(),
 				team.getModality().getId());
 		
-		Team teamResearched = search(modality.getChampionship().getId(), modality.getId(), team.getId());
+		Team teamResearched = search(modality.getChampionship().getId(), modality.getId(), teamId);
+		
+		team.setId(teamId);
 		
 		if(team.equals(teamResearched)) {
 			teamResearched = save(team);
