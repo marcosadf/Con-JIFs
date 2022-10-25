@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
 	
 	private AuthenticationManager authenticationManager;
-	private static int TOKEN_EXPIRACTION = 600_000;
+	private static int TOKEN_EXPIRACTION = 86_400_000;
 	public static String TOKEN_PASSWORD = "525da2b8-7ccb-485c-b591-01e70ad55574";
 	
 	@Override

@@ -7,4 +7,10 @@ public interface ValidationGroups {
 	public interface ModalityId{
 		
 	}
+	public interface StageId{
+		
+	}
+	public interface BracketId{
+		
+	}
 }

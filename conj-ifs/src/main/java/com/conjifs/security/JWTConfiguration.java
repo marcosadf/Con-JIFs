@@ -1,4 +1,6 @@
 package com.conjifs.security;
+import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,19 +36,25 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter{
 //		Delabilitado apenas durante desenvolvimento, quando implementado desabilitar
 		http.csrf().disable().authorizeHttpRequests()
 			.antMatchers(HttpMethod.POST, "/login").permitAll()
-			.anyRequest().authenticated()
+			.antMatchers("/**").permitAll()
+			.anyRequest().authenticated() 
 			.and()
 			.addFilter(new JWTAuthenticationFilter(authenticationManager()))
 			.addFilter(new JWTValidateFilter(authenticationManager()))
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
-	
+
 	@Bean
 	UrlBasedCorsConfigurationSource corsConfigurationSource() {
 		final UrlBasedCorsConfigurationSource source =  new UrlBasedCorsConfigurationSource();
 		
-		CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
-		source.registerCorsConfiguration("/**" , corsConfiguration);
+		CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
+		config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("*"));
+        config.addAllowedOriginPattern("*");
+        config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "responseType", "Authorization"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+		source.registerCorsConfiguration("/**" , config);
 		
 		return source;
 		

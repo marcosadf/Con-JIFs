@@ -52,6 +52,9 @@ public class Modality {
 	@Enumerated(EnumType.STRING)
 	private TypeCompetition typeCompetition;
 	
+	@Column(name = "group_teams_number")
+	private Integer groupTeamsNumber;
+	
 	@Column(name = "group_approved_number")
 	private Integer groupApprovedNumber;
 	

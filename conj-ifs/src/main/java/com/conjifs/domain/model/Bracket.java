@@ -12,10 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
+import com.conjifs.domain.ValidationGroups;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
@@ -41,8 +45,11 @@ public class Bracket {
 	@Size(max = 45)
 	private String name;
 	
+	@Valid
 	@ManyToOne
 	@JoinColumn(name = "parent_bracket_id")
+	@ConvertGroup(from = Default.class, to = ValidationGroups.BracketId.class)
+	@JsonIgnore
 	private Bracket parentBracket;
 	
 	@OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)

@@ -30,10 +30,8 @@ public class TeamCatalogService {
 	public Team search(Long championshipId, Long modalityId, Long teamId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Set<Team> teams = teamRepository.findByModality(modality);
-		List<Team> teamsList = teams.stream().filter(t -> t.getId().equals(teamId)).toList();
-		Optional<Team> team = Optional.of(
-				teams.isEmpty() ? null: teamsList.get(0)
-				);
+		Optional<List<Team>> teamsList = Optional.of(teams.stream().filter(t -> t.getId().equals(teamId)).toList());
+		Optional<Team> team = (teamsList.isPresent() ? (!teamsList.get().isEmpty() ? Optional.of(teamsList.get().get(0)) : Optional.empty()): Optional.empty());
 		return team.orElseThrow(() -> 
 			new EntityNotFoundException(
 				messageSource.getMessage("team.not.found", null, LocaleContextHolder.getLocale())
@@ -57,7 +55,7 @@ public class TeamCatalogService {
 				.filter(t -> t.getName().equals(team.getName())).toList().isEmpty();
 		if(!nameUsed) {
 			throw new BusinessException(
-				messageSource.getMessage("team.modality.exist", null, LocaleContextHolder.getLocale())
+				messageSource.getMessage("name.team.exist", null, LocaleContextHolder.getLocale())
 			);
 		}
 		team.setModality(modality);

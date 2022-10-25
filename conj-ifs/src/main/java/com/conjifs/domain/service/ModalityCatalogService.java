@@ -15,6 +15,7 @@ import com.conjifs.domain.exception.BusinessException;
 import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Championship;
 import com.conjifs.domain.model.Modality;
+import com.conjifs.domain.model.TypeCompetition;
 import com.conjifs.domain.repository.ModalityRepository;
 
 import lombok.AllArgsConstructor;
@@ -29,11 +30,9 @@ public class ModalityCatalogService {
 	@Transactional
 	public Modality search(Long championshipId, Long modalityId) {
 		Set<Modality> modalities = listAll(championshipId);
-		List<Modality> modalitiesList = modalities.stream().filter(m -> m.getId().equals(modalityId)).toList();
+		Optional<List<Modality>> modalitiesList = Optional.of(modalities.stream().filter(t -> t.getId().equals(modalityId)).toList());
 				
-		Optional<Modality> modality = Optional.of(
-				modalitiesList.isEmpty() ? null: modalitiesList.get(0)
-		);
+		Optional<Modality> modality = (modalitiesList.isPresent() ? (!modalitiesList.get().isEmpty() ? Optional.of(modalitiesList.get().get(0)) : Optional.empty()): Optional.empty());
 		return modality.orElseThrow(() -> 
 			new EntityNotFoundException(
 				messageSource.getMessage("modality.not.found", null, LocaleContextHolder.getLocale())
@@ -63,6 +62,11 @@ public class ModalityCatalogService {
 			throw new BusinessException(
 				messageSource.getMessage("name.modality.exist", null, LocaleContextHolder.getLocale())
 			);
+		}
+		if(!modality.getTypeCompetition().equals(TypeCompetition.BRACKET) && (modality.getGroupApprovedNumber() == null && modality.getGroupTeamsNumber() == null)) {
+			throw new BusinessException(
+					messageSource.getMessage("params.required.modality", null, LocaleContextHolder.getLocale())
+				);
 		}
 		return modalityRepository.save(modality);
 	}

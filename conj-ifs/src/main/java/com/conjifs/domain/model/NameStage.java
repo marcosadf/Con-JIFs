@@ -1,5 +1,5 @@
 package com.conjifs.domain.model;
 
 public enum NameStage {
-	GROUP, FINAL, SEMIFINALS, QUARTERFINALS, ROUNDOF16
+	FINAL, SEMIFINALS, QUARTERFINALS, ROUNDOF16, GROUP;
 }

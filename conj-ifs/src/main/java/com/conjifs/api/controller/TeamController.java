@@ -25,6 +25,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/teams")
 public class TeamController {
 	private TeamCatalogService teamCatalogService;
+	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Team save(@Valid @RequestBody Team team) {

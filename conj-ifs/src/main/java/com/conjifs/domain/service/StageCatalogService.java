@@ -29,11 +29,9 @@ public class StageCatalogService {
 	public Stage search(Long championshipId, Long modalityId, Long stageId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Set<Stage> stages = stageRepository.findByModality(modality);
-		List<Stage> stagesList = stages.stream().filter(t -> t.getId().equals(stageId)).toList();
+		Optional<List<Stage>> stagesList = Optional.of(stages.stream().filter(t -> t.getId().equals(stageId)).toList());
 				
-		Optional<Stage> stage = Optional.of(
-				stagesList.isEmpty()? null: stagesList.get(0)
-		);
+		Optional<Stage> stage = (stagesList.isPresent() ? (!stagesList.get().isEmpty() ? Optional.of(stagesList.get().get(0)) : Optional.empty()): Optional.empty());
 		return stage.orElseThrow(() -> 
 			new EntityNotFoundException(
 				messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale())
@@ -44,8 +42,7 @@ public class StageCatalogService {
 	@Transactional
 	public Set<Stage> listAll(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
-		Set<Stage> stages = stageRepository.findByModality(modality);
-		return stages;
+		return modality.getStages();
 	}
 	
 	@Transactional
@@ -53,11 +50,11 @@ public class StageCatalogService {
 		Modality modality = modalityCatalogService.search(
 				stage.getModality().getChampionship().getId(),
 				stage.getModality().getId());
-		boolean nameUsed = listAll(stage.getModality().getChampionship().getId(), modality.getChampionship().getId()).stream()
+		boolean nameUsed = listAll(modality.getChampionship().getId(), modality.getId()).stream()
 				.filter(t -> t.getNameStage().equals(stage.getNameStage())).toList().isEmpty();
 		if(!nameUsed) {
 			throw new BusinessException(
-				messageSource.getMessage("stage.modality.exist", null, LocaleContextHolder.getLocale())
+				messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
 			);
 		}
 		stage.setModality(modality);
@@ -92,6 +89,11 @@ public class StageCatalogService {
 		 }
 
 		 return stages.get(0);
+	}
+	
+	@Transactional
+	public Optional<Stage> searchParentStage(Stage stage) {
+		return stageRepository.findByParentStage(stage);
 	}
 	
 	@Transactional
