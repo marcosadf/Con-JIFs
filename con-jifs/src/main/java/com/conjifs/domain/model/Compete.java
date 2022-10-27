@@ -2,6 +2,8 @@ package com.conjifs.domain.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,5 +35,6 @@ public class Compete {
 	@Column(columnDefinition = "integer default 0")
 	private Integer points; 
 	
+	@Enumerated(EnumType.STRING)
 	private Result result;
 }
