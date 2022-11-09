@@ -24,7 +24,7 @@ public class BracketRulesService {
 //	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
 	@Transactional
-	public List<List<Bracket>> createdBrackets(Long championshipId, Long modalityId) {
+	public List<List<Bracket>> createBrackets(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Optional<List<Stage>> stagesList = Optional.of(modality.getStages().stream().filter(s -> s.getParentStage() == null).toList());
 		Optional<Stage> stageOp = (stagesList.isPresent() ? (!stagesList.get().isEmpty() ? Optional.of(stagesList.get().get(0)) : Optional.empty()): Optional.empty());

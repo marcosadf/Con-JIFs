@@ -33,7 +33,7 @@ public class Compete {
 	private Bracket bracket;
 	
 	@Column(columnDefinition = "integer default 0")
-	private Integer points; 
+	private Integer points = 0; 
 	
 	@Enumerated(EnumType.STRING)
 	private Result result;

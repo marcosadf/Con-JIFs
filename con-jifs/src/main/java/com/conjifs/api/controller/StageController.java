@@ -29,7 +29,12 @@ public class StageController {
 	
 	@PostMapping("/championship/{championshipId}/modality/{modalityId}")
 	public List<Stage> create(@PathVariable Long championshipId, @PathVariable Long modalityId) {
-		return stageRulesService.createdStages(championshipId, modalityId);
+		return stageRulesService.createStages(championshipId, modalityId);
+	}
+	
+	@PutMapping("/{stageId}/conclud")
+	public Stage create(@PathVariable Long stageId, @Valid @RequestBody Stage stage) {
+		return stageRulesService.setConcluded(stageId, stage);
 	}
 	
 	@PutMapping("/{stageId}")

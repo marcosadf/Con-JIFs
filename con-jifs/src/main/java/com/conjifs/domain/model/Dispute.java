@@ -34,5 +34,5 @@ public class Dispute {
 	private Match match;
 	
 	@Column(columnDefinition = "integer default 0")
-	private Integer points;
+	private Integer points = 0;
 }

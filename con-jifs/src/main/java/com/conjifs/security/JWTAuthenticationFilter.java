@@ -70,7 +70,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		}else {
 			token = JWT.create()
 					.withSubject(managerData.getUsername())
-					.withExpiresAt(new Date(System.currentTimeMillis() + 0))
+					.withExpiresAt(new Date(System.currentTimeMillis() + 1))
 					.sign(Algorithm.HMAC512(TOKEN_PASSWORD));
 		}
 		
