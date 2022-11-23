@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -18,6 +19,7 @@ import com.conjifs.domain.model.NameStage;
 import com.conjifs.domain.model.Result;
 import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.model.Team;
+import com.conjifs.domain.model.TypeCompetition;
 
 import lombok.AllArgsConstructor;
 
@@ -28,7 +30,7 @@ public class CompeteRulesService {
 	private ModalityCatalogService modalityCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
-	public Stage createdCompetesGroup(Long championshipId, Long modalityId) {
+	public Stage createCompetesGroup(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Optional<List<Stage>> stagesOpListGroup = Optional.of(modality.getStages().stream().filter(s -> s.getNameStage().equals(NameStage.GROUP)).toList());
 		Optional<Stage> stageOpGroup = (stagesOpListGroup.isPresent() ? (!stagesOpListGroup.get().isEmpty() ? Optional.of(stagesOpListGroup.get().get(0)) : Optional.empty()): Optional.empty());
@@ -70,7 +72,7 @@ public class CompeteRulesService {
 		}
 	}
 	
-	public Stage createdCompetesBracket(Long championshipId, Long modalityId){
+	public Stage createCompetesBracket(Long championshipId, Long modalityId){
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Optional<List<Stage>> stagesOpListGroup = Optional.of(modality.getStages().stream().filter(s -> s.getNameStage().equals(NameStage.GROUP)).toList());
 		Optional<Stage> stageOpGroup = (stagesOpListGroup.isPresent() ? (!stagesOpListGroup.get().isEmpty() ? Optional.of(stagesOpListGroup.get().get(0)) : Optional.empty()): Optional.empty());
@@ -140,7 +142,7 @@ public class CompeteRulesService {
 		}
 	}
 	
-	public Stage createdCompetesMixed(Long championshipId, Long modalityId){
+	public Stage createCompetesMixed(Long championshipId, Long modalityId){
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Optional<List<Stage>> stagesOpListGroup = Optional.of(modality.getStages().stream().filter(s -> s.getNameStage().equals(NameStage.GROUP)).toList());
 		Optional<Stage> stageOpGroup = (stagesOpListGroup.isPresent() ? (!stagesOpListGroup.get().isEmpty() ? Optional.of(stagesOpListGroup.get().get(0)) : Optional.empty()): Optional.empty());
@@ -162,6 +164,7 @@ public class CompeteRulesService {
 					stageOpList = Optional.of(stageList.stream().filter(s -> s.getParentStage().getId().equals(stageId)).toList());
 					stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
 				}while(stageOp.isPresent());
+				
 				if(!stage.getConcluded()) {
 					List<Bracket> brackets = stage.getBrackets().stream().toList();
 					Boolean bracketsNoEmpty = brackets.stream().filter(b -> !b.getCompetes().isEmpty()).toList().isEmpty();
@@ -221,10 +224,11 @@ public class CompeteRulesService {
 				}
 			}
 			else {
-				List<Bracket> brackets = stageGroup.getBrackets().stream().toList();
+				List<Bracket> brackets = stageGroup.getBrackets().stream().collect(Collectors.toList());
 				Boolean bracketsNoEmpty = brackets.stream().filter(b -> !b.getCompetes().isEmpty()).toList().isEmpty();
 				if(bracketsNoEmpty) {
-					List<Team> teams = modality.getTeams().stream().toList();
+					List<Team> teams = modality.getTeams().stream().collect(Collectors.toList());
+					System.out.println(teams.size());
 					Collections.shuffle(teams);
 					Collections.shuffle(brackets);
 					int numGroups = brackets.size();
@@ -234,11 +238,13 @@ public class CompeteRulesService {
 						Compete compete = new Compete();
 						compete.setTeam(t);
 						compete.setBracket(b);
+						compete.setPoints(0);
 						compete = competeCatalogService.save(compete);
 						t.getCompetes().add(compete);
 						b.getCompetes().add(compete);
 						auxGroups = auxGroups + 1 < numGroups ? auxGroups + 1: 0;
 					}
+					System.out.println(stageGroup.getId());
 					return stageGroup;
 				}
 				else {
@@ -249,5 +255,15 @@ public class CompeteRulesService {
 		else {
 			throw new BusinessException(messageSource.getMessage("stage.function.invalid.modality", null, LocaleContextHolder.getLocale()));
 		}
+	}
+
+	public Stage createCompetes(Long championshipId, Long modalityId) {
+		Modality modality = modalityCatalogService.search(championshipId, modalityId);
+		if(modality.getTypeCompetition().equals(TypeCompetition.MIXED))
+			return createCompetesMixed(championshipId, modalityId);
+		else if(modality.getTypeCompetition().equals(TypeCompetition.BRACKET))
+			return createCompetesBracket(championshipId, modalityId);
+		else
+			return createCompetesGroup(championshipId, modalityId);
 	}
 }

@@ -38,6 +38,7 @@ public class Match {
 	@Column(name = "date_time")
 	private Date dateTime;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "match", cascade = CascadeType.ALL)
 	private Set<Dispute> disputes = new LinkedHashSet<>();
 	

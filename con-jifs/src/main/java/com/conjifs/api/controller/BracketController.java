@@ -31,7 +31,7 @@ public class BracketController {
 	
 	@PostMapping("/championship/{championshipId}/modality/{modalityId}")
 	public List<List<Bracket>> create(@PathVariable Long championshipId, @PathVariable Long modalityId) {
-		return bracketRulesService.createdBrackets(championshipId, modalityId);
+		return bracketRulesService.createBrackets(championshipId, modalityId);
 	}
 	
 	@PutMapping("/{bracketId}")

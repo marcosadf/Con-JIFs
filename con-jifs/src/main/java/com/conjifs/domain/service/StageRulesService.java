@@ -29,7 +29,7 @@ public class StageRulesService {
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 
 	@Transactional
-	public List<Stage> createdStages(Long championshipId, Long modalityId) {
+	public List<Stage> createStages(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Set<Stage> stages = modality.getStages();
 		Stage stage = new Stage();
