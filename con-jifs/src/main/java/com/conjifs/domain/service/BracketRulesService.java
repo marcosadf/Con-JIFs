@@ -21,6 +21,9 @@ import lombok.AllArgsConstructor;
 public class BracketRulesService {
 	private BracketCatalogService bracketCatalogService;
 	private ModalityCatalogService modalityCatalogService;
+	private CompeteCatalogService competeCatalogService;
+	private MatchCatalogService matchCatalogService;
+	private StageCatalogService stageCatalogService;
 //	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
 	@Transactional
@@ -73,4 +76,20 @@ public class BracketRulesService {
 		}
 		return listBrackets;
 	}
+	
+	@Transactional
+	public Set<Bracket> clearAll(Long championshipId, Long modalityId, Long stageId){
+		Stage stage = stageCatalogService.search(championshipId, modalityId, stageId);
+		competeCatalogService.clearAll(stage);
+		matchCatalogService.deleteAllStage(stage);
+		return stageCatalogService.search(championshipId, modalityId, stageId).getBrackets();
+	}
+
+	public Bracket clear(Long championshipId, Long modalityId, Long stageId, Long bracketId) {
+		competeCatalogService.clear(championshipId, modalityId, stageId, bracketId);
+		matchCatalogService.deleteAllBracket(championshipId, modalityId, stageId, bracketId);
+		return bracketCatalogService.search(championshipId, modalityId, stageId, bracketId);
+	}
+	
+	
 }

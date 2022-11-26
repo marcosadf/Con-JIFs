@@ -1,0 +1,13 @@
+add championship	->	delete
+
+add modality	->	delete
+
+add team		->	delete
+
+add stage		->	drop
+
+add bracket		->	
+
+add compete		->	
+
+add match		->	

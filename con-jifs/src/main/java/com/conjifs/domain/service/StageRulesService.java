@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -18,6 +19,7 @@ import com.conjifs.domain.model.NameStage;
 import com.conjifs.domain.model.Result;
 import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.model.TypeCompetition;
+import com.conjifs.domain.repository.StageRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -27,11 +29,12 @@ public class StageRulesService {
 	private StageCatalogService stageCatalogService;
 	private ModalityCatalogService modalityCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
+	private StageRepository stageRepository;
 
 	@Transactional
 	public List<Stage> createStages(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
-		Set<Stage> stages = modality.getStages();
+		List<Stage> stages = modality.getStages().stream().collect(Collectors.toList());
 		Stage stage = new Stage();
 		if (modality.getTypeCompetition() == TypeCompetition.GROUP) {
 			if (stages.isEmpty()) {
@@ -93,11 +96,16 @@ public class StageRulesService {
 						messageSource.getMessage("stage.exist", null, LocaleContextHolder.getLocale()));
 			}
 		} else if (modality.getTypeCompetition() == TypeCompetition.MIXED) {
-			System.out.println("Oi");
-			if (stages.isEmpty()) {
-				stage.setModality(modality);
-				stage.setNameStage(NameStage.GROUP);
-				
+			if (stages.size() <= 1) {
+				if(stages.size() != 1) {
+					stage.setModality(modality);
+					stage.setNameStage(NameStage.GROUP);
+				}else if(stages.get(0).getNameStage() == NameStage.GROUP){
+					stage = stages.get(0);
+				}else {
+					throw new BusinessException(messageSource.getMessage("stage.invalid.modality", null,
+							LocaleContextHolder.getLocale()));
+				}
 				int numGroups = modality.getTeams().size() / modality.getGroupTeamsNumber();
 				numGroups = modality.getTeams().size() % modality.getGroupTeamsNumber() != 0 ? numGroups + 1: numGroups;
 				int numTeamBracket = numGroups * modality.getGroupApprovedNumber();
@@ -154,7 +162,8 @@ public class StageRulesService {
 							LocaleContextHolder.getLocale()));
 				}
 				
-			} else {
+			}
+			else {
 				throw new BusinessException(
 						messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale()));
 			}
@@ -223,7 +232,7 @@ public class StageRulesService {
 		}
 
 		stages.forEach((s) -> {
-			stageCatalogService.delete(championshipId, modalityId, s.getId());
+			stageRepository.delete(s);
 		});
 
 		return stages;

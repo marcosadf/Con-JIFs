@@ -2,6 +2,7 @@ package com.conjifs.domain.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -35,7 +36,7 @@ public class MatchRulesService {
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
 	@Transactional
-	public Modality createMatchs(Long championshipId, Long modalityId) {
+	public void createMatchs(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Set<Stage> stages = modality.getStages();
 		if(!stages.isEmpty()) {
@@ -99,7 +100,18 @@ public class MatchRulesService {
 					}
 				}
 			}
-			return modality;
+//			List<Bracket> bracketsList = new ArrayList<>();
+//			List<Set<Match>> matchList = new ArrayList<>();
+//			modalityCatalogService.search(championshipId, modalityId).getStages().forEach(s -> {
+//				s.getBrackets().forEach(b -> {
+//					bracketsList.add(b);
+//				});
+//			});
+//			System.out.println();
+//			bracketsList.forEach(b ->{
+//				matchList.add(b.getMatchs());
+//			});
+//			return matchList;
 		}
 		else {
 			throw new EntityNotFoundException(messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale()));
@@ -107,7 +119,7 @@ public class MatchRulesService {
 	}
 	
 	@Transactional
-	private Stage createNextDisputes(Long championshipId, Long modalityId){
+	private List<List<Dispute>> createNextDisputes(Long championshipId, Long modalityId){
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		List<Stage> stages = modality.getStages().stream().filter(s -> s.getParentStage() == null).collect(Collectors.toList());
 		Stage stage = null;
@@ -125,7 +137,8 @@ public class MatchRulesService {
 			Set<Team> auxTeams = new HashSet<>();
 			Set<Bracket> brackets = new HashSet<>();
 			Optional<Match> matchOp = Optional.empty();
-			while(stage != null && !stage.getConcluded()){
+			List<List<Dispute>> listDisputesList = new ArrayList<>();
+			while(stage != null && stage.getConcluded()){
 				if(stage.getConcluded() && !stage.getParentStage().getConcluded()) {
 					brackets = stage.getParentStage().getBrackets();
 					for (Bracket bracket: brackets) {
@@ -148,12 +161,14 @@ public class MatchRulesService {
 									match.setDisputes(new HashSet<>(List.of(d1, d2)));
 								}
 							}
+							listDisputesList.add(match.getDisputes().stream().collect(Collectors.toList()));
 						}
+						
 					}
 				}
 				stage = stage.getParentStage();
 			}
-			return stage;
+			return listDisputesList;
 		}
 		else {
 			throw new EntityNotFoundException(messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale()));

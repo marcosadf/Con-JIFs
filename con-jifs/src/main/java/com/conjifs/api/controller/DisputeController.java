@@ -1,5 +1,6 @@
 package com.conjifs.api.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.conjifs.domain.model.Dispute;
-import com.conjifs.domain.model.Match;
 import com.conjifs.domain.service.DisputeCatalogService;
 
 import lombok.AllArgsConstructor;
@@ -28,18 +28,18 @@ public class DisputeController {
 		return disputeCatalogService.edit(disputeId, dispute);
 	}
 
-	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/bracket/{bracketId}")
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/bracket/{bracketId}/match/{matchId}")
 	public Set<Dispute> listAllMatch(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId, @PathVariable Long bracketId, @PathVariable Long matchId) {
 		return disputeCatalogService.listAllMatch(championshipId, modalityId, stageId, bracketId, matchId);
 	}
 
-	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/bracket/{bracketId}/{disputeId}")
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/bracket/{bracketId}/team/{teamId}")
 	public Set<Dispute> searchTeamBracket(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId, @PathVariable Long bracketId, @PathVariable Long teamId) {
 		return disputeCatalogService.searchTeamBracket(championshipId, modalityId, stageId, bracketId, teamId);
 	}
-
-	@GetMapping("/championship/{championshipId}/modality/{modalityId}/team/{teamId}/{disputeId}")
-	public Match search(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId, @PathVariable Long bracketId, @PathVariable Long matchId) {
-		return disputeCatalogService.clear(championshipId, modalityId, stageId, bracketId, matchId);
+	
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}")
+	public List<List<List<Dispute>>> listAllStageForBracket(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId) {
+		return disputeCatalogService.listAllStageForBracket(championshipId, modalityId, stageId);
 	}
 }

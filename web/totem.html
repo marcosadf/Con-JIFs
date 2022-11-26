@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Totem</title>
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrap.css.map">
+    <link rel="stylesheet" href="./css/totem-style.css">
+	<script src="./core/jquery-1.10.2.js"></script>
+	<script src="./core/util-coockies.js"></script>
+	<script src="./core/api-request.js"></script>
+	<script src="./core/screen-ratio.js"></script>
+	<script src="./core/sort-ranking.js"></script>
+	<script src="./core/sort-disputes.js"></script>
+	<script src="./core/format-date.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./requests/modalities-requests.js"></script>
+    <script src="./requests/login-requests.js"></script>
+    <script src="./requests/championships-requests.js"></script>
+    <script src="./requests/stages-requests.js"></script>
+    <script src="./requests/disputes-requests.js"></script>
+    <script src="./requests/competes-requests.js"></script>
+    <script src="./requests/brackets-requests.js"></script>
+    <script src="./requests/matches-requests.js"></script>
+    <script src="./requests/teams-requests.js"></script>
+    <script src="./view/totem-tables-groups.js"></script>
+    <script src="./view/totem-ranking-groups.js"></script>
+    <script src="./test/trigger-settest.js"></script>
+    <!-- <script src="./test/data.js"></script> -->
+</head>
+<body>
+	<div id="titleChampionship" class="titleTables"></div>
+	<div id="container">
+		<div class="containerData">
+			<div class="titleTables">Partidas</div>
+			<div id="containerGroupsMatches" class="containerGroups">
+			</div>	
+		</div>
+		<div class="containerData">
+			<div class="titleTables">Ranking Grupos</div>
+			<div id="containerGroupsRanking" class="containerGroups">
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var callback = (vetModalities) => {
+			for (var i = 0; i < vetModalities.length; i++) {
+				list_stages(vetModalities[i].championship.id, vetModalities[i].id ,check_stage);
+			}
+			let modalitiesIds = getData("modalitiesIds", false).split(",").map(function(m) {
+					return parseInt(m);
+			});
+			let modalities = [];
+			for (var x = 0; x < vetModalities.length; x++) {
+				for(var i = 0; i < modalitiesIds.length; i++){	
+					if(vetModalities[x].id == modalitiesIds[i]){
+						modalities.push(vetModalities[x]);
+						i = modalitiesIds.length;
+					}
+				}
+			}
+			if(modalities.length > 0){
+				renderTotem(modalities, 0);
+			}else{
+				alert("Não existem modalidades ativas no momento!");
+			}
+		}
+
+		function animateContainer() {
+			$("#titleChampionship").attr("class" , "titleTables containers");
+			$("#container").attr("class" , "container containers");
+		}
+
+		function renderTotem(modalities, x) {
+			let modality = modalities[x];
+			$("#titleChampionship").html(modality.name);
+
+			$("#titleChampionship").attr("class" , "titleTables");
+			$("#container").attr("class" , "container");
+			searchCurrent_stage(modality.championship.id, modality.id, process_stages);
+			setTimeout(animateContainer, 100);
+			if (x == 0) 
+				x = modalities.length - 1;
+			else
+				x--;
+			setTimeout(renderTotem, 10000, modalities, x);
+		}
+
+		function check_stage(stages){
+			let listModalities = new Array();
+			setData("modalitiesIds", listModalities, 1);
+			for (var i = 0; i < stages.length; i++) {
+				listAllStageForBracket_disputes(stages[i].modality.championship.id, stages[i].modality.id, stages[i].id, function(listDisputesForGroups){
+					let listModalitiesId = new  Array(getData("modalitiesIds", false));
+					for (var k = 0; k < listDisputesForGroups.length; k++) {
+						let listDisputes = listDisputesForGroups[k];
+						for(var n = 0; n < listDisputes.length; n++){
+							for(var j = 0; j < listDisputes[n].length; j++){
+								listModalitiesId.push(listDisputes[n][j].match.bracket.stage.modality.id);
+							}
+						}
+					}
+					setData("modalitiesIds", listModalitiesId, 1);
+				});
+			};
+		}
+
+		function process_stages(stage){
+			if(stage.nameStage == "GROUP"){
+				listAllStage_competes(stage.modality.championship.id, stage.modality.id, stage.id, renderResults);
+				listAllStageForBracket_disputes(stage.modality.championship.id, stage.modality.id, stage.id, renderDisputes);
+			}
+		}
+
+		function renderDisputes(listDisputesForGroups){
+			for (var i = 0; i < listDisputesForGroups.length; i++) {
+				let listDisputes = listDisputesForGroups[i];
+				renderTable({
+						rWidth: window.width,
+						rHeight: window.width
+					},
+					sort_disputes(listDisputes, 1),
+					(i + 1),
+					 listDisputesForGroups.length,
+					 false
+				);
+			}
+		}
+		function renderResults(listCompetesForGroups){
+			for (var i = 0; i < listCompetesForGroups.length; i++) {
+				let listCompetes = listCompetesForGroups[i];
+				renderRank({
+						rWidth: window.width,
+						rHeight: window.width
+					},
+					sort_ranking(listCompetes, 1),
+					(i + 1),
+					 listCompetesForGroups.length,
+					 false
+				);
+			}			
+		}
+		var login = "marcos";
+		var password = "@1234";
+		
+		setTimeout(list_modalities, 1000, 1, callback);
+	</script>
+</body>
+</html>

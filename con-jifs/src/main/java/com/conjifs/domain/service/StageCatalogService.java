@@ -3,6 +3,7 @@ package com.conjifs.domain.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -14,6 +15,7 @@ import com.conjifs.domain.exception.BusinessException;
 import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Modality;
 import com.conjifs.domain.model.Stage;
+import com.conjifs.domain.model.TypeCompetition;
 import com.conjifs.domain.repository.StageRepository;
 
 import lombok.AllArgsConstructor;
@@ -72,6 +74,17 @@ public class StageCatalogService {
 		stage.setId(stageId);
 		
 		if(stage.equals(stageResearched)) {
+			if(stage.getConcluded() == false && stageResearched.getConcluded() == true) {
+				if(stage.getParentStage().getConcluded()) {
+					throw new EntityNotFoundException(
+							messageSource.getMessage("stage.not.concluded.next.stage", null, LocaleContextHolder.getLocale())
+						);
+				}
+			} else if(stage.getConcluded() == true && stageResearched.getConcluded() == false) {
+				throw new EntityNotFoundException(
+						messageSource.getMessage("stage.not.concluded", null, LocaleContextHolder.getLocale())
+					);
+			}
 			stageResearched = save(stage);
 		}
 		return stageResearched;
@@ -101,5 +114,40 @@ public class StageCatalogService {
 		Stage stage = search(championshipId, modalityId, stageId);
 		stageRepository.delete(stage);
 		return stage;
+	}
+	
+	@Transactional
+	public Stage searchStageCurrent(Long championshipId, Long modalityId) {
+		Modality modality = modalityCatalogService.search(championshipId, modalityId);
+		List<Stage> stageList = modality.getStages().stream().toList(); 
+		Optional<List<Stage>> stageOpList = Optional.of(stageList.stream().filter(s -> {return s.getParentStage() == null;}).toList());
+		Optional<Stage> stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
+		Stage stage = null;
+		if(stageOp.isPresent()) {
+			if(modality.getTypeCompetition() != TypeCompetition.GROUP) {
+				do{
+					Stage stageAux = stageOp.get();
+					stage = stageAux;
+					stageOpList = Optional.of(stageList.stream().filter(s -> s.getParentStage() == stageAux).collect(Collectors.toList()));
+					stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
+				}while(stageOp.isPresent());
+				if(stage.getConcluded()) {
+					while(stage.getParentStage() != null) {
+						stage = stage.getParentStage();
+						if(!stage.getConcluded())
+							return stage;
+					}
+				}else {
+					return stage;
+				}
+			}else {
+				return stageOp.get();
+			}
+		}else {
+			throw new EntityNotFoundException(
+					messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale())
+				); 
+		}
+		return null;
 	}
 }

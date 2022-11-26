@@ -32,8 +32,8 @@ public class StageController {
 		return stageRulesService.createStages(championshipId, modalityId);
 	}
 	
-	@PutMapping("/{stageId}/conclud")
-	public Stage create(@PathVariable Long stageId, @Valid @RequestBody Stage stage) {
+	@PutMapping("/{stageId}/concluded")
+	public Stage setconcluded(@PathVariable Long stageId, @Valid @RequestBody Stage stage) {
 		return stageRulesService.setConcluded(stageId, stage);
 	}
 	
@@ -41,13 +41,18 @@ public class StageController {
 	public Stage edit(@PathVariable Long stageId, @Valid @RequestBody Stage stage) {
 		return stageCatalogService.edit(stageId, stage);
 	}
-
+	
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/current")
+	public Stage searchStageCurrent(@PathVariable Long championshipId, @PathVariable Long modalityId) {
+		return stageCatalogService.searchStageCurrent(championshipId, modalityId);
+	}
+	
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}")
 	public Set<Stage> listAll(@PathVariable Long championshipId, @PathVariable Long modalityId) {
 		return stageCatalogService.listAll(championshipId, modalityId);
 	}
 
-	@GetMapping("/championship/{championshipId}/modality/{modalityId}/name")
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/nameStage")
 	public Stage searchNameStage(@PathVariable Long championshipId, @PathVariable Long modalityId, @RequestBody Stage stage) {
 		return stageCatalogService.searchNameStage(championshipId, modalityId, stage);
 	}
@@ -56,7 +61,7 @@ public class StageController {
 	public Stage search(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId) {
 		return stageCatalogService.search(championshipId, modalityId, stageId);
 	}
-
+	
 	@DeleteMapping("/championship/{championshipId}/modality/{modalityId}/{stageId}")
 	public Set<Stage> drop(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId) {
 		return stageRulesService.drop(championshipId, modalityId, stageId);

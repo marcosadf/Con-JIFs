@@ -33,8 +33,7 @@ public class ModalityController {
 
 	@PutMapping("/{modalityId}")
 	public Modality edit(@PathVariable Long modalityId, @Valid @RequestBody Modality modality) {
-		modality.setId(modalityId);
-		return modalityCatalogService.edit(modality);
+		return modalityCatalogService.edit(modalityId, modality);
 	}
 
 	@GetMapping("/championship/{championshipId}")

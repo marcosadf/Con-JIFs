@@ -1,0 +1,106 @@
+html{
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #3AC1A3;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.containerGroups{
+	display: grid;
+	flex-direction: column;
+	justify-content: space-around;
+	background-color: #D2E1F2;
+	border: 0.3VW solid #1A826B;
+	border-radius: 1VW;
+	height: 100%;
+	width: 100%;
+}
+.baseTable{
+	position: relative;
+	float: left;
+	clear:both;
+	align-self: center;
+  			
+}
+.container{
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	height: 100%;
+	max-height: 100%;
+	width: 100%;
+}		
+.containerData{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #1A826B;
+	text-align: center;
+	height: 100%;
+	max-height: 100%;
+	width: 50%;
+	border: 0.5VW solid #3AC1A3;
+	border-radius: 1VW;
+}
+.titleTables{
+	margin-top: 1VH;
+	text-align: center;
+	font-size: 4VH;
+	font-weight: bold;
+}
+.tabCaption{
+	margin: 0;
+		text-align: center;
+		font-weight: bold;
+	border: 1px solid #655E82;
+	background-color: #C6375C;
+}
+.tab {
+	width: 100%;
+	border: 1px solid #655E82;
+	border-radius: 0.5VW;			
+}
+.tabThead {
+	width: 100%;
+}
+.tabTr {
+	width: 100%;
+	border-radius: 5px;
+	padding: 30px;
+	margin-bottom: 30px;
+	background-color: #6F9996;	
+}  
+.tabTd {
+	padding: 1px;
+	position: relative;
+	text-align: center;
+}
+
+.tabTheadTh{
+	color: #3f3f3f;
+	text-align: center;
+}
+	
+.tabTheadTh:hover{
+	background-color: #A9A9A9;
+}
+
+@keyframes go-back {
+    0% {
+        transform: translateX(100px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+.containers {
+    animation: go-back 3s;
+}

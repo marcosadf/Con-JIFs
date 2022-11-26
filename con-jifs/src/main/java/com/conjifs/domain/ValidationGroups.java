@@ -1,6 +1,9 @@
 package com.conjifs.domain;
 
 public interface ValidationGroups {
+	public interface TeamId {
+
+	}
 	public interface ChampionshipId{
 		
 	}
@@ -11,6 +14,9 @@ public interface ValidationGroups {
 		
 	}
 	public interface BracketId{
+		
+	}
+	public interface MatchId{
 		
 	}
 }

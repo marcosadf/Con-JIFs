@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.conjifs.domain.model.Bracket;
 import com.conjifs.domain.service.BracketCatalogService;
 import com.conjifs.domain.service.BracketRulesService;
-import com.conjifs.domain.service.CompeteCatalogService;
 
 import lombok.AllArgsConstructor;
 
@@ -27,7 +26,6 @@ import lombok.AllArgsConstructor;
 public class BracketController {
 	private BracketCatalogService bracketCatalogService;
 	private BracketRulesService bracketRulesService ;
-	private CompeteCatalogService competeCatalogService;
 	
 	@PostMapping("/championship/{championshipId}/modality/{modalityId}")
 	public List<List<Bracket>> create(@PathVariable Long championshipId, @PathVariable Long modalityId) {
@@ -55,8 +53,11 @@ public class BracketController {
 	}
 
 	@DeleteMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/{bracketId}")
-	public Set<Bracket> clear(@PathVariable Long championshipId, @PathVariable Long modalityId,  @PathVariable Long stageId,@PathVariable Long bracketId) {
-		competeCatalogService.clear(championshipId, modalityId, stageId, bracketId);
-		return bracketCatalogService.listAll(championshipId, modalityId, stageId);
+	public Bracket clear(@PathVariable Long championshipId, @PathVariable Long modalityId,  @PathVariable Long stageId,@PathVariable Long bracketId) {
+		return bracketRulesService.clear(championshipId, modalityId, stageId, bracketId);
+	}
+	@DeleteMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}")
+	public Set<Bracket> clearAll(@PathVariable Long championshipId, @PathVariable Long modalityId,  @PathVariable Long stageId) {
+		return bracketRulesService.clearAll(championshipId, modalityId, stageId);
 	}
 }

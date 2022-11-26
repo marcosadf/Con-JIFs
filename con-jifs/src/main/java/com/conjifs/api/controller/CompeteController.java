@@ -1,5 +1,6 @@
 package com.conjifs.api.controller;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.conjifs.domain.model.Compete;
-import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.service.CompeteCatalogService;
 import com.conjifs.domain.service.CompeteRulesService;
 
@@ -27,7 +27,7 @@ public class CompeteController {
 	private CompeteRulesService competeRulesService;
 	
 	@PostMapping("/championship/{championshipId}/modality/{modalityId}")
-	public Stage createCompetes(@PathVariable Long championshipId, @PathVariable Long modalityId) {
+	public List<List<Compete>> createCompetes(@PathVariable Long championshipId, @PathVariable Long modalityId) {
 		return competeRulesService.createCompetes(championshipId, modalityId);
 	}
 	
@@ -39,6 +39,11 @@ public class CompeteController {
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/bracket/{bracketId}")
 	public Set<Compete> listAllBracket(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId, @PathVariable Long bracketId) {
 		return competeCatalogService.listAllBracket(championshipId, modalityId, stageId, bracketId);
+	}
+	
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}")
+	public List<List<Compete>> listAllStage(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId) {
+		return competeCatalogService.listAllStage(championshipId, modalityId, stageId);
 	}
 
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/team/{teamId}")

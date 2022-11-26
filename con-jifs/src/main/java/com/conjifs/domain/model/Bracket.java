@@ -36,8 +36,10 @@ public class Bracket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JsonIgnore
+	@Valid
 	@ManyToOne
+	@JoinColumn(name = "stage_id")
+	@ConvertGroup(from = Default.class, to = ValidationGroups.StageId.class)
 	@NotNull
 	private Stage stage;
 	
@@ -52,6 +54,7 @@ public class Bracket {
 	@JsonIgnore
 	private Bracket parentBracket;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)
 	private Set<Match> matchs = new LinkedHashSet<>();
 	

@@ -1,5 +1,8 @@
 package com.conjifs.domain.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +19,10 @@ import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Bracket;
 import com.conjifs.domain.model.Dispute;
 import com.conjifs.domain.model.Match;
+import com.conjifs.domain.model.NameStage;
+import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.model.Team;
+import com.conjifs.domain.repository.DisputeRepository;
 import com.conjifs.domain.repository.MatchRepository;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +32,7 @@ import lombok.AllArgsConstructor;
 public class MatchCatalogService {
 	private BracketCatalogService bracketCatalogService;
 	private MatchRepository matchRepository;
+	private DisputeRepository disputeRepository;
 	private TeamCatalogService teamCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
@@ -79,14 +86,16 @@ public class MatchCatalogService {
 		Long stageId = match.getBracket().getStage().getId();
 		Long bracketId = match.getBracket().getId();
 		Bracket bracket = bracketCatalogService.search(championshipId, modalityId, stageId, bracketId);
-		
-		List<Match> matchResearched = listAllBracket(championshipId, modalityId, stageId, bracketId).stream().filter(m -> m.getBracket().equals(bracket)).toList();
-		
-		if (!matchResearched.isEmpty()) {
-			throw new BusinessException(
-					messageSource.getMessage("match.invalid.stage", null, LocaleContextHolder.getLocale()));
-		}
 		match.setBracket(bracket);
+		
+		List<Match> matchResearched = listAllBracket(championshipId, modalityId, stageId, bracketId).stream().toList();
+		
+		if (!matchResearched.isEmpty()&& match.getId() != null) {
+			if(bracket.getStage().getNameStage() != NameStage.GROUP && !matchResearched.get(0).equals(match)) {
+				throw new BusinessException(
+					messageSource.getMessage("match.invalid.stage", null, LocaleContextHolder.getLocale()));
+			}
+		}
 		return matchRepository.save(match);
 	}
 	
@@ -123,5 +132,68 @@ public class MatchCatalogService {
 		Match match = searchForTeam(championshipId, modalityId, teamId, matchId);
 		matchRepository.delete(match);
 		return match;
+	}
+	
+	
+	@Transactional
+	public Match clear(Long championshipId, Long modalityId, Long stageId, Long bracketId, Long matchId) {
+		Match match = searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse("0001-01-01");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		match.setDateTime(date);
+		match.setLocale("Undefined");
+		match.getDisputes().forEach(d -> {
+			d.setPoints(0);
+			disputeRepository.save(d);
+		});
+		return save(match);
+	}
+	
+	@Transactional
+	public void clearAll(Stage stage) {
+		do {
+			stage.getBrackets().forEach(b -> {
+				 b.getMatchs().forEach( m -> {
+					m.getDisputes().forEach(d -> {
+						d.setPoints(0);
+						disputeRepository.save(d);
+					});
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					Date date = null;
+					try {
+						date = sdf.parse("0001-01-01");
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					m.setDateTime(date);
+					m.setLocale("Undefined");
+					save(m);
+				});
+			});
+			stage = stage.getParentStage();
+		}while(stage != null);
+	}
+
+	public void deleteAllStage(Stage stage) {
+		do {
+			stage.getBrackets().forEach(b -> {
+				 b.getMatchs().forEach( m -> {
+					 matchRepository.delete(m);
+				});
+			});
+			stage = stage.getParentStage();
+		}while(stage != null);
+	}
+
+	public void deleteAllBracket(Long championshipId, Long modalityId, Long stageId, Long bracketId) {
+		bracketCatalogService.search(championshipId, modalityId, stageId, bracketId).getMatchs().forEach(m -> {
+			matchRepository.delete(m);
+		});
+		
 	}
 }

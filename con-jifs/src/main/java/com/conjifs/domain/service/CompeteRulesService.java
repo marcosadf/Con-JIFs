@@ -30,20 +30,16 @@ public class CompeteRulesService {
 	private ModalityCatalogService modalityCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
-	public Stage createCompetesGroup(Long championshipId, Long modalityId) {
-		Modality modality = modalityCatalogService.search(championshipId, modalityId);
+	public List<List<Compete>> createCompetesGroup(Modality modality) {
 		Optional<List<Stage>> stagesOpListGroup = Optional.of(modality.getStages().stream().filter(s -> s.getNameStage().equals(NameStage.GROUP)).toList());
 		Optional<Stage> stageOpGroup = (stagesOpListGroup.isPresent() ? (!stagesOpListGroup.get().isEmpty() ? Optional.of(stagesOpListGroup.get().get(0)) : Optional.empty()): Optional.empty());
 		
-		Optional<List<Stage>> stagesOpListBracket = Optional.of(modality.getStages().stream().filter(s -> !s.getNameStage().equals(NameStage.GROUP)).toList());
-		List<Stage> stageList = stagesOpListBracket.isPresent() ? stagesOpListBracket.get() : new ArrayList<>();
-		
-		if(stageOpGroup.isPresent() && stageList.isEmpty()) {
-			Stage stageGroup = stageOpGroup.get();
-			List<Bracket> brackets = stageGroup.getBrackets().stream().toList();
+		if(stageOpGroup.isPresent()) {
+			Stage stage = stageOpGroup.get();
+			List<Bracket> brackets = stage.getBrackets().stream().collect(Collectors.toList());
 			Boolean bracketsNoEmpty = brackets.stream().filter(b -> !b.getCompetes().isEmpty()).toList().isEmpty();
 			if(bracketsNoEmpty) {
-				List<Team> teams = modality.getTeams().stream().toList();
+				List<Team> teams = modality.getTeams().stream().collect(Collectors.toList());
 				Collections.shuffle(teams);
 				Collections.shuffle(brackets);
 				int numGroups = brackets.size();
@@ -53,12 +49,18 @@ public class CompeteRulesService {
 					Compete compete = new Compete();
 					compete.setTeam(t);
 					compete.setBracket(b);
+					compete.setPoints(0);
 					compete = competeCatalogService.save(compete);
 					t.getCompetes().add(compete);
 					b.getCompetes().add(compete);
 					auxGroups = auxGroups + 1 < numGroups ? auxGroups + 1: 0;
 				}
-				return stageGroup;
+				System.out.println(stage.getId());
+				List<List<Compete>> listCompetesList = new ArrayList<>();
+				stage.getBrackets().forEach(b ->{
+					listCompetesList.add(b.getCompetes().stream().collect(Collectors.toList()));
+				});;
+				return listCompetesList;
 			}
 			else {
 				throw new BusinessException(messageSource.getMessage("stage.group.exist", null, LocaleContextHolder.getLocale()));
@@ -72,20 +74,13 @@ public class CompeteRulesService {
 		}
 	}
 	
-	public Stage createCompetesBracket(Long championshipId, Long modalityId){
-		Modality modality = modalityCatalogService.search(championshipId, modalityId);
-		Optional<List<Stage>> stagesOpListGroup = Optional.of(modality.getStages().stream().filter(s -> s.getNameStage().equals(NameStage.GROUP)).toList());
-		Optional<Stage> stageOpGroup = (stagesOpListGroup.isPresent() ? (!stagesOpListGroup.get().isEmpty() ? Optional.of(stagesOpListGroup.get().get(0)) : Optional.empty()): Optional.empty());
-		
-		Optional<List<Stage>> stagesOpListBracket = Optional.of(modality.getStages().stream().filter(s -> !s.getNameStage().equals(NameStage.GROUP)).toList());
-		List<Stage> stageList = stagesOpListBracket.isPresent() ? stagesOpListBracket.get() : new ArrayList<>();
-		
-		if(stageOpGroup.isEmpty() && !stageList.isEmpty()) {
-			Optional<List<Stage>> stageOpList = Optional.of(stageList.stream().filter(s -> s.getParentStage() == null ).toList());
-			Optional<Stage> stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
-			
+	public List<List<Compete>> createCompetesBracket(Modality modality) {
+		Optional<List<Stage>> stageOpList = Optional.of(modality.getStages().stream().filter(s -> s.getParentStage() == null ).toList());
+		Optional<Stage> stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
+		if(stageOp.isPresent()) {
+			List<Stage> stageList = stageOpList.get();
 			Stage stage = null;
-			
+		
 			do{
 				stage = stageOp.get();
 				Long stageId = stage.getId();
@@ -93,8 +88,15 @@ public class CompeteRulesService {
 				stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
 			}while(stageOp.isPresent());
 			if(!stage.getConcluded()) {
-				List<Team> teams = modality.getTeams().stream().toList();
 				List<Bracket> brackets = stage.getBrackets().stream().toList();
+				List<Team> teams = new ArrayList<>();
+				for (Bracket b : stage.getBrackets()) {
+					for (Compete c : b.getCompetes()) {
+						if(c.getResult().equals(Result.APPROVED)) {
+							teams.add(c.getTeam());
+						}
+					}
+				}
 				Collections.shuffle(teams);
 				int auxBracket = 0;
 				int numBrackets = brackets.size();
@@ -108,7 +110,11 @@ public class CompeteRulesService {
 					b.getCompetes().add(compete);
 					auxBracket = auxBracket + 1 < numBrackets ? auxBracket + 1: 0;
 				}
-				return stage;
+				List<List<Compete>> listCompetesList = new ArrayList<>();
+				stage.getBrackets().forEach(b ->{
+					listCompetesList.add(b.getCompetes().stream().collect(Collectors.toList()));
+				});;
+				return listCompetesList;
 			}
 			else {
 				Stage lastStage;
@@ -134,16 +140,19 @@ public class CompeteRulesService {
 						throw new RuntimeException();
 					}
 				}
-				return stage;
+				List<List<Compete>> listCompetesList = new ArrayList<>();
+				stage.getBrackets().forEach(b ->{
+					listCompetesList.add(b.getCompetes().stream().collect(Collectors.toList()));
+				});;
+				return listCompetesList;
 			}
 		}
 		else {
-			throw new BusinessException(messageSource.getMessage("stage.function.invalid.modality", null, LocaleContextHolder.getLocale()));
+			throw new BusinessException(messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale()));
 		}
 	}
 	
-	public Stage createCompetesMixed(Long championshipId, Long modalityId){
-		Modality modality = modalityCatalogService.search(championshipId, modalityId);
+	public List<List<Compete>> createCompetesMixed(Modality modality){
 		Optional<List<Stage>> stagesOpListGroup = Optional.of(modality.getStages().stream().filter(s -> s.getNameStage().equals(NameStage.GROUP)).toList());
 		Optional<Stage> stageOpGroup = (stagesOpListGroup.isPresent() ? (!stagesOpListGroup.get().isEmpty() ? Optional.of(stagesOpListGroup.get().get(0)) : Optional.empty()): Optional.empty());
 		
@@ -190,7 +199,11 @@ public class CompeteRulesService {
 							b.getCompetes().add(compete);
 							auxBracket = auxBracket + 1 < numBrackets ? auxBracket + 1: 0;
 						}
-						return stage;
+						List<List<Compete>> listCompetesList = new ArrayList<>();
+						stage.getBrackets().forEach(b ->{
+							listCompetesList.add(b.getCompetes().stream().collect(Collectors.toList()));
+						});;
+						return listCompetesList;
 					}
 					else {
 						throw new BusinessException(messageSource.getMessage("stage.bracket.exist", null, LocaleContextHolder.getLocale()));
@@ -220,7 +233,11 @@ public class CompeteRulesService {
 							throw new RuntimeException();
 						}
 					}
-					return stage;
+					List<List<Compete>> listCompetesList = new ArrayList<>();
+					lastStage.getBrackets().forEach(b ->{
+						listCompetesList.add(b.getCompetes().stream().collect(Collectors.toList()));
+					});;
+					return listCompetesList;
 				}
 			}
 			else {
@@ -228,7 +245,6 @@ public class CompeteRulesService {
 				Boolean bracketsNoEmpty = brackets.stream().filter(b -> !b.getCompetes().isEmpty()).toList().isEmpty();
 				if(bracketsNoEmpty) {
 					List<Team> teams = modality.getTeams().stream().collect(Collectors.toList());
-					System.out.println(teams.size());
 					Collections.shuffle(teams);
 					Collections.shuffle(brackets);
 					int numGroups = brackets.size();
@@ -245,7 +261,11 @@ public class CompeteRulesService {
 						auxGroups = auxGroups + 1 < numGroups ? auxGroups + 1: 0;
 					}
 					System.out.println(stageGroup.getId());
-					return stageGroup;
+					List<List<Compete>> listCompetesList = new ArrayList<>();
+					stageGroup.getBrackets().forEach(b ->{
+						listCompetesList.add(b.getCompetes().stream().collect(Collectors.toList()));
+					});;
+					return listCompetesList;
 				}
 				else {
 					throw new BusinessException(messageSource.getMessage("stage.group.exist", null, LocaleContextHolder.getLocale())); 
@@ -257,13 +277,13 @@ public class CompeteRulesService {
 		}
 	}
 
-	public Stage createCompetes(Long championshipId, Long modalityId) {
+	public List<List<Compete>> createCompetes(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		if(modality.getTypeCompetition().equals(TypeCompetition.MIXED))
-			return createCompetesMixed(championshipId, modalityId);
+			return createCompetesMixed(modality);
 		else if(modality.getTypeCompetition().equals(TypeCompetition.BRACKET))
-			return createCompetesBracket(championshipId, modalityId);
+			return createCompetesBracket(modality);
 		else
-			return createCompetesGroup(championshipId, modalityId);
+			return createCompetesGroup(modality);
 	}
 }

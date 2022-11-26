@@ -72,11 +72,16 @@ public class ModalityCatalogService {
 	}
 	
 	@Transactional
-	public Modality edit(Modality modality) {
-		Modality modalityResearched = search(modality.getChampionship().getId(), modality.getId());
+	public Modality edit(Long modalityId, Modality modality) {
+		Modality modalityResearched = search(modality.getChampionship().getId(), modalityId);
 		modality.setChampionship(championshipCatalogService.search(modality.getChampionship().getId()));
 		
+		modality.setId(modalityId);
+		
 		if(modality.equals(modalityResearched)) {
+			if(modality.getTypeCompetition() != modalityResearched.getTypeCompetition()){
+				modality.getStages().clear();
+			}
 			modalityResearched = save(modality);
 		}
 		return modalityResearched;

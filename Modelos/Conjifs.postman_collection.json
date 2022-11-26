@@ -1,0 +1,1885 @@
+{
+	"info": {
+		"_postman_id": "3cc566dc-e7a9-4c1d-aab1-25c31208b646",
+		"name": "Conjifs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Championships",
+			"item": [
+				{
+					"name": "Championships - Search Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjQ4NDI0NTF9.wcFrx3fyidgrWu0q1-Fb-w4pEvbxqJ0BxQuwo1oXDWSh0sLzKQJKAHuYarQ_TdMLTlHU4cgN0UpApygf1ygGXA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/modalities/championship/1/name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities",
+								"championship",
+								"1",
+								"name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Championships - Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkxNDE4ODZ9.s0neiB5FY5UrdArkxEfx0DSXzH0_LmwjlrnerWCqFnbcFPv6fPfq7lp2XpCE7Cvt1Pp6ymakbN29xYqT0uPxGQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"JIFs 2022 - Edição Ceres\",\r\n    \"date\": \"2022-10-20\",\r\n    \"locale\": \"Instituto Federal Goiano - Campus Ceres\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/championships",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"championships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Championships - Add More",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjU0MjM5OTN9.H8mUoyN61o8WEclZzTAlQNg_VF9hihGmKnqYiZEVpSKdDNTPI4NxG6PE-OpgfupSBsgZZqzfB5HVfn27J2DF3A",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"JIFs 2022 - Edição Ipora\",\r\n    \"date\": \"2022-11-02\",\r\n    \"locale\": \"Instituto Federal Goiano - Campus Ipora\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/championships",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"championships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Championships - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"JIFs 2022 - Edição Ipora\",\r\n    \"date\": \"2022-11-22\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/championships/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"championships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Championships - List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkxNDE4ODZ9.s0neiB5FY5UrdArkxEfx0DSXzH0_LmwjlrnerWCqFnbcFPv6fPfq7lp2XpCE7Cvt1Pp6ymakbN29xYqT0uPxGQ",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/championships",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"championships"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Championships - Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjQ4NDI0NTF9.wcFrx3fyidgrWu0q1-Fb-w4pEvbxqJ0BxQuwo1oXDWSh0sLzKQJKAHuYarQ_TdMLTlHU4cgN0UpApygf1ygGXA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/championships/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"championships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Championships - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/championships/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"championships",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Modalities",
+			"item": [
+				{
+					"name": "Modalities - Search Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/modalities/championship/1/name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities",
+								"championship",
+								"1",
+								"name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modalities - Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjY0NTUwOTZ9.HfLBy_BhGpF5Y1yUJvFbGICp_3Zp2M6bEZamnexxW191HmXg8Qs37FIME0ASeW41e7ztkcUDDC4hyQrhuS7EwQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"championship\": {\r\n            \"id\": 1\r\n        },\r\n        \"name\": \"Futsal\",\r\n        \"typeCompetition\": \"BRACKET\",\r\n        \"groupTeamsNumber\": 5,\r\n        \"groupApprovedNumber\": 2\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/modalities",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modalities - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"championship\": {\r\n        \"id\": 1\r\n    },\r\n    \"name\": \"Futisal Feminino\",\r\n    \"typeCompetition\": \"GROUP\",\r\n    \"groupApprovedNumber\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/modalities/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modalities - List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkxNDE4ODZ9.s0neiB5FY5UrdArkxEfx0DSXzH0_LmwjlrnerWCqFnbcFPv6fPfq7lp2XpCE7Cvt1Pp6ymakbN29xYqT0uPxGQ",
+								"type": "default"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/modalities/championship/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities",
+								"championship",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modalities - Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/modalities/championship/1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities",
+								"championship",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modalities - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/modalities/championship/1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"modalities",
+								"championship",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teams",
+			"item": [
+				{
+					"name": "Teams - Search Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/teams/championship/1/modality/1/name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teams- Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjU4ODE2NjB9.xuxF-cTPcaG8yH77dHb0e09qbr9eyBqgebJSyng_1WvaepZkrsPN6Sd4-oRq4lDgA-WWT9t0ctOb4ogXDR7v-g",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"name\": \"Ceres IFClube\",\r\n    \"campus\": \"Ceres\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/teams",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teams - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"championship\": {\r\n        \"id\": 1\r\n    },\r\n    \"name\": \"Futisal Feminino\",\r\n    \"typeCompetition\": \"GROUP\",\r\n    \"groupApprovedNumber\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/teams/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teams - List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjgwMTYxNjZ9.a3p8V7_mx_tFl97GLpAmVph2OBzWfy7a4rzh8-LKnKP51VlTrCwFLSiQU-EGOmYWQApQEu1o6JBg77KowOHcuw",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/teams/championship/1/modality/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"championship",
+								"1",
+								"modality",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teams - Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjY0NTUwOTZ9.HfLBy_BhGpF5Y1yUJvFbGICp_3Zp2M6bEZamnexxW191HmXg8Qs37FIME0ASeW41e7ztkcUDDC4hyQrhuS7EwQ",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/teams/championship/1/modality/1/25",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"25"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Teams - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/teams/championship/1/modality/1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"teams",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stages",
+			"item": [
+				{
+					"name": "Stages - Search Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/1/name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stages - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stages - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/stages/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stages - List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkyMzIyNzl9.xV9KUu3dD0-UIlBcFsaUfOPhEJJGlChr8yGpS-c19JdKk1oQtFkLxtvaev7PGk9DRwlZ5DQ2FX8ltTwuhQS_VA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stages - List Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkyMzIyNzl9.xV9KUu3dD0-UIlBcFsaUfOPhEJJGlChr8yGpS-c19JdKk1oQtFkLxtvaev7PGk9DRwlZ5DQ2FX8ltTwuhQS_VA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stages - Search",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjY0NTUwOTZ9.HfLBy_BhGpF5Y1yUJvFbGICp_3Zp2M6bEZamnexxW191HmXg8Qs37FIME0ASeW41e7ztkcUDDC4hyQrhuS7EwQ",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stages - Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Brackets",
+			"item": [
+				{
+					"name": "Brackets - Search Name",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjgwMTYxNjZ9.a3p8V7_mx_tFl97GLpAmVph2OBzWfy7a4rzh8-LKnKP51VlTrCwFLSiQU-EGOmYWQApQEu1o6JBg77KowOHcuw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nam\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/brackets/championship/1/modality/1/stage/1/name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brackets",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"stage",
+								"1",
+								"name"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brackets - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/brackets/championship/1/modality/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brackets",
+								"championship",
+								"1",
+								"modality",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brackets - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjYzMDgwOTB9.s20hinQazSuJkVoqGmqtV0ArDiZSk-T8hgypOa3C6g0VptX02s7qmBGK5B8NQKmMIYOndAptX1ZBNzOvqoy5jw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/brackets/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brackets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brackets - List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/brackets/championship/1/modality/2/stage/4",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brackets",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brackets - Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/brackets/championship/1/modality/1/stage/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"brackets",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"stage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brackets - Clear",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/1/stage/1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"stage",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brackets - Clear All",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/1/stage/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"stage",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Competes",
+			"item": [
+				{
+					"name": "Competes - Search Team Stage",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjYzMDgwOTB9.s20hinQazSuJkVoqGmqtV0ArDiZSk-T8hgypOa3C6g0VptX02s7qmBGK5B8NQKmMIYOndAptX1ZBNzOvqoy5jw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/competes/championship/1/modality/2/stage/4/team/22",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"competes",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"team",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Competes - List All Stage",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjYzMDgwOTB9.s20hinQazSuJkVoqGmqtV0ArDiZSk-T8hgypOa3C6g0VptX02s7qmBGK5B8NQKmMIYOndAptX1ZBNzOvqoy5jw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/competes/championship/1/modality/2/stage/4/team/22",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"competes",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"team",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Competes - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/competes/championship/1/modality/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"competes",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Competes - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjYzMDgwOTB9.s20hinQazSuJkVoqGmqtV0ArDiZSk-T8hgypOa3C6g0VptX02s7qmBGK5B8NQKmMIYOndAptX1ZBNzOvqoy5jw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/compete/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"compete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Competes - List All Bracket",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/competes/championship/1/modality/2/stage/4/bracket/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"competes",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"bracket",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Matches",
+			"item": [
+				{
+					"name": "Matches - Search For Bracket",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/matches/championship/1/modality/2/stage/4/bracket/8/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"matches",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"bracket",
+								"8",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Matches - Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/matches/championship/1/modality/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"matches",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Matches - Clear",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/matches/championship/1/modality/2/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"matches",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Matches - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjYzMDgwOTB9.s20hinQazSuJkVoqGmqtV0ArDiZSk-T8hgypOa3C6g0VptX02s7qmBGK5B8NQKmMIYOndAptX1ZBNzOvqoy5jw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/matches/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"matches",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Matches - List All Bracket",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/matches/championship/1/modality/2/stage/4/bracket/8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"matches",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"bracket",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Matches - Search For Team",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/1/team/1/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"1",
+								"team",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Matches - Search For Bracket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/stages/championship/1/modality/2/stage/4/bracket/8/8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stages",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"bracket",
+								"8",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Disputes",
+			"item": [
+				{
+					"name": "Disputes - Search Team Bracket",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/disputes/championship/1/modality/2/stage/4/bracket/8/team/14",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disputes",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"bracket",
+								"8",
+								"team",
+								"14"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disputes - List All Stage For Bracket",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Fut\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/disputes/championship/1/modality/2/stage/4/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disputes",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disputes - Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjYzMDgwOTB9.s20hinQazSuJkVoqGmqtV0ArDiZSk-T8hgypOa3C6g0VptX02s7qmBGK5B8NQKmMIYOndAptX1ZBNzOvqoy5jw",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"modality\": {\r\n        \"id\": 1,\r\n        \"championship\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"nameStage\": \"FINAL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/disputes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disputes",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disputes - List All Match",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjkzMTg3NzB9.ZWgChGodZcxoABwxFWYsYHCYMPDk8W1UF0MKD-lCxgGTHgg282ZmCzVlHMI4Uf4hjwkE4wT-QG7eCj3_dOUoHQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/disputes/championship/1/modality/2/stage/4/bracket/8/match/8",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"disputes",
+								"championship",
+								"1",
+								"modality",
+								"2",
+								"stage",
+								"4",
+								"bracket",
+								"8",
+								"match",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Managers",
+			"item": [
+				{
+					"name": "Managers - login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJjb3MiLCJleHAiOjE2NjQ1NTExMTd9.M71gCS3lpEE_T5HdfC3qFFRNUl_3CL-i-_rZkSXh92qDkuXnc9nDciYb6wQcICbvn8y1fAcnvUDWb_FgEI8G5g",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"marcos\",\r\n    \"password\": \"@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Managers - Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "pt",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"marcos\",\r\n    \"password\": \"@1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/managers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"managers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

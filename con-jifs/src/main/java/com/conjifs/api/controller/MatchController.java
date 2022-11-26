@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.conjifs.domain.model.Match;
-import com.conjifs.domain.model.Modality;
 import com.conjifs.domain.service.MatchCatalogService;
 import com.conjifs.domain.service.MatchRulesService;
 
@@ -21,14 +21,14 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/matchs")
+@RequestMapping("/matches")
 public class MatchController {
 	private MatchCatalogService matchCatalogService;
 	private MatchRulesService matchRulesService;
 	
 	@PostMapping("/championship/{championshipId}/modality/{modalityId}")
-	public Modality createMatchs(@PathVariable Long championshipId, @PathVariable Long modalityId) {
-		return matchRulesService.createMatchs(championshipId, modalityId);
+	public void createMatchs(@PathVariable Long championshipId, @PathVariable Long modalityId) {
+		matchRulesService.createMatchs(championshipId, modalityId);
 	}
 	
 	@PutMapping("/{matchId}")
@@ -47,7 +47,12 @@ public class MatchController {
 	}
 
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}/team/{teamId}/{matchId}")
-	public Match search(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long teamId, @PathVariable Long matchId) {
+	public Match searchForTeam(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long teamId, @PathVariable Long matchId) {
 		return matchCatalogService.searchForTeam(championshipId, modalityId, teamId, matchId);
+	}
+
+	@DeleteMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/bracket/{bracketId}/{matchId}")
+	public Match clear(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId, @PathVariable Long bracketId, @PathVariable Long matchId) {
+		return matchCatalogService.clear(championshipId, modalityId, stageId, bracketId, matchId);
 	}
 }

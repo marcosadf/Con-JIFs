@@ -1,8 +1,10 @@
 package com.conjifs.domain.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -14,6 +16,7 @@ import com.conjifs.domain.exception.BusinessException;
 import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Bracket;
 import com.conjifs.domain.model.Compete;
+import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.model.Team;
 import com.conjifs.domain.repository.CompeteRepository;
 
@@ -25,6 +28,7 @@ public class CompeteCatalogService {
 	private BracketCatalogService bracketCatalogService;
 	private CompeteRepository competeRepository;
 	private TeamCatalogService teamCatalogService;
+	public StageCatalogService stageCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
 	@Transactional
@@ -113,8 +117,28 @@ public class CompeteCatalogService {
 	@Transactional
 	public void clear(Long championshipId, Long modalityId, Long stageId, Long bracketId) {
 		bracketCatalogService.search(championshipId, modalityId, stageId, bracketId).getCompetes().forEach(c -> {
-			delete(championshipId, modalityId, stageId, bracketId, c.getId());
+			competeRepository.delete(c);
 		});
 	}
+	
+	@Transactional
+	public void clearAll(Stage stage) {
+		do {
+			stage.getBrackets().forEach(b -> {
+				b.getCompetes().forEach(c -> {
+					competeRepository.delete(c);
+				});
+			});
+			stage = stage.getParentStage();
+		}while(stage != null);
+	}
 
+	public List<List<Compete>> listAllStage(Long championshipId, Long modalityId, Long stageId) {
+		Stage stage = stageCatalogService.search(championshipId, modalityId, stageId);
+		List<List<Compete>> listCompetesList = new ArrayList<>();
+		stage.getBrackets().forEach(b ->{
+			listCompetesList.add(b.getCompetes().stream().collect(Collectors.toList()));
+		});;
+		return listCompetesList;
+	}
 }

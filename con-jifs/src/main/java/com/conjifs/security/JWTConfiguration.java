@@ -36,7 +36,6 @@ public class JWTConfiguration extends WebSecurityConfigurerAdapter{
 //		Delabilitado apenas durante desenvolvimento, quando implementado desabilitar
 		http.csrf().disable().authorizeHttpRequests()
 			.antMatchers(HttpMethod.POST, "/login").permitAll()
-			.antMatchers("/**").permitAll()
 			.anyRequest().authenticated() 
 			.and()
 			.addFilter(new JWTAuthenticationFilter(authenticationManager()))

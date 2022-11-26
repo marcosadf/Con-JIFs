@@ -1,10 +1,10 @@
 package com.conjifs.domain.service;
 
 import java.util.HashSet;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -17,6 +17,7 @@ import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Bracket;
 import com.conjifs.domain.model.Dispute;
 import com.conjifs.domain.model.Match;
+import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.model.Team;
 import com.conjifs.domain.repository.DisputeRepository;
 
@@ -28,6 +29,7 @@ public class DisputeCatalogService {
 	private MatchCatalogService matchCatalogService;
 	private DisputeRepository disputeRepository;
 	private TeamCatalogService teamCatalogService;
+	private StageCatalogService stageCatalogService;
 	private BracketCatalogService bracketCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
@@ -62,6 +64,19 @@ public class DisputeCatalogService {
 	public Set<Dispute> listAllMatch(Long championshipId, Long modalityId, Long stageId, Long bracketId, Long matchId) {
 		Match match = matchCatalogService.searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
 		return match.getDisputes();
+	}
+	
+	@Transactional
+	public List<List<List<Dispute>>> listAllStageForBracket(Long championshipId, Long modalityId, Long stageId) {
+		Stage stage = stageCatalogService.search(championshipId, modalityId, stageId);
+		return stage.getBrackets().stream().map(b -> {
+				return b.getMatchs();
+			}).map(lM -> {
+				return lM.stream().map(m -> {
+					return m.getDisputes().stream().collect(Collectors.toList());
+				}).collect(Collectors.toList());
+			}).collect(Collectors.toList());
+
 	}
 	
 	@Transactional
@@ -115,14 +130,5 @@ public class DisputeCatalogService {
 		disputeRepository.delete(dispute);
 		return dispute;
 	}
-	
-	@Transactional
-	public Match clear(Long championshipId, Long modalityId, Long stageId, Long bracketId, Long matchId) {
-		Match match = matchCatalogService.searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
-		match.getDisputes().forEach(d -> {
-			delete(championshipId, modalityId, stageId, bracketId, matchId, d.getId());
-		});
-		match = matchCatalogService.searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
-		return match;
-	}
+
 }
