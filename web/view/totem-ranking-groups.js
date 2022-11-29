@@ -1,3 +1,4 @@
+
 function renderRank(elemBase, vetCompetes, id, length, repet){
 	let proportion = repet ? elemBase : screenRatio();
 	let lastHeight = $("#containerGroupsRanking").height();
