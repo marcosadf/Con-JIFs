@@ -1,3 +1,561 @@
+var listCompetesForStage = [
+        [
+            {
+                "id": 9,
+                "team": {
+                    "id": 3,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Posse",
+                    "campus": "Posse IFClube"
+                },
+                "bracket": {
+                    "id": 8,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S1 - Q2 - R1"
+                },
+                "points": 0,
+                "result": null
+            },
+            {
+                "id": 1,
+                "team": {
+                    "id": 11,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Trindade",
+                    "campus": "Trindade IFClube"
+                },
+                "bracket": {
+                    "id": 8,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S1 - Q2 - R1"
+                },
+                "points": 0,
+                "result": null
+            }
+        ],
+        [
+            {
+                "id": 10,
+                "team": {
+                    "id": 4,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Catalão",
+                    "campus": "Catalão IFClube"
+                },
+                "bracket": {
+                    "id": 9,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S1 - Q2 - R2"
+                },
+                "points": 0,
+                "result": null
+            },
+            {
+                "id": 2,
+                "team": {
+                    "id": 12,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Urutaí",
+                    "campus": "Urutaí IFClube"
+                },
+                "bracket": {
+                    "id": 9,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S1 - Q2 - R2"
+                },
+                "points": 0,
+                "result": null
+            }
+        ],
+        [
+            {
+                "id": 11,
+                "team": {
+                    "id": 10,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Rio Verde",
+                    "campus": "Rio Verde IFClube"
+                },
+                "bracket": {
+                    "id": 10,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S2 - Q1 - R1"
+                },
+                "points": 0,
+                "result": null
+            },
+            {
+                "id": 3,
+                "team": {
+                    "id": 6,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Cristalina",
+                    "campus": "Cristalina IFClube"
+                },
+                "bracket": {
+                    "id": 10,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S2 - Q1 - R1"
+                },
+                "points": 0,
+                "result": null
+            }
+        ],
+        [
+            {
+                "id": 12,
+                "team": {
+                    "id": 1,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Ceres",
+                    "campus": "Ceres IFClube"
+                },
+                "bracket": {
+                    "id": 11,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S2 - Q1 - R2"
+                },
+                "points": 0,
+                "result": null
+            },
+            {
+                "id": 4,
+                "team": {
+                    "id": 8,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Ipameri",
+                    "campus": "Ipameri IFClube"
+                },
+                "bracket": {
+                    "id": 11,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S2 - Q1 - R2"
+                },
+                "points": 0,
+                "result": null
+            }
+        ],
+        [
+            {
+                "id": 5,
+                "team": {
+                    "id": 5,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Campos Belos",
+                    "campus": "Campos Belos IFClube"
+                },
+                "bracket": {
+                    "id": 12,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S2 - Q2 - R1"
+                },
+                "points": 0,
+                "result": null
+            }
+        ],
+        [
+            {
+                "id": 6,
+                "team": {
+                    "id": 7,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Hidrolandia",
+                    "campus": "Hidrolandia IFClube"
+                },
+                "bracket": {
+                    "id": 13,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S2 - Q2 - R2"
+                },
+                "points": 0,
+                "result": null
+            }
+        ],
+        [
+            {
+                "id": 7,
+                "team": {
+                    "id": 2,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Ipora",
+                    "campus": "Ipora IFClube"
+                },
+                "bracket": {
+                    "id": 14,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S1 - Q1 - R1"
+                },
+                "points": 0,
+                "result": null
+            }
+        ],
+        [
+            {
+                "id": 8,
+                "team": {
+                    "id": 9,
+                    "modality": {
+                        "id": 1,
+                        "championship": {
+                            "id": 1,
+                            "name": "Instituto Federal Goiano - Campus Ceres",
+                            "date": "2022-10-20T03:00:00.000+00:00",
+                            "locale": "JIFs 2022 - Edição Ceres"
+                        },
+                        "name": "Futisal Feminino",
+                        "typeCompetition": "BRACKET",
+                        "groupTeamsNumber": null,
+                        "groupApprovedNumber": 2
+                    },
+                    "name": "Morrinhos",
+                    "campus": "Morrinhos IFClube"
+                },
+                "bracket": {
+                    "id": 15,
+                    "stage": {
+                        "id": 4,
+                        "modality": {
+                            "id": 1,
+                            "championship": {
+                                "id": 1,
+                                "name": "Instituto Federal Goiano - Campus Ceres",
+                                "date": "2022-10-20T03:00:00.000+00:00",
+                                "locale": "JIFs 2022 - Edição Ceres"
+                            },
+                            "name": "Futisal Feminino",
+                            "typeCompetition": "BRACKET",
+                            "groupTeamsNumber": null,
+                            "groupApprovedNumber": 2
+                        },
+                        "nameStage": "ROUNDOF16",
+                        "concluded": false
+                    },
+                    "name": "F - S1 - Q1 - R2"
+                },
+                "points": 0,
+                "result": null
+            }
+        ]
+    ];
 var listCompetesForGroups = [
         [
             {

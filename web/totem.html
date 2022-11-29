@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/bootstrap.css.map">
     <link rel="stylesheet" href="./css/totem-style.css">
+    <link rel="stylesheet" href="./css/brackets-style.css">
 	<script src="./core/jquery-1.10.2.js"></script>
 	<script src="./core/util-coockies.js"></script>
 	<script src="./core/api-request.js"></script>
@@ -26,32 +27,34 @@
     <script src="./requests/teams-requests.js"></script>
     <script src="./view/totem-tables-groups.js"></script>
     <script src="./view/totem-ranking-groups.js"></script>
-    <script src="./test/trigger-settest.js"></script>
-    <!-- <script src="./test/data.js"></script> -->
+    <script src="./view/totem-table-brackets.js"></script>
+    <!-- <script src="./test/trigger-settest.js"></script> -->
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
+    <script src="./test/data.js"></script>
+	<!-- <script src="./core/fluxo-graphic.js"></script> -->
 </head>
 <body>
 	<div id="titleChampionship" class="titleTables"></div>
-	<div id="container">
-		<div class="containerData">
-			<div class="titleTables">Partidas</div>
-			<div id="containerGroupsMatches" class="containerGroups">
-			</div>	
-		</div>
+	<div id="container" class="container">
 		<div class="containerData">
 			<div class="titleTables">Ranking Grupos</div>
 			<div id="containerGroupsRanking" class="containerGroups">
 			</div>
 		</div>
+		<div class="containerData">
+			<div class="titleTables">Partidas</div>
+			<div id="containerGroupsMatches" class="containerGroups">		
+			</div>	
+		</div>
 	</div>
 	<script type="text/javascript">
-		var callback = (vetModalities) => {
+		function callback(vetModalities) {
 			for (var i = 0; i < vetModalities.length; i++) {
 				list_stages(vetModalities[i].championship.id, vetModalities[i].id ,check_stage);
 			}
-			let modalitiesIds = getData("modalitiesIds", false).split(",").map(function(m) {
-					return parseInt(m);
-			});
-			let modalities = [];
+			let modalitiesIds = JSON.parse(getData("modalitiesIds", false));
+			let modalities = new Array();
+			setData("modalitiesIds", JSON.stringify(modalities), 1);
 			for (var x = 0; x < vetModalities.length; x++) {
 				for(var i = 0; i < modalitiesIds.length; i++){	
 					if(vetModalities[x].id == modalitiesIds[i]){
@@ -88,11 +91,9 @@
 		}
 
 		function check_stage(stages){
-			let listModalities = new Array();
-			setData("modalitiesIds", listModalities, 1);
 			for (var i = 0; i < stages.length; i++) {
 				listAllStageForBracket_disputes(stages[i].modality.championship.id, stages[i].modality.id, stages[i].id, function(listDisputesForGroups){
-					let listModalitiesId = new  Array(getData("modalitiesIds", false));
+					let listModalitiesId = JSON.parse(getData("modalitiesIds", false));
 					for (var k = 0; k < listDisputesForGroups.length; k++) {
 						let listDisputes = listDisputesForGroups[k];
 						for(var n = 0; n < listDisputes.length; n++){
@@ -101,7 +102,7 @@
 							}
 						}
 					}
-					setData("modalitiesIds", listModalitiesId, 1);
+					setData("modalitiesIds", JSON.stringify(listModalitiesId), 1);
 				});
 			};
 		}
@@ -136,14 +137,24 @@
 					},
 					sort_ranking(listCompetes, 1),
 					(i + 1),
-					 listCompetesForGroups.length,
-					 false
+					listCompetesForGroups.length,
+					false
 				);
 			}			
 		}
 		var login = "marcos";
 		var password = "@1234";
-		
+		// renderBrackets({
+		// 				rWidth: window.width,
+		// 				rHeight: window.width
+		// 			},
+		// 			listCompetesForStage,
+		// 			false
+		// 		);
+		login_api(login, password, function(data){
+			let token = data;
+		    setData("token",token,1);	
+		});
 		setTimeout(list_modalities, 1000, 1, callback);
 	</script>
 </body>

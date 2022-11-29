@@ -58,8 +58,8 @@ body {
 }
 .tabCaption{
 	margin: 0;
-		text-align: center;
-		font-weight: bold;
+	text-align: center;
+	font-weight: bold;
 	border: 1px solid #655E82;
 	background-color: #C6375C;
 }
@@ -103,4 +103,21 @@ body {
 }
 .containers {
     animation: go-back 3s;
+}
+
+#tabBracket{
+	width: 30VW;
+	height: 5VW;
+	border: 1px solid black;
+}
+#tabBracket tbody tr{
+	width: 30VW;
+	height: 5VW;
+	background-color: blue;
+	border: 1px solid black;
+}
+#tabBracket tbody tr td{
+	width: 30VW;
+	height: 5VW;
+	border: 1px solid black;
 }

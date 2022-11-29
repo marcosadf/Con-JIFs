@@ -1,4 +1,4 @@
-function login_api(login, password){
+function login_api(login, password, callback){
 	endpoint = "/login";
 	type = "post";
 	header = {
@@ -9,10 +9,6 @@ function login_api(login, password){
 		login: login,
 		password: password
 	});
-	callback = function(data){
-		token = data;
-	    setData("token",token,1);	
-	}
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){
 			case 401:

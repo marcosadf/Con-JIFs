@@ -62,8 +62,12 @@ public class StageController {
 		return stageCatalogService.search(championshipId, modalityId, stageId);
 	}
 	
-	@DeleteMapping("/championship/{championshipId}/modality/{modalityId}/{stageId}")
+	@DeleteMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/drop")
 	public Set<Stage> drop(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId) {
 		return stageRulesService.drop(championshipId, modalityId, stageId);
+	}
+	@DeleteMapping("/championship/{championshipId}/modality/{modalityId}/{stageId}")
+	public Stage delete(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId) {
+		return stageCatalogService.delete(championshipId, modalityId, stageId);
 	}
 }
