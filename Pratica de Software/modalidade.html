@@ -16,169 +16,15 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <style>
-        .nome {
-            margin-left: 400px;
-            font-size: 48px;
-            margin-bottom: 5px;
-        }
-
-        .btn-nome {
-            border-radius: 20px;
-            width: 30;
-            height: 40;
-            font-size: 15px;
-            margin-left: 98px;
-            margin-bottom: 10px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-        }
-
-        .btn-etapa {
-            border-radius: 15px;
-            width: 30;
-            height: 23;
-            font-size: 15px;
-            margin-left: 220px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-        }
-
-        .btn-apro{
-            border-radius: 15px;
-            width: 30;
-            height: 23;
-            font-size: 15px;
-            margin-left: 105px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-        }
-
-        .btn-apro2{
-            border-radius: 15px;
-            width: 30;
-            height: 23;
-            font-size: 15px;
-            margin-left: 40px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-        }
-
-        .btn-inicio {
-            margin-left: 15px;        
-            border-radius: 5px;
-            font-size: 12px;
-            height: 23px;
-            background-color: #EFEFEF;
-            color: black;
-            border: 1px;
-        }
-
-        .btn-in{
-            background-color: #209218;
-            border: 0;
-            border-radius: 5px;
-            color: white;
-            width: 125px;
-            margin-left: 10px;
-            text-align: center;
-            font-size: 15px;
-        }
-
-         .btn-local {
-            border-radius: 20px;
-            width: 30;
-            height: 40;
-            font-size: 15px;
-            margin-left: 200px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-            margin-bottom: 10px;
-        }
-
-        .divBusca {
-            background-color: #ECECEC;
-            border: solid 1px #ECECEC;
-            border-radius: 15px;
-            width: 200px;
-            margin-left: 780px;
-            margin-bottom: 15px;
-        }
-
-        .txtBusca {
-            float: left;
-            background-color: transparent;
-            padding-left: 5px;
-            font-size: 18px;
-            border: none;
-            height: 25px;
-            width: 150px;
-            margin-left: 5px;
-        }
-
-        .button {
-            background-color: #209218;
-            color: white;
-            font-size: 20px;
-            width: 150px;
-            margin-left: 640px;
-            margin-top: 25px;
-            border: solid 1px #209218;
-            border-radius: 20px;
-        }
-
-        .buttonfe {
-            background-color: red;
-            border: solid 1px red;
-            color: white;
-            font-size: 20px;
-            border-radius: 15px;
-            margin-right: 500px;
-        }
-
-        .buttonsal {
-            background-color: #209218;
-            border: solid 1px #209218;
-            color: white;
-            font-size: 20px;
-            border-radius: 15px;
-
-        }
-
-        .pagination {
-            margin-left: 50px;
-        }
-
-        ul.pagination li a {
-            border-radius: 5px;
-            margin-top: 30px;
-            color: black;
-            float: left;
-            border: solid 1px #209218;
-        }
-
-        .ul.pagination li a.active {
-            background-color: #209218;
-            color: white;
-        }
-
-        .cadastro {
-            margin-left: 70px;
-        }
-    </style>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    
 </head>
 
 <body>
     <p class="nome"> Modalidade</p>
     <div>
        
-        <select class="custom-select btn-in" id="inputGroupSelect01">
+        <select class="custom-select btn-verde" id="inputGroupSelect01">
           <option selected >Tipo</option>
           <option value="1">Mista</option>
           <option value="2">Grupo</option>
@@ -193,43 +39,37 @@
                 
             </div>
             </div> 
-            <button class="btn-nome  dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Nome
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Order A a Z</a>
-                <a class="dropdown-item" href="#">Order conologica</a>
-                <a class="dropdown-item" href="#">Alguma coisa aqui</a>
-            </div>
-            <button class="btn-etapa dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Etapa
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Alguma ação</a>
-                <a class="dropdown-item" href="#">Outra ação</a>
-                <a class="dropdown-item" href="#">Alguma coisa aqui</a>
-            </div>
-            <button class="btn-apro dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false"> 
-             Nº de grupo aprovados 
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Alguma ação</a>
-            <a class="dropdown-item" href="#">Outra ação</a>
-            <a class="dropdown-item" href="#">Alguma coisa aqui</a>
-        </div>
-        <button class="btn-apro2 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Nº de times aprovados
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Alguma ação</a>
-        <a class="dropdown-item" href="#">Outra ação</a>
-        <a class="dropdown-item" href="#">Alguma coisa aqui</a>
-    </div>
          <table class="table table-striped">
+            <thead>
+                <th scope="row">
+                    <div class="aliamento">
+                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                     Nome
+                    </button>
+                </div>
+                </th>
+                <th scope="row">
+                    <div class="aliamento">
+                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                     Etapa
+                    </button>
+                </div>
+                </th>
+                <th scope="row">
+                    <div class="aliamento">
+                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                     Nº de grupos aprovados
+                    </button>
+                </div>
+                </th>
+                <th scope="row">
+                    <div class="aliamento">
+                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                     Nº de times aprovados
+                    </button>
+                </div>
+                </th>
+            </thead>
                 <tbody>
                     <tr>
                         <th scope="row"><input type="text" name="mood1.1" id="mod1.1" class="form-control" /></th>

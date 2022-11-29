@@ -16,206 +16,31 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <style>
-        .nome {
-            margin-left: 450px;
-            font-size: 48px;
-            margin-bottom: 5px;
-        }
-
-        .btn-time {
-            border-radius: 20px;
-            width: 30;
-            height: 40;
-            font-size: 15px;
-            margin-left: 135px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-        }
-
-        .btn-grupo {
-            border-radius: 20px;
-            width: 30;
-            height: 40;
-            font-size: 15px;
-            margin-left: 220px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-        }
-
-        .btn-cam {
-            background-color: #209218;
-            border: 0;
-            border-radius: 5px;
-            color: white;
-            width: 125px;
-            margin-left: 10px;
-            text-align: center;
-            font-size: 15px;
-        }
-
-        .btn-mod{
-            background-color: #209218;
-            border: 0;
-            border-radius: 5px;
-            color: white;
-            width: 125px;
-            margin-left: 15px;
-            text-align: center;
-            font-size: 15px;
-        }
-
-        .btn-fase{
-            background-color: #209218;
-            border: 0;
-            border-radius: 5px;
-            color: white;
-            width: 125px;
-            margin-left: 20px;
-            text-align: center;
-            font-size: 15px;
-        }
-
-        .btn-gru{
-            background-color: #209218;
-            border: 0;
-            border-radius: 5px;
-            color: white;
-            width: 145px;
-            margin-left: 20px;
-            text-align: center;
-            font-size: 15px;
-        }
-
-        .btn-in {
-            background-color: #209218;
-            border: 0;
-            border-radius: 2px;
-            color: white;
-            height: 23px;
-        }
-
-        .btn-local {
-            border-radius: 20px;
-            width: 30;
-            height: 40;
-            font-size: 15px;
-            margin-left: 140px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-            margin-bottom: 10px;
-        }
-
-        .btn-disputa {
-            border-radius: 20px;
-            width: 30;
-            height: 40;
-            font-size: 15px;
-            margin-left: 160px;
-            background-color: #E2F1E1;
-            border: 1px dashed #E2F1E1;
-            color: black;
-            margin-bottom: 15px;
-        }
-
-        .divBusca {
-            background-color: #ECECEC;
-            border: solid 1px #ECECEC;
-            border-radius: 15px;
-            width: 200px;
-            margin-left: 780px;
-            margin-bottom: 10px;
-        }
-
-        .txtBusca {
-            float: left;
-            background-color: transparent;
-            padding-left: 5px;
-            font-size: 18px;
-            border: none;
-            height: 25px;
-            width: 150px;
-            margin-left: 5px;
-        }
-
-        .button {
-            background-color: #209218;
-            color: white;
-            font-size: 20px;
-            width: 150px;
-            margin-left: 640px;
-            margin-top: 25px;
-            border: solid 1px #209218;
-            border-radius: 20px;
-        }
-
-        .buttonfe {
-            background-color: red;
-            border: solid 1px red;
-            color: white;
-            font-size: 20px;
-            border-radius: 15px;
-            margin-right: 500px;
-        }
-
-        .buttonsal {
-            background-color: #209218;
-            border: solid 1px #209218;
-            color: white;
-            font-size: 20px;
-            border-radius: 15px;
-
-        }
-
-        .pagination {
-            margin-left: 50px;
-        }
-
-        ul.pagination li a {
-            border-radius: 5px;
-            margin-top: 30px;
-            color: black;
-            float: left;
-            border: solid 1px #209218;
-        }
-
-        .ul.pagination li a.active {
-            background-color: #209218;
-            color: white;
-        }
-
-        .cadastro {
-            margin-left: 70px;
-        }
-    </style>
+        <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 <body>
     <p class="nome"> Competição</p>
     <div>
-        <select class="custom-select btn-cam" id="inputGroupSelect01">
+        <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Campeonato</option>
             <option value="1">Mista</option>
             <option value="2">Grupo</option>
             <option value="3">Chave</option>
           </select>
-          <select class="custom-select btn-mod" id="inputGroupSelect01">
+          <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Modalidade</option>
             <option value="1">Mista</option>
             <option value="2">Grupo</option>
             <option value="3">Chave</option>
           </select>
-          <select class="custom-select btn-fase" id="inputGroupSelect01">
+          <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Fase</option>
             <option value="1">Mista</option>
             <option value="2">Grupo</option>
             <option value="3">Chave</option>
           </select>
-          <select class="custom-select btn-gru" id="inputGroupSelect01">
+          <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Grupo/Chaves</option>
             <option value="1">Mista</option>
             <option value="2">Grupo</option>
@@ -229,41 +54,42 @@
             </div> 
 
         </div>
-        <button class="btn-time dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-           Time
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Order A a Z</a>
-            <a class="dropdown-item" href="#">Order conologica</a>
-            <a class="dropdown-item" href="#">Alguma coisa aqui</a>
-        </div>
-        <button class="btn-grupo dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Grupo/chave
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Alguma ação</a>
-            <a class="dropdown-item" href="#">Outra ação</a>
-            <a class="dropdown-item" href="#">Alguma coisa aqui</a>
-        </div>
-        <button class="btn-local  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Pontos
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Order A a Z</a>
-    </div>
-    <button class="btn-disputa  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Aprovação
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Order A a Z</a>
-    </div>
+      
     
         
-        <table class="table table-striped">
+        <table class="table-striped table">
+           <thead>
+            <tr style="border: 0;">
+                <th scope="row">
+                    <div class="aliamento">
+                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                     Time
+                    </button>
+                </div>
+                </th>
+                <th scope="row">
+                    <div class="aliamento">
+                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                     Grupo/Chave
+                    </button>
+                </div>
+                </th>
+                        <th scope="row">
+                            <div class="aliamento">
+                            <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                             Aprovação
+                            </button>
+                        </div>
+                        </th>
+                        <th scope="row">
+                            <div class="aliamento">
+                            <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                             Pontos
+                            </button>
+                        </div>
+                        </th>
+                            <th></th>
+           </thead> 
             <tbody>
                 <tr>
                     <th scope="row"><input type="text" name="mood4.1" id="mod4.1" class="form-control" /></th>
