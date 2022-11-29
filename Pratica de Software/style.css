@@ -1,4 +1,12 @@
-
+        body{
+            display: flex;
+            justify-items: flex-start;
+            
+    
+        }
+        #menu{
+            background-color: #209218;
+        }
         .nome {
             margin-left: 400px;
             font-size: 45px;
