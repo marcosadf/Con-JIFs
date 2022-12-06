@@ -2,11 +2,10 @@
 function renderRank(elemBase, vetCompetes, id, length, repet){
 	let proportion = repet ? elemBase : screenRatio();
 	let lastHeight = $("#containerGroupsRanking").height();
-	let auxProportion = lastHeight / length / 500;
+	let auxProportion = lastHeight / length / 400;
 	if($('#baseRank'+ id)){
 		$('#baseRank'+ id).remove();
-	} 	
-
+	} 
 	let baseRank = $("<div />", {
 	  id: "baseRank" + id,
 	  style: 
@@ -50,7 +49,7 @@ function renderRank(elemBase, vetCompetes, id, length, repet){
 			`
 	});
 	tabTheadThPosi.html("Posição");
-	let tabTheadThUsua = $("<th />", {
+	let tabTheadThTeam = $("<th />", {
 	  "class": "tabTheadTh",
 	  style:`
 			width: 60%;
@@ -59,7 +58,7 @@ function renderRank(elemBase, vetCompetes, id, length, repet){
 			height: ${((proportion.rWidth * 3> proportion.rHeight) ?  proportion.rWidth : (proportion.rHeight * 0.9 / 3)) * 0.06 * auxProportion +'px'};
 	  `
 	});
-	tabTheadThUsua.html("Times");
+	tabTheadThTeam.html("Times");
 
 	let tabTheadThPont = $("<th />", {
 	  "class": "tabTheadTh",
@@ -72,7 +71,7 @@ function renderRank(elemBase, vetCompetes, id, length, repet){
 	tabTheadThPont.html("Pontos");
 	
 	tabTheadTr.append(tabTheadThPosi);
-	tabTheadTr.append(tabTheadThUsua);
+	tabTheadTr.append(tabTheadThTeam);
 	tabTheadTr.append(tabTheadThPont);
 	
 	tabThead.append(tabTheadTr);
@@ -140,7 +139,6 @@ function renderRank(elemBase, vetCompetes, id, length, repet){
 			}
 		}
 		if($("#containerGroupsRanking").width() > $("#baseRank"+id).width() * 2){
-			console.log($("#containerGroupsRanking").width() , $("#baseRank"+id).width() * 2);
 			renderRank(proportion, vetCompetes, id, length / 2, true);
 			$("#containerGroupsRanking").css("grid-template-columns", "repeat(2, 1fr)");
 		}

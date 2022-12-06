@@ -42,6 +42,28 @@ public class StageCatalogService {
 	}
 	
 	@Transactional
+	public Stage searchFirst(Long championshipId, Long modalityId) {
+		Modality modality = modalityCatalogService.search(championshipId, modalityId);
+		Set<Stage> stageList = modality.getStages();
+		Optional<List<Stage>> stageOpList = Optional.of(stageList.stream().filter(s -> s.getParentStage() == null).collect(Collectors.toList()));
+		Optional<Stage> stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
+		Stage stage = null;
+		if(stageOp.isPresent()) {
+			do{
+				Stage stageAux = stageOp.get();
+				stage = stageAux;
+				stageOpList = Optional.of(stageList.stream().filter(s -> s.getParentStage() == stageAux).collect(Collectors.toList()));
+				stageOp = (stageOpList.isPresent() ? (!stageOpList.get().isEmpty() ? Optional.of(stageOpList.get().get(0)) : Optional.empty()): Optional.empty());
+			}while(stageOp.isPresent());
+			return stage;
+		}else {
+			throw new EntityNotFoundException(
+				messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale())
+			);
+		}
+	}
+	
+	@Transactional
 	public Set<Stage> listAll(Long championshipId, Long modalityId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		return modality.getStages();

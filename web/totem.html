@@ -14,6 +14,7 @@
 	<script src="./core/screen-ratio.js"></script>
 	<script src="./core/sort-ranking.js"></script>
 	<script src="./core/sort-disputes.js"></script>
+	<script src="./core/sort-brackets.js"></script>
 	<script src="./core/format-date.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script src="./requests/modalities-requests.js"></script>
@@ -28,20 +29,18 @@
     <script src="./view/totem-tables-groups.js"></script>
     <script src="./view/totem-ranking-groups.js"></script>
     <script src="./view/totem-table-brackets.js"></script>
+    <!-- <script src="./test/data.js"></script> -->
     <!-- <script src="./test/trigger-settest.js"></script> -->
-    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> -->
-    <script src="./test/data.js"></script>
-	<!-- <script src="./core/fluxo-graphic.js"></script> -->
 </head>
 <body>
 	<div id="titleChampionship" class="titleTables"></div>
 	<div id="container" class="container">
-		<div class="containerData">
-			<div class="titleTables">Ranking Grupos</div>
+		<div id="containerDataRanking" class="containerData">
+			<div class="titleTables">Ranking</div>
 			<div id="containerGroupsRanking" class="containerGroups">
 			</div>
 		</div>
-		<div class="containerData">
+		<div id="containerDataMatches" class="containerData">
 			<div class="titleTables">Partidas</div>
 			<div id="containerGroupsMatches" class="containerGroups">		
 			</div>	
@@ -52,7 +51,8 @@
 			for (var i = 0; i < vetModalities.length; i++) {
 				list_stages(vetModalities[i].championship.id, vetModalities[i].id ,check_stage);
 			}
-			let modalitiesIds = JSON.parse(getData("modalitiesIds", false));
+			console.log("oi");
+			let modalitiesIds = JSON.parse(getData("modalitiesIds", false) == ""? "[]": getData("modalitiesIds", false));
 			let modalities = new Array();
 			setData("modalitiesIds", JSON.stringify(modalities), 1);
 			for (var x = 0; x < vetModalities.length; x++) {
@@ -70,19 +70,22 @@
 			}
 		}
 
-		function animateContainer() {
+		function animateContainer() {			
 			$("#titleChampionship").attr("class" , "titleTables containers");
 			$("#container").attr("class" , "container containers");
+			$("#titleChampionship").css({"display": "flex"});
+			$("#container").css({"display": "flex"});
 		}
 
 		function renderTotem(modalities, x) {
-			let modality = modalities[x];
-			$("#titleChampionship").html(modality.name);
-
 			$("#titleChampionship").attr("class" , "titleTables");
 			$("#container").attr("class" , "container");
-			searchCurrent_stage(modality.championship.id, modality.id, process_stages);
-			setTimeout(animateContainer, 100);
+			$("#titleChampionship").css({"display": "none"});			
+			$("#container").css({"display": "none"});			
+			setTimeout(animateContainer, 5);
+			let modality = modalities[x];
+			$("#titleChampionship").html(modality.name);			
+			searchCurrent_stage(modality.championship.id, modality.id, process_stages);	
 			if (x == 0) 
 				x = modalities.length - 1;
 			else
@@ -93,7 +96,7 @@
 		function check_stage(stages){
 			for (var i = 0; i < stages.length; i++) {
 				listAllStageForBracket_disputes(stages[i].modality.championship.id, stages[i].modality.id, stages[i].id, function(listDisputesForGroups){
-					let listModalitiesId = JSON.parse(getData("modalitiesIds", false));
+					let listModalitiesId = JSON.parse(getData("modalitiesIds", false) == ""? "[]": getData("modalitiesIds", false));
 					for (var k = 0; k < listDisputesForGroups.length; k++) {
 						let listDisputes = listDisputesForGroups[k];
 						for(var n = 0; n < listDisputes.length; n++){
@@ -109,8 +112,14 @@
 
 		function process_stages(stage){
 			if(stage.nameStage == "GROUP"){
-				listAllStage_competes(stage.modality.championship.id, stage.modality.id, stage.id, renderResults);
-				listAllStageForBracket_disputes(stage.modality.championship.id, stage.modality.id, stage.id, renderDisputes);
+				$("#containerDataRanking").css({"display": "flex"});
+				setTimeout(()=>{
+					listAllStage_competes(stage.modality.championship.id, stage.modality.id, stage.id, renderResults);
+					listAllStageForBracket_disputes(stage.modality.championship.id, stage.modality.id, stage.id, renderDisputes);
+				}, 10);
+			}else{
+				$("#containerDataRanking").css({"display": "none"});
+				listForTotem_stages(stage.modality.championship.id, stage.modality.id,renderBrackets)
 			}
 		}
 
@@ -144,13 +153,6 @@
 		}
 		var login = "marcos";
 		var password = "@1234";
-		// renderBrackets({
-		// 				rWidth: window.width,
-		// 				rHeight: window.width
-		// 			},
-		// 			listCompetesForStage,
-		// 			false
-		// 		);
 		login_api(login, password, function(data){
 			let token = data;
 		    setData("token",token,1);	

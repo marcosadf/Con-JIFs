@@ -5,6 +5,9 @@ function renderTable(elemBase, vetDisputes, id, length, repet) {
 	if($('#baseTable'+ id)){
 		$('#baseTable'+ id).remove();
 	} 
+	if($('#baseBracket')){
+		$('#baseBracket').remove();
+	} 	
 	let baseTable = $("<div />", {
 	  id: "baseTable" + id,
 	  "class": "baseTable",

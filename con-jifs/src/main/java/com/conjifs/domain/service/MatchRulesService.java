@@ -49,7 +49,6 @@ public class MatchRulesService {
 				for (Bracket bracket: brackets) {
 					if(stage.getNameStage().equals(NameStage.GROUP)) {
 						teams = bracket.getCompetes().stream().map(c -> c.getTeam()).collect(Collectors.toSet());
-						System.out.println(teams);
 						auxTeams = teams;
 						for (Team team : teams) {
 							auxTeams = auxTeams.stream().filter(t -> !t.equals(team)).collect(Collectors.toSet());
@@ -82,6 +81,7 @@ public class MatchRulesService {
 						matchs.clear();
 					}
 					else {
+						teams = bracket.getCompetes().stream().map(c -> c.getTeam()).collect(Collectors.toSet());
 						Match match = new Match();
 						match.setBracket(bracket);
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -94,6 +94,13 @@ public class MatchRulesService {
 						match.setDateTime(date);
 						match.setLocale("Undefined");
 						match = matchCatalogService.save(match);
+						for (Team team : teams) {
+							Dispute d = new Dispute();
+							d.setMatch(match);
+							d.setTeam(team);
+							d = disputeCatalogService.save(d);
+							match.getDisputes().add(d);
+						}
 						matchs.add(match);
 						bracket.setMatchs(matchs);
 						matchs.clear();

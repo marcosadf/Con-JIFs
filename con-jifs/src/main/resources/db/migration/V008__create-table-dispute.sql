@@ -9,5 +9,5 @@ CREATE TABLE dispute (
     REFERENCES team (id),
   CONSTRAINT fk_dispute_match1
     FOREIGN KEY (match_id)
-    REFERENCES `match` (id)
+    REFERENCES `_match` (id)
 );

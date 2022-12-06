@@ -1,6 +1,6 @@
 INSERT INTO championship (date, locale, name) VALUES ('2022-10-20', 'JIFs 2022 - Edição Ceres', 'Instituto Federal Goiano - Campus Ceres');
-INSERT INTO modality (championship_id, group_teams_number, group_approved_number, name, type_competition) VALUES (1, 5, 2, 'Futibol Masculino','GROUP');
-INSERT INTO modality (championship_id, group_teams_number, group_approved_number, name, type_competition) VALUES (1, 5, 2, 'Futibol Feminino','MIXED');
+INSERT INTO modality (championship_id, group_teams_number, group_approved_number, name, type_competition) VALUES (1, 5, 2, 'Futebol Masculino','GROUP');
+INSERT INTO modality (championship_id, group_teams_number, group_approved_number, name, type_competition) VALUES (1, 5, 2, 'Futsal Feminino','BRACKET');
 
 INSERT INTO team (campus, modality_id, name) VALUES ('Ceres IFClube', 1, 'Ceres');
 INSERT INTO team (campus, modality_id, name) VALUES ('Ipora IFClube', 1, 'Ipora');

@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.conjifs.api.assembler.StageAssembler;
+import com.conjifs.api.model.StageOut;
 import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.service.StageCatalogService;
 import com.conjifs.domain.service.StageRulesService;
@@ -26,6 +28,7 @@ import lombok.AllArgsConstructor;
 public class StageController {
 	private StageCatalogService stageCatalogService;
 	private StageRulesService stageRulesService;
+	private StageAssembler stageAssembler;
 	
 	@PostMapping("/championship/{championshipId}/modality/{modalityId}")
 	public List<Stage> create(@PathVariable Long championshipId, @PathVariable Long modalityId) {
@@ -44,12 +47,17 @@ public class StageController {
 	
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}/current")
 	public Stage searchStageCurrent(@PathVariable Long championshipId, @PathVariable Long modalityId) {
-		return stageCatalogService.searchStageCurrent(championshipId, modalityId);
+		return stageCatalogService.searchStageCurrent(championshipId, modalityId); 
 	}
 	
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}")
 	public Set<Stage> listAll(@PathVariable Long championshipId, @PathVariable Long modalityId) {
 		return stageCatalogService.listAll(championshipId, modalityId);
+	}
+	
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/totem")
+	public StageOut searchFirstTotem(@PathVariable Long championshipId, @PathVariable Long modalityId) {
+		return stageAssembler.toOut(stageCatalogService.searchFirst(championshipId, modalityId));
 	}
 
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}/nameStage")
