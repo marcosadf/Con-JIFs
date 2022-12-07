@@ -5,10 +5,10 @@ function tabelaModalidade(){
     <div>
        
         <select class="custom-select btn-verde" id="inputGroupSelect01">
-          <option selected >Tipo</option>
-          <option value="1">Mista</option>
-          <option value="2">Grupo</option>
-          <option value="3">Chave</option>
+          <option selected >Campeonato</option>
+          <option value="1"></option>
+          <option value="2"></option>
+          <option value="3"></option>
         </select>
     
             <div class="dropdown">
@@ -31,7 +31,7 @@ function tabelaModalidade(){
                 <th scope="row">
                     <div class="aliamento">
                     <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
-                     Etapa
+                     Tipo
                     </button>
                 </div>
                 </th>
@@ -88,10 +88,10 @@ function tabelaModalidade(){
                     </tr>
                     </tr>
                     <tr>
-                        <th scope="row" width="120"><input type="text" name="mood5.1" id="mod5.1" class="form-control" /></th>
-                        <th scope="row" width="90"><input type="text" name="mod5.2" id="mod5.2" class="form-control" /></th>
-                        <th scope="row" width="90"><input type="text" name="mood5.1" id="mod5.1" class="form-control" /></th>
-                        <th scope="row" width="90"><input type="text" name="mod5.2" id="mod5.2" class="form-control" /></th>
+                        <th scope="row" width="320"><input type="text" name="mood5.1" id="mod5.1" class="form-control" /></th>
+                        <th scope="row" width="320"><input type="text" name="mod5.2" id="mod5.2" class="form-control" /></th>
+                        <th scope="row" width="20"><input type="text" name="mood5.1" id="mod5.1" class="form-control" /></th>
+                        <th scope="row" width="20"><input type="text" name="mod5.2" id="mod5.2" class="form-control" /></th>
                         <th scope="row" width="10" rowspan="1">
                             <img style="width: 30px;" src="img/lixo.png">
                     </tr>
@@ -128,7 +128,7 @@ function tabelaModalidade(){
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="TituloModalCentralizado">Cadratar Modalidade</h5>
+                                    <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Modalidade</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -136,15 +136,30 @@ function tabelaModalidade(){
                                 <div class="modal-body">
                                     <form id="Cadastro" method="post" action="login.php">
 
-                                        <div class="form-group cadastro" style="width: 20rem">
-                                            <label for="mailUsuario">Campus</label>
+                                    <div class="form-group cadastro" style="width: 20rem">
+                                    <label for="mailUsuario">Nome</label>
+                                    <input type="Nome" class="form-control campo" id="NomeCam"
+                                        placeholder="Digite nome " required>
+                                </div>
+                                <div class="form-group cadastro" style="width: 20rem">
+                                            <label for="mailUsuario">Tipo</label>
                                             <input type="Campusmo" class="form-control campo" id="NomeCam"
-                                                placeholder="Digite nome do Campus" required>
+                                                placeholder="Digite tipo" required>
+                                        </div>
+                                        <div class="form-group cadastro" style="width: 20rem">
+                                            <label for="mailUsuario">Nº de grupos aprovados</label>
+                                            <input type="Campusmo" class="form-control campo" id="NomeCam"
+                                                placeholder="Digite nº de grupos aprovados" required>
+                                        </div>
+                                        <div class="form-group cadastro" style="width: 20rem">
+                                            <label for="mailUsuario">Nº de times aprovados</label>
+                                            <input type="Campusmo" class="form-control campo" id="NomeCam"
+                                                placeholder="Digite nº de times aprovados" required>
                                         </div>                                    
                                    </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="buttonsal">Salvar mudanças</button>
+                                    <button type="button" class="buttonsal">Salvar </button>
                                 </div>
                             </div>
                         </div>
@@ -164,27 +179,27 @@ function tabelaPartida(){
     <div>
         <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Campeonato</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Modalidade</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Fase</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Grupo</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
         </div>
         <div class="dropdown">
@@ -299,7 +314,7 @@ function tabelaPartida(){
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="TituloModalCentralizado">Cadratar Partida</h5>
+                                <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Partida</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -308,19 +323,29 @@ function tabelaPartida(){
                                 <form id="Cadastro" method="post" action="login.php">
 
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="mailUsuario">Nome da Modalidade</label>
-                                        <input type="NomeCam" class="form-control campo" id="NomeCam"
-                                            placeholder="Digite nome da modalidade" required>
+                                        <label for="mailUsuario">Nome do Grupo/Chave</label>
+                                        <input type="GrupoPartida" class="form-control campo" id="GrupoPartida"
+                                            placeholder="Digite nome do Grupo/Chave" required>
                                     </div>
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="DataCam">Data</label>
-                                        <input type="DataCam" class="form-control campo" id="DataCam"
+                                        <label for="DataPartida">Data</label>
+                                        <input type="DataPartida" class="form-control campo" id="DataPartida"
                                             placeholder="Digite a data" required>
                                     </div>
+                                    <div class="form-group cadastro" style="width: 20rem">
+                                    <label for="LocalPartida">Local</label>
+                                    <input type="LocalPartida" class="form-control campo" id="LocalPartida"
+                                        placeholder="Digite o local" required>
+                                </div>
+                                <div class="form-group cadastro" style="width: 20rem">
+                                <label for="DisputaPartida">Disputa</label>
+                                <input type="DisputaPartida" class="form-control campo" id="DisputaPartida"
+                                    placeholder="Digite a disputa" required>
+                            </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="buttonsal">Salvar mudanças</button>
+                                <button type="button" class="buttonsal">Salvar </button>
                             </div>
                         </div>
                     </div>
@@ -341,23 +366,28 @@ function tabelaGrupos(){
        
         <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Campeonato</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2">>/option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Modalidade</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Fase</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
-        </br> </br>
+          <div class="dropdown">
+          <div class="divBusca">
+              <input type="text" class="txtBusca" placeholder="Buscar..." />
+              <img style="width: 30px;" src="img/lupa.png" id="btnBusca" alt="Buscar" />
+          </div> 
+      </div>
       </div>
             <table class="table table-striped">
                 <thead>
@@ -444,7 +474,7 @@ function tabelaGrupos(){
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="TituloModalCentralizado">Cadratar Grupo</h5>
+                                    <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Grupo</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -453,19 +483,19 @@ function tabelaGrupos(){
                                     <form id="Cadastro" method="post" action="login.php">
 
                                         <div class="form-group cadastro" style="width: 20rem">
-                                            <label for="nomegrup">Nome</label>
-                                            <input type="nomegrup" class="form-control campo" id="nomegrup"
+                                            <label for="NomeGrupo">Nome</label>
+                                            <input type="NomeGrupo" class="form-control campo" id="NomeGrupo"
                                                 placeholder="Digite o nome" required>
                                         </div>  
                                         <div class="form-group cadastro" style="width: 20rem">
-                                            <label for="timegrup">Time</label>
-                                            <input type="temegrup" class="form-control campo" id="timegrup"
-                                                placeholder="Digite o time" required>
+                                            <label for="CompGrupo">Competição</label>
+                                            <input type="CompGrupo" class="form-control campo" id="CompGrupo"
+                                                placeholder="Digite a competição" required>
                                         </div>                                    
                                    </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="buttonsal">Salvar mudanças</button>
+                                    <button type="button" class="buttonsal">Salvar </button>
                                 </div>
                             </div>
                         </div>
@@ -484,27 +514,27 @@ function tabelaCompeticao(){
     <div>
         <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Campeonato</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Modalidade</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Fase</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Grupo/Chaves</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
         </div>
         <div class="dropdown">
@@ -625,7 +655,7 @@ function tabelaCompeticao(){
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="TituloModalCentralizado">Cadratar Partida</h5>
+                                <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Competição</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -634,19 +664,24 @@ function tabelaCompeticao(){
                                 <form id="Cadastro" method="post" action="login.php">
 
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="mailUsuario">Nome da Modalidade</label>
-                                        <input type="NomeCam" class="form-control campo" id="NomeCam"
-                                            placeholder="Digite nome da modalidade" required>
+                                        <label for="mailUsuario">Nome do Time</label>
+                                        <input type="TimeComp" class="form-control campo" id="TimeComp"
+                                            placeholder="Digite nome do time" required>
                                     </div>
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="DataCam">Data</label>
-                                        <input type="DataCam" class="form-control campo" id="DataCam"
-                                            placeholder="Digite a data" required>
+                                        <label for="DataCam">Grupo/Chave</label>
+                                        <input type="GrupoComp" class="form-control campo" id="GrupoComp"
+                                            placeholder="Digite o Grupo/Chaves" required>
                                     </div>
+                                    <div class="form-group cadastro" style="width: 20rem">
+                                    <label for="DataCam">Nº da Arovação</label>
+                                    <input type="AprovacaoComp" class="form-control campo" id="AprovacaoComp"
+                                        placeholder="Digite o nº da Aprovação" required>
+                                </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="buttonsal">Salvar mudanças</button>
+                                <button type="button" class="buttonsal">Salvar </button>
                             </div>
                         </div>
                     </div>
@@ -667,35 +702,35 @@ function tabelaDisputa(){
     <div>
         <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Campeonato</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Modalidade</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Fase</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Grupo</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>       
         <select class="custom-select btn-verde" id="inputGroupSelect01">
           <option selected >Partida</option>
-          <option value="1">Mista</option>
-          <option value="2">Grupo</option>
-          <option value="3">Chave</option>
+          <option value="1"></option>
+          <option value="2"></option>
+          <option value="3"></option>
         </select>
-    </br>
+        </br> </br> 
         <div class="dropdown">
                 <div class="divBusca">
                     <input type="text" class="txtBusca" placeholder="Buscar..." />
@@ -743,38 +778,8 @@ function tabelaDisputa(){
                 </tbody>
             </table>
            </br> </br>
-                    <button type="button" class="button" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                        <img style="width: 40px; height: 32px;" src="img/mais.png" height="80" width="100" />
-                        Adicionar
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog"
-                        aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="TituloModalCentralizado">Cadratar Modalidade</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="Cadastro" method="post" action="login.php">
-
-                                        <div class="form-group cadastro" style="width: 20rem">
-                                            <label for="mailUsuario">Campus</label>
-                                            <input type="Campusmo" class="form-control campo" id="NomeCam"
-                                                placeholder="Digite nome do Campus" required>
-                                        </div>                                    
-                                   </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="buttonsal">Salvar mudanças</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                   
                 </ul>
             </nav>
         </div>
@@ -790,21 +795,21 @@ function tabelaTime(){
     <div>
         <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Campeonato</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Modalidade</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
           <select class="custom-select btn-verde" id="inputGroupSelect01">
             <option selected >Grupo</option>
-            <option value="1">Mista</option>
-            <option value="2">Grupo</option>
-            <option value="3">Chave</option>
+            <option value="1"></option>
+            <option value="2"></option>
+            <option value="3"></option>
           </select>
             </div>
         </div>
@@ -903,7 +908,7 @@ function tabelaTime(){
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="TituloModalCentralizado">Cadratar Modalidade</h5>
+                                <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Time</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -912,19 +917,19 @@ function tabelaTime(){
                                 <form id="Cadastro" method="post" action="login.php">
 
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="mailUsuario">Nome da Modalidade</label>
-                                        <input type="NomeCam" class="form-control campo" id="NomeCam"
-                                            placeholder="Digite nome da modalidade" required>
+                                        <label for="CampusTime">Nome do Campus:</label>
+                                        <input type="CampusTime" class="form-control campo" id="NomeCam"
+                                            placeholder="Digite nome do campus" required>
                                     </div>
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="DataCam">Data</label>
-                                        <input type="DataCam" class="form-control campo" id="DataCam"
-                                            placeholder="Digite a data" required>
+                                        <label for="NomeTime">Nome do time:</label>
+                                        <input type="NomeTime" class="form-control campo" id="DataCam"
+                                            placeholder="Digite o nome do time" required>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="buttonsal">Salvar mudanças</button>
+                                <button type="button" class="buttonsal">Salvar </button>
                             </div>
                         </div>
                     </div>
@@ -1045,7 +1050,7 @@ function tabelaCampeonato(){
                         <div class="modal-dialog modal-dialog-centered" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h5 class="modal-title" id="TituloModalCentralizado">Cadratar Campeonato</h5>
+                              <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Campeonato</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
                                 <span aria-hidden="true">&times;</span>
                               </button>
@@ -1072,7 +1077,7 @@ function tabelaCampeonato(){
                                 </form>
                             </div>
                             <div class="modal-footer">
-                              <button type="button" class="buttonsal">Salvar mudanças</button>
+                              <button type="button" class="buttonsal">Salvar </button>
                             </div>
                           </div>
                         </div>
