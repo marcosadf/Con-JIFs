@@ -12,9 +12,11 @@ function login_api(login, password, callback){
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){
 			case 401:
+				setData('token', "" ,1)
 				alert("ERROR 401: Usuário ou senha incorretos!");
 				break;
 			case 500:
+				setData('token', "" ,1)
 				alert("ERROR 500: Falha no acesso ao servidor!");
 				break;				
 		}
