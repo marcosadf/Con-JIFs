@@ -49,11 +49,13 @@ public class BracketCatalogService {
 				bracket.getStage().getModality().getId(),
 				bracket.getStage().getId()
 			);
-		boolean nameUsed = listAll(stage.getModality().getChampionship().getId(), stage.getModality().getId(), stage.getId()).stream()
-				.filter(b -> b.getName().equals(bracket.getName())).toList().isEmpty();
-		if (!nameUsed) {
-			throw new BusinessException(
-					messageSource.getMessage("bracket.invalid.stage", null, LocaleContextHolder.getLocale()));
+		List<Bracket> nameUsed = listAll(stage.getModality().getChampionship().getId(), stage.getModality().getId(), stage.getId()).stream()
+				.filter(b -> b.getName().equals(bracket.getName())).toList();
+		if (!nameUsed.isEmpty()) {
+			if(nameUsed.get(0).getId() != bracket.getId()) {
+				throw new BusinessException(
+						messageSource.getMessage("bracket.invalid.stage", null, LocaleContextHolder.getLocale()));
+			}
 		}
 		bracket.setStage(stage);
 		return bracketRepository.save(bracket);

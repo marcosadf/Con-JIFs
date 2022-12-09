@@ -58,7 +58,7 @@ public class ModalityCatalogService {
 		modality.setChampionship(c);
 		boolean nameUsed = listAll(modality.getChampionship().getId()).stream()
 				.filter(m -> m.getName().equals(modality.getName())).toList().isEmpty();
-		if(!nameUsed) {
+		if(!nameUsed && modality.getId() == null) {
 			throw new BusinessException(
 				messageSource.getMessage("name.modality.exist", null, LocaleContextHolder.getLocale())
 			);

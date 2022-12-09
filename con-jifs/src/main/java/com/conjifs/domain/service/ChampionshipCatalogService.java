@@ -1,7 +1,9 @@
 package com.conjifs.domain.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -40,11 +42,13 @@ public class ChampionshipCatalogService {
 	
 	@Transactional
 	public Championship save(Championship championship) {
-		boolean nameUsed = championshipRepository.findByName(championship.getName())
+		List<Championship> nameUsed = championshipRepository.findByName(championship.getName())
 				.stream()
-				.anyMatch(championshipExist -> !championshipExist.equals(championship));
-		if(nameUsed) {
-			throw new BusinessException(messageSource.getMessage("name.championship.exist", null, LocaleContextHolder.getLocale()));
+				.filter(c -> championship.getName() == c.getName()).toList();
+		if (!nameUsed.isEmpty()) {
+			if(nameUsed.get(0).getId() != championship.getId()) {
+				throw new BusinessException(messageSource.getMessage("name.championship.exist", null, LocaleContextHolder.getLocale()));
+			}
 		}
 		return championshipRepository.save(championship);
 	}

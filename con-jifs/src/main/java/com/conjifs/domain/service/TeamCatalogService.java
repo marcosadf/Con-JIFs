@@ -51,12 +51,14 @@ public class TeamCatalogService {
 		Modality modality = modalityCatalogService.search(
 				team.getModality().getChampionship().getId(),
 				team.getModality().getId());
-		boolean nameUsed = listAll(team.getModality().getChampionship().getId(), modality.getChampionship().getId()).stream()
-				.filter(t -> t.getName().equals(team.getName())).toList().isEmpty();
-		if(!nameUsed) {
-			throw new BusinessException(
-				messageSource.getMessage("name.team.exist", null, LocaleContextHolder.getLocale())
-			);
+		List<Team> nameUsed = listAll(team.getModality().getChampionship().getId(), modality.getChampionship().getId()).stream()
+				.filter(t -> t.getName().equals(team.getName())).toList();
+		if (!nameUsed.isEmpty()) {
+			if(nameUsed.get(0).getId() != team.getId()) {
+				throw new BusinessException(
+					messageSource.getMessage("name.team.exist", null, LocaleContextHolder.getLocale())
+				);
+			}
 		}
 		team.setModality(modality);
 		return teamRepository.save(team);

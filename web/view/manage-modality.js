@@ -5,10 +5,7 @@ function manage_modality(){
     <div>
        
         <select class="custom-select btn-verde" id="inputGroupSelect01">
-          <option selected >Campeonato</option>
-          <option value="1"></option>
-          <option value="2"></option>
-          <option value="3"></option>
+          <option value="0" selected >Campeonato</option>
         </select>
     
             <div class="dropdown">
@@ -50,60 +47,80 @@ function manage_modality(){
                 </div>
                 </th>
             </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"><input type="text" name="mood1.1" id="mod1.1" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood1.2" id="mod1.2" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood1.3" id="mod1.3" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood1.4" id="mod1.4" class="form-control" /></th>
-                        <th scope="row" width="5" rowspan="1">
-                            <img style="width: 30px;" src="img/lixo.png">
-                    </tr>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input type="text" name="mood2.1" id="mod2.1" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood2.2" id="mod2.2" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood2.3" id="mod2.1" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood2.4" id="mod2.2" class="form-control" /></th>
-                        <th scope="row" rowspan="1">
-                            <img style="width: 30px;" src="img/lixo.png">
-                    </tr>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input type="text" name="mood3.1" id="mod3.1" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood3.2" id="mod3.2" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood3.3" id="mod3.3" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood3.4" id="mod3.4" class="form-control" /></th>
-                        <th scope="row" width="5" rowspan="1">
-                            <img style="width: 30px;" src="img/lixo.png">
-                    </tr>
-                    </tr>
-                    <tr>
-                        <th scope="row"><input type="text" name="mood4.1" id="mod4.1" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood4.2" id="mod4.2" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood4.3" id="mod4.3" class="form-control" /></th>
-                        <th scope="row"><input type="text" name="mood4.4" id="mod4.4" class="form-control" /></th>
-                        <th scope="row" rowspan="1">
-                            <img style="width: 30px;" src="img/lixo.png">
-                    </tr>
-                    </tr>
-                    <tr>
-                        <th scope="row" width="320"><input type="text" name="mood5.1" id="mod5.1" class="form-control" /></th>
-                        <th scope="row" width="320"><input type="text" name="mod5.2" id="mod5.2" class="form-control" /></th>
-                        <th scope="row" width="20"><input type="text" name="mood5.1" id="mod5.1" class="form-control" /></th>
-                        <th scope="row" width="20"><input type="text" name="mod5.2" id="mod5.2" class="form-control" /></th>
-                        <th scope="row" width="10" rowspan="1">
-                            <img style="width: 30px;" src="img/lixo.png">
-                    </tr>
-                    </tr>
+                <tbody id="tab-modalities">
+                    
                 </tbody>
             </table>
             <nav aria-label="Navegação de página exemplo">
                 <ul class="pagination">
+                    
+                </ul>
+                <button type="button" class="button" data-toggle="modal" data-target="#ExemploModalCentralizado">
+                    <img style="width: 40px; height: 32px;" src="img/mais.png" height="80" width="100" />
+                    Adicionar
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog"
+                    aria-labelledby="TituloModalCentralizado" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Modalidade</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="Cadastro" method="post" action="login.php">
+                                <div class="form-group cadastro" style="width: 20rem">
+                                <label for="mailUsuario">Nome</label>
+                                <input type="Nome" class="form-control campo" id="NomeCam"
+                                    placeholder="Digite nome " required>
+                            </div>
+                            <div class="form-group cadastro" style="width: 20rem">
+                                        <label for="mailUsuario">Tipo</label>
+                                        <input type="Campusmo" class="form-control campo" id="NomeCam"
+                                            placeholder="Digite tipo" required>
+                                    </div>
+                                    <div class="form-group cadastro" style="width: 20rem">
+                                        <label for="mailUsuario">Nº de grupos aprovados</label>
+                                        <input type="Campusmo" class="form-control campo" id="NomeCam"
+                                            placeholder="Digite nº de grupos aprovados" required>
+                                    </div>
+                                    <div class="form-group cadastro" style="width: 20rem">
+                                        <label for="mailUsuario">Nº de times aprovados</label>
+                                        <input type="Campusmo" class="form-control campo" id="NomeCam"
+                                            placeholder="Digite nº de times aprovados" required>
+                                    </div>                                    
+                               </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="buttonsal">Salvar </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    `);
+    list_championships(function(champs){
+        $.each(champs, function (i, item) {
+            $('#inputGroupSelect01').append($('<option>', { 
+                value: item.id,
+                text : item.name
+            }));
+        });
+    });
+    $('#inputGroupSelect01').change(function() {
+        if ($(this).val() != "0") {
+            list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
+                insert_modalities(modalities, 1);
+                var nPages = parseInt(modalities.length / 4);
+                    var btnPages = `
                     <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Anterior">
+                        <a class="page-link" onclick="insert_modalities(modalities, 1);" aria-label="Anterior">
                             <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Anterior</span>
                         </a>
                     </li>
                     <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -115,54 +132,82 @@ function manage_modality(){
                             <span class="sr-only">Próximo</span>
                         </a>
                     </li>
-                    <button type="button" class="button" data-toggle="modal" data-target="#ExemploModalCentralizado">
-                        <img style="width: 40px; height: 32px;" src="img/mais.png" height="80" width="100" />
-                        Adicionar
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog"
-                        aria-labelledby="TituloModalCentralizado" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="TituloModalCentralizado">Cadastrar Modalidade</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form id="Cadastro" method="post" action="login.php">
-                                    <div class="form-group cadastro" style="width: 20rem">
-                                    <label for="mailUsuario">Nome</label>
-                                    <input type="Nome" class="form-control campo" id="NomeCam"
-                                        placeholder="Digite nome " required>
-                                </div>
-                                <div class="form-group cadastro" style="width: 20rem">
-                                            <label for="mailUsuario">Tipo</label>
-                                            <input type="Campusmo" class="form-control campo" id="NomeCam"
-                                                placeholder="Digite tipo" required>
-                                        </div>
-                                        <div class="form-group cadastro" style="width: 20rem">
-                                            <label for="mailUsuario">Nº de grupos aprovados</label>
-                                            <input type="Campusmo" class="form-control campo" id="NomeCam"
-                                                placeholder="Digite nº de grupos aprovados" required>
-                                        </div>
-                                        <div class="form-group cadastro" style="width: 20rem">
-                                            <label for="mailUsuario">Nº de times aprovados</label>
-                                            <input type="Campusmo" class="form-control campo" id="NomeCam"
-                                                placeholder="Digite nº de times aprovados" required>
-                                        </div>                                    
-                                   </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="buttonsal">Salvar </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </ul>
-            </nav>
-        </div>
-    </div>
-    `);
+
+                    `;
+                for (var i = 1; i <= nPages; i++) {
+                    
+                }
+                $('#pagination');
+            });
+        }
+    });
+    document.getElementById("screen").addEventListener('click', function(e) {
+        $.each($('.tab-input'), function(i, input){
+            if(e.target != input && $(input).attr('readonly') != "readonly") {
+                console.log("sda");
+                $(input).trigger($.Event("keydown", {keyCode: 13}))
+            } 
+        });
+    });
+}
+function insert_modalities(modalities, page){
+    if(page == 1 || modalities.length / 4 > (page - 1)){
+        var trs = ``;
+        for (var i = (page - 1) * 4; i < modalities.length || i == page * 4; i++) {
+            modalities[i]
+            trs += `<tr>
+                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                        if (event.keyCode == 13){
+                            this.readOnly='true';
+                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
+                        }"
+                    name="name" id="name-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].name}" /></th>
+                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                        if (event.keyCode == 13){
+                            this.readOnly='true';
+                            console.log('hello');
+                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
+                        }"
+                    name="type" id="type-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].typeCompetition}" /></th>
+                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                        if (event.keyCode == 13){
+                            this.readOnly='true';
+                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
+                        }"
+                    name="ngroup" id="ngroup-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupTeamsNumber}" /></th>
+                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                        if (event.keyCode == 13){
+                            this.readOnly='true';
+                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
+                        }"
+                    name="napprov" id="napprov-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupApprovedNumber}" /></th>
+                <th scope="row" width="5" rowspan="1">
+                    <img style="width: 30px;" src="img/lixo.png">
+                </th>
+            </tr>`;
+        };
+        $('#tab-modalities').html(trs);
+        var nPages = parseInt(modalities.length / 4);
+        var btnPages = page != 1 ? `
+            <li class="page-item">
+                <a class="page-link" onclick="insert_modalities(${modalities}, ${page - 1});" aria-label="Anterior">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>` : ``;                    
+        for (var i = 1; i <= nPages; i++) {
+            btnPages += page != i ? `
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                ` : `
+                <li class="page-item"><a class="page-link" href="#" style="background-color: #0AB41E">1</a></li>
+                `;   
+        }
+        btnPages += page != nPages ? `
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Próximo">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </li>` : ``;
+        $('#pagination').html(btnPages);
+    }
 }

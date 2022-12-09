@@ -74,12 +74,14 @@ public class StageCatalogService {
 		Modality modality = modalityCatalogService.search(
 				stage.getModality().getChampionship().getId(),
 				stage.getModality().getId());
-		boolean nameUsed = listAll(modality.getChampionship().getId(), modality.getId()).stream()
-				.filter(t -> t.getNameStage().equals(stage.getNameStage())).toList().isEmpty();
-		if(!nameUsed) {
-			throw new BusinessException(
-				messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
-			);
+		List<Stage> nameUsed = listAll(modality.getChampionship().getId(), modality.getId()).stream()
+				.filter(t -> t.getNameStage().equals(stage.getNameStage())).toList();
+		if (!nameUsed.isEmpty()) {
+			if(nameUsed.get(0).getId() != stage.getId()) {
+				throw new BusinessException(
+					messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
+				);
+			}
 		}
 		stage.setModality(modality);
 		return stageRepository.save(stage);
