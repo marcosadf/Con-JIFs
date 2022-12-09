@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./css/bootstrap.css">
+        <link rel="stylesheet" href="./css/bootstrap.css.map">
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="./core/jquery-1.10.2.js"></script>
+        <script src="./core/util-coockies.js"></script>
+        <script src="./core/api-request.js"></script>
+        <script src="./core/screen-ratio.js"></script>
+        <script src="./core/sort-ranking.js"></script>
+        <script src="./core/sort-disputes.js"></script>
+        <script src="./core/sort-brackets.js"></script>
+        <script src="./core/format-date.js"></script>
+        <script src="./js/bootstrap.min.js"></script>
+         <script src="./js/popper.min.js"></script>
+        <script src="./requests/modalities-requests.js"></script>
+        <script src="./requests/login-requests.js"></script>
+        <script src="./requests/championships-requests.js"></script>
+        <script src="./requests/stages-requests.js"></script>
+        <script src="./requests/disputes-requests.js"></script>
+        <script src="./requests/competes-requests.js"></script>
+        <script src="./requests/brackets-requests.js"></script>
+        <script src="./requests/matches-requests.js"></script>
+        <script src="./requests/teams-requests.js"></script>
+        <script src="./view/manage-championship.js"></script>
+        <script src="./view/manage-compete.js"></script>
+        <script src="./view/manage-dispute.js"></script>
+        <script src="./view/manage-group.js"></script>        
+        <script src="./view/manage-match.js"></script>
+        <script src="./view/manage-modality.js"></script>
+        <script src="./view/manage-team.js"></script>
+        <meta name='viewport' content="width=device-width, intial-scale=1">
+        <title>Con-JIFs</title>
+    </head>
+    <body >
+        <nav id="menu">
+            <div id="titulomenu"><h1> Menu</h1></div>
+            <ul style="list-style: none;">
+                <li >
+                    <button onclick='manage_championship()'id="menu_btn_championship" type="submit" class="btn btn-success btn-block btn-lg" style=" margin:center;" target="principal" >
+                        Campeonato
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_modality()'id="menu_btn_modality" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Modalidade
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_team()'id="menu_btn_team" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal"> 
+                        Times
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_group()'id="menu_btn_group"type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Grupos
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_compete()'id="menu_btn_compete" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Competição
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_match()' id="menu_btn_match" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Partidas
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_dispute()' id="menu_btn_dispute" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Disputa
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <div id="container">
+            <div id="screen">
+                <img src="img/logo.png" id="logo"/>   
+            </div>  
+        </div>
+        </body>
+</html>

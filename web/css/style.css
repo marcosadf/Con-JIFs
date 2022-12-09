@@ -1,0 +1,170 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    display: flex;
+    justify-items: flex-start;
+    
+
+}
+#menu{
+    display: flex;
+    flex-direction: column;
+    background-color: #209218;
+    height: 100vh;
+    width: 20VW;
+}
+#menu ul li button{
+    margin-top: 2VH;
+    font-size: 4VH;
+    width: 18vw;
+    height: 10vh;
+}
+#titulomenu{
+    display: flex;
+    align-items: center;
+    color: white;
+    justify-content: center;
+    height: 16vh;
+}
+#titulomenu  h1{
+    font-size: 10vh;
+}
+.nome {
+    margin-left: 400px;
+    font-size: 45px;
+    margin-bottom: 5px;
+}
+
+.table {
+    width: 100%;
+    margin-right:0px;
+    margin-left: 0px;
+  
+}
+.table thead th {
+    
+    border: 0px;
+}
+
+.btn{
+    border-radius: 25px;
+    text-align: center;
+    margin: auto;
+    color: #ECECEC;
+}
+
+.btn-verde{
+    background-color: #209218;
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    min-width: 1VW;
+    width: 11.5VW;
+    text-align: center;
+    font-size: 3VH;
+    margin-left:10px ;
+}
+.aliamento{
+    display:flex ;
+    justify-content: center;
+    height: 4.8vh;
+}
+.aliamento button{
+    color: black;
+}
+.divBusca {
+    background-color: #ECECEC;
+    border: solid 1px #ECECEC;
+    border-radius: 15px;
+    width: 200px;
+    margin-left: 850px;
+    margin-bottom: 20px;
+}
+
+.txtBusca {
+    float: left;
+    background-color: transparent;
+    padding-left: 5px;
+    font-size: 18px;
+    border: none;
+    height: 25px;
+    width: 150px;
+    margin-left: 5px;
+}
+
+.button {
+    background-color: #209218;
+    color: white;
+    display: flex;
+   justify-content: center;
+    align-items: center;
+    width: 9vw;
+    height: 6.6vh;
+    margin-left: 640px;
+    margin-top: 20px;
+    border: solid 1px #209218;
+    border-radius: 20px;
+}
+
+.buttonfe{
+    background-color: red;
+    border: solid 1px red;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+    margin-right: 500px;
+}
+.buttonsal{
+    background-color: #209218;
+    border: solid 1px #209218;
+    color: white;
+    font-size: 20px;
+    border-radius: 15px;
+    width: 40%;
+    
+}
+.modal-footer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-title{
+    display: flex;
+    justify-content:center ;
+    width: 100%;
+}
+.pagination {
+    margin-left: 50px;
+}
+
+ul.pagination li a {
+    border-radius: 5px;
+    margin-top: 20px;
+    color: black;
+    float: left;
+    border: solid 1px #209218;
+    height: 5.6vh;
+}
+
+.ul.pagination li a.active {
+    background-color: #209218;
+    color: white;
+}
+.cadastro{
+    margin-left: 70px;
+}
+
+#container{
+    display: flex;
+    justify-content: center;
+    width: 80vw;
+}
+#screen{
+    width: 100%;
+}
+#logo{
+    margin-left: 20vw;
+    width: 40vw;
+}
