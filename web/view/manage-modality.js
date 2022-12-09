@@ -3,7 +3,7 @@ function manage_modality(){
     content.html(`
      <p class="nome"> Modalidade</p>
     <div>
-       
+        <input type="hidden" hidden id="current-page" value="1"/>
         <select class="custom-select btn-verde" id="inputGroupSelect01">
           <option value="0" selected >Campeonato</option>
         </select>
@@ -20,31 +20,31 @@ function manage_modality(){
             <thead>
                 <th scope="row">
                     <div class="aliamento">
-                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
-                     Nome
-                    </button>
-                </div>
+                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                         Nome
+                        </button>
+                    </div>
                 </th>
                 <th scope="row">
                     <div class="aliamento">
-                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
-                     Tipo
-                    </button>
-                </div>
+                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                         Tipo
+                        </button>
+                    </div>
                 </th>
                 <th scope="row">
                     <div class="aliamento">
-                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
-                     Nº de grupos aprovados
-                    </button>
-                </div>
+                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                         Nº de times por grupo
+                        </button>
+                    </div>
                 </th>
                 <th scope="row">
                     <div class="aliamento">
-                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
-                     Nº de times aprovados
-                    </button>
-                </div>
+                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                         Nº de times aprovados
+                        </button>
+                    </div>
                 </th>
             </thead>
                 <tbody id="tab-modalities">
@@ -52,7 +52,7 @@ function manage_modality(){
                 </tbody>
             </table>
             <nav aria-label="Navegação de página exemplo">
-                <ul class="pagination">
+                <ul class="pagination" id="pagination">
                     
                 </ul>
                 <button type="button" class="button" data-toggle="modal" data-target="#ExemploModalCentralizado">
@@ -72,30 +72,35 @@ function manage_modality(){
                             </div>
                             <div class="modal-body">
                                 <form id="Cadastro" method="post" action="login.php">
-                                <div class="form-group cadastro" style="width: 20rem">
-                                <label for="mailUsuario">Nome</label>
-                                <input type="Nome" class="form-control campo" id="NomeCam"
-                                    placeholder="Digite nome " required>
-                            </div>
-                            <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="mailUsuario">Tipo</label>
-                                        <input type="Campusmo" class="form-control campo" id="NomeCam"
-                                            placeholder="Digite tipo" required>
+                                    <div class="form-group cadastro" style="width: 20rem">
+                                        <label for="name">Nome</label>
+                                        <input type="text" class="form-control campo" id="cad-name"
+                                            placeholder="Digite nome " required>
                                     </div>
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="mailUsuario">Nº de grupos aprovados</label>
-                                        <input type="Campusmo" class="form-control campo" id="NomeCam"
-                                            placeholder="Digite nº de grupos aprovados" required>
+                                        <label for="type">Tipo</label>
+                                        <select class="form-control campo" id="cad-type"
+                                             required>
+                                            <option value="0">Selecione</option>
+                                            <option value="GROUP">GROUP</option>
+                                            <option value="BRACKET">BRACKET</option>
+                                            <option value="MIXED">MIXED</option>
+                                        </select>                                            
                                     </div>
                                     <div class="form-group cadastro" style="width: 20rem">
-                                        <label for="mailUsuario">Nº de times aprovados</label>
-                                        <input type="Campusmo" class="form-control campo" id="NomeCam"
+                                        <label for="groupTeamsNumber">Nº de times por grupos</label>
+                                        <input type="text" class="form-control campo" id="cad-ngroup"
+                                            placeholder="Digite nº de times por grupos" required>
+                                    </div>
+                                    <div class="form-group cadastro" style="width: 20rem">
+                                        <label for="groupApprovedNumber">Nº de times aprovados</label>
+                                        <input type="text" class="form-control campo" id="cad-nteam"
                                             placeholder="Digite nº de times aprovados" required>
                                     </div>                                    
                                </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="buttonsal">Salvar </button>
+                                <button type="button" data-dismiss="modal" onclick="save_modality($('#cad-name').val(), $('#cad-type').val(), parseInt($('#cad-nteam').val()), parseInt($('#cad-ngroup').val()))" class="buttonsal">Salvar </button>
                             </div>
                         </div>
                     </div>
@@ -104,6 +109,7 @@ function manage_modality(){
         </div>
     </div>
     `);
+    
     list_championships(function(champs){
         $.each(champs, function (i, item) {
             $('#inputGroupSelect01').append($('<option>', { 
@@ -116,28 +122,6 @@ function manage_modality(){
         if ($(this).val() != "0") {
             list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
                 insert_modalities(modalities, 1);
-                var nPages = parseInt(modalities.length / 4);
-                    var btnPages = `
-                    <li class="page-item">
-                        <a class="page-link" onclick="insert_modalities(modalities, 1);" aria-label="Anterior">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Próximo">
-                            <span aria-hidden="true">&raquo;</span>
-                            <span class="sr-only">Próximo</span>
-                        </a>
-                    </li>
-
-                    `;
-                for (var i = 1; i <= nPages; i++) {
-                    
-                }
-                $('#pagination');
             });
         }
     });
@@ -147,67 +131,103 @@ function manage_modality(){
                 console.log("sda");
                 $(input).trigger($.Event("keydown", {keyCode: 13}))
             } 
-        });
+        });      
     });
 }
 function insert_modalities(modalities, page){
     if(page == 1 || modalities.length / 4 > (page - 1)){
         var trs = ``;
-        for (var i = (page - 1) * 4; i < modalities.length || i == page * 4; i++) {
-            modalities[i]
+        for (var i = (page - 1) * 4; i < modalities.length && i < page * 4; i++) {
             trs += `<tr>
-                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                <th scope="row">
+                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
                         if (event.keyCode == 13){
                             this.readOnly='true';
                             edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
                         }"
-                    name="name" id="name-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].name}" /></th>
-                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
-                        if (event.keyCode == 13){
-                            this.readOnly='true';
-                            console.log('hello');
-                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
-                        }"
-                    name="type" id="type-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].typeCompetition}" /></th>
-                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
-                        if (event.keyCode == 13){
-                            this.readOnly='true';
-                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
-                        }"
-                    name="ngroup" id="ngroup-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupTeamsNumber}" /></th>
-                <th scope="row"><input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
-                        if (event.keyCode == 13){
-                            this.readOnly='true';
-                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
-                        }"
-                    name="napprov" id="napprov-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupApprovedNumber}" /></th>
-                <th scope="row" width="5" rowspan="1">
-                    <img style="width: 30px;" src="img/lixo.png">
+                    name="name" id="name-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].name}" />
                 </th>
-            </tr>`;
+                <th scope="row">
+                    <select type="text"  onchange="edit_modality(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});"
+                    name="type" id="type-${modalities[i].id}" class="tab-select form-control" value="${modalities[i].typeCompetition}">
+                        <option >Selecione</option>
+                        <option ${modalities[i].typeCompetition == 'GROUP'? 'selected': ''} value="GROUP">GROUP</option>
+                        <option ${modalities[i].typeCompetition == 'BRACKET'? 'selected': ''} value="BRACKET">BRACKET</option>
+                        <option ${modalities[i].typeCompetition == 'MIXED'? 'selected': ''} value="MIXED">MIXED</option>
+                    </select>
+                </th>
+                <th scope="row">
+                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                        if (event.keyCode == 13){
+                            this.readOnly='true';
+                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
+                        }"
+                    name="ngroup" id="ngroup-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupTeamsNumber}" />
+                </th>
+                <th scope="row">
+                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                        if (event.keyCode == 13){
+                            this.readOnly='true';
+                            edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
+                        }"
+                    name="napprov" id="napprov-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupApprovedNumber}" />
+                </th>
+                <th scope="row" width="5" rowspan="1">
+                    <a onclick="delete_modality(${page}, ${parseInt(modalities[i].id)})"">
+                        <img style="width: 30px;" src="img/lixo.png">
+                    </a>
+                </th>
+            </tr>`;          
         };
         $('#tab-modalities').html(trs);
-        var nPages = parseInt(modalities.length / 4);
+        var nPages = parseInt(modalities.length / 4) + (modalities.length % 4 != 0 ? 1: 0);
         var btnPages = page != 1 ? `
             <li class="page-item">
-                <a class="page-link" onclick="insert_modalities(${modalities}, ${page - 1});" aria-label="Anterior">
+                <a class="page-link" onclick="next_page(${page - 1})" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>` : ``;                    
         for (var i = 1; i <= nPages; i++) {
             btnPages += page != i ? `
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" onclick="next_page(${i});">${i}</a></li>
                 ` : `
-                <li class="page-item"><a class="page-link" href="#" style="background-color: #0AB41E">1</a></li>
+                <li class="page-item"><a class="page-link" href="#" style="background-color: #0AB41E">${i}</a></li>
                 `;   
         }
-        btnPages += page != nPages ? `
+        btnPages += page < nPages ? `
             <li class="page-item">
-                <a class="page-link" href="#" aria-label="Próximo">
+                <a class="page-link" onclick="next_page(${page + 1});" aria-label="Próximo">
                     <span aria-hidden="true">&raquo;</span>
-                    <span class="sr-only">Próximo</span>
                 </a>
             </li>` : ``;
+        $('#current-page').val(page);
         $('#pagination').html(btnPages);
+    }
+}
+function next_page(page){
+        list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
+            insert_modalities(modalities, page);
+        });
+}
+function edit_modality(championshipId, modalityId, name, typeCompetition, groupTeamsNumber, groupApprovedNumber){
+   edit_modalities(championshipId, modalityId, name, typeCompetition, groupTeamsNumber, groupApprovedNumber, ()=>{});
+}
+function save_modality(name, typeCompetition, groupTeamsNumber, groupApprovedNumber){
+    if(window.confirm('Click em "Ok" para confirmar a adição da modalidade.') == true){
+        add_modalities(parseInt($('#inputGroupSelect01').val()) , name, typeCompetition, groupTeamsNumber, groupApprovedNumber, ()=>{
+            list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
+                insert_modalities(modalities, $('#current-page').val());
+            });            
+        });
+    }
+}
+
+function delete_modality(page, modalityId){
+    if(window.confirm('Click em "Ok" para confirmar a exclusão da modalidade.') == true){
+        delete_modalities(parseInt($('#inputGroupSelect01').val()), modalityId, ()=>{
+            list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
+                insert_modalities(modalities, page);
+            });            
+        });
     }
 }

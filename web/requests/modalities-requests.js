@@ -6,7 +6,7 @@ function add_modalities(championshipId, name, typeCompetition, groupTeamsNumber,
 		"Accept-Language": "pt",
 		"Authorization": "Bearer " + getData("token",false)
 	}
-	body =  JSON.stringify({
+	body = JSON.stringify({
         championship: {
             id: championshipId
         },
@@ -120,7 +120,7 @@ function searchName_modalities(championshipId, name, callback){
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function edit_modalities(modalityId, championshipId, name, typeCompetition, groupTeamsNumber, groupApprovedNumber, callback){
+function edit_modalities(championshipId, modalityId, name, typeCompetition, groupTeamsNumber, groupApprovedNumber, callback){
 	endpoint = `/modalities/${modalityId}`;
 	type = "put";
 	header = {
@@ -156,8 +156,8 @@ function edit_modalities(modalityId, championshipId, name, typeCompetition, grou
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function delete_modalities(modalityId, championshipId, callback){
-	endpoint = "/modalities/championship/${championshipId}/${modalityId}";
+function delete_modalities(championshipId, modalityId, callback){
+	endpoint = `/modalities/championship/${championshipId}/${modalityId}`;
 	type = "delete";
 	header = {
 		"Content-Type": "application/json",
