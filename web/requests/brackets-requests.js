@@ -54,6 +54,34 @@ function list_brackets(championshipId, modalityId, stageId, callback){
 	api_request(endpoint, type, header, body, callback, error);
 }
 
+function listGroup_brackets(championshipId, modalityId, callback){
+	endpoint = `/brackets/championship/${championshipId}/modality/${modalityId}/group`;
+	type = "get";
+	header = {
+		"Content-Type": "application/json",
+		"Accept-Language": "pt",
+		"Authorization": "Bearer " + getData("token",false)
+	}
+	body = "";
+	error = function(jqXHR, textStatus, msg){
+		switch (jqXHR.status){
+			case 404:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;
+			case 400:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;			
+			case 401:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;
+			case 500:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;			
+		}
+	}
+	api_request(endpoint, type, header, body, callback, error);
+}
+
 function search_brackets(championshipId, modalityId, stageId, bracketId, callback){
 	endpoint = `/brackets/championship/${championshipId}/modality/${modalityId}/stage/${stageId}/bracket/${bracketId}`;
 	type = "get";

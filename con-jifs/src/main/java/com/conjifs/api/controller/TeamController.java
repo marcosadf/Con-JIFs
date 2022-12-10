@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.conjifs.domain.model.Team;
+import com.conjifs.domain.service.CompeteCatalogService;
 import com.conjifs.domain.service.TeamCatalogService;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/teams")
 public class TeamController {
 	private TeamCatalogService teamCatalogService;
+	private CompeteCatalogService competeCatalogService;
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -40,6 +42,11 @@ public class TeamController {
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}")
 	public Set<Team> listAll(@PathVariable Long championshipId, @PathVariable Long modalityId) {
 		return teamCatalogService.listAll(championshipId, modalityId);
+	}
+	
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/bracket/{bracketId}")
+	public Set<Team> listAllForGroup(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long bracketId) {
+		return competeCatalogService.listAllForGroup(championshipId, modalityId, bracketId);
 	}
 
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}/name")

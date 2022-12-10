@@ -71,7 +71,7 @@ function manage_modality(){
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form id="Cadastro" method="post" action="login.php">
+                                <form id="Cadastro" method="post" action="#">
                                     <div class="form-group cadastro" style="width: 20rem">
                                         <label for="name">Nome</label>
                                         <input type="text" class="form-control campo" id="cad-name"
@@ -82,9 +82,9 @@ function manage_modality(){
                                         <select class="form-control campo" id="cad-type"
                                              required>
                                             <option value="0">Selecione</option>
-                                            <option value="GROUP">GROUP</option>
-                                            <option value="BRACKET">BRACKET</option>
-                                            <option value="MIXED">MIXED</option>
+                                            <option value="GROUP">GRUPOS</option>
+                                            <option value="BRACKET">CHAVES</option>
+                                            <option value="MIXED">MIXTO</option>
                                         </select>                                            
                                     </div>
                                     <div class="form-group cadastro" style="width: 20rem">
@@ -111,6 +111,7 @@ function manage_modality(){
     `);
     
     list_championships(function(champs){
+        $('#inputGroupSelect01').html(`<option selected value="0">Campeonato</option>`);
         $.each(champs, function (i, item) {
             $('#inputGroupSelect01').append($('<option>', { 
                 value: item.id,
@@ -121,14 +122,13 @@ function manage_modality(){
     $('#inputGroupSelect01').change(function() {
         if ($(this).val() != "0") {
             list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
-                insert_modalities(modalities, 1);
+                insert_modalities(modalities, 1);             
             });
         }
     });
     document.getElementById("screen").addEventListener('click', function(e) {
         $.each($('.tab-input'), function(i, input){
             if(e.target != input && $(input).attr('readonly') != "readonly") {
-                console.log("sda");
                 $(input).trigger($.Event("keydown", {keyCode: 13}))
             } 
         });      
@@ -151,9 +151,9 @@ function insert_modalities(modalities, page){
                     <select type="text"  onchange="edit_modality(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});"
                     name="type" id="type-${modalities[i].id}" class="tab-select form-control" value="${modalities[i].typeCompetition}">
                         <option >Selecione</option>
-                        <option ${modalities[i].typeCompetition == 'GROUP'? 'selected': ''} value="GROUP">GROUP</option>
-                        <option ${modalities[i].typeCompetition == 'BRACKET'? 'selected': ''} value="BRACKET">BRACKET</option>
-                        <option ${modalities[i].typeCompetition == 'MIXED'? 'selected': ''} value="MIXED">MIXED</option>
+                        <option ${modalities[i].typeCompetition == 'GROUP'? 'selected': ''} value="GROUP">GRUPOS</option>
+                        <option ${modalities[i].typeCompetition == 'BRACKET'? 'selected': ''} value="BRACKET">CHAVES</option>
+                        <option ${modalities[i].typeCompetition == 'MIXED'? 'selected': ''} value="MIXED">MIXTO</option>
                     </select>
                 </th>
                 <th scope="row">
@@ -183,20 +183,20 @@ function insert_modalities(modalities, page){
         var nPages = parseInt(modalities.length / 4) + (modalities.length % 4 != 0 ? 1: 0);
         var btnPages = page != 1 ? `
             <li class="page-item">
-                <a class="page-link" onclick="next_page(${page - 1})" aria-label="Anterior">
+                <a class="page-link" onclick="nextModality_page(${page - 1})" aria-label="Anterior">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>` : ``;                    
         for (var i = 1; i <= nPages; i++) {
             btnPages += page != i ? `
-                <li class="page-item"><a class="page-link" onclick="next_page(${i});">${i}</a></li>
+                <li class="page-item"><a class="page-link" onclick="nextModality_page(${i});">${i}</a></li>
                 ` : `
                 <li class="page-item"><a class="page-link" href="#" style="background-color: #0AB41E">${i}</a></li>
                 `;   
         }
         btnPages += page < nPages ? `
             <li class="page-item">
-                <a class="page-link" onclick="next_page(${page + 1});" aria-label="Próximo">
+                <a class="page-link" onclick="nextModality_page(${page + 1});" aria-label="Próximo">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>` : ``;
@@ -204,7 +204,7 @@ function insert_modalities(modalities, page){
         $('#pagination').html(btnPages);
     }
 }
-function next_page(page){
+function nextModality_page(page){
         list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
             insert_modalities(modalities, page);
         });

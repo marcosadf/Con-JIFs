@@ -41,6 +41,11 @@ public class BracketController {
 	public Set<Bracket> listAll(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId) {
 		return bracketCatalogService.listAll(championshipId, modalityId, stageId);
 	}
+	
+	@GetMapping("/championship/{championshipId}/modality/{modalityId}/group")
+	public Set<Bracket> listGroupAll(@PathVariable Long championshipId, @PathVariable Long modalityId) {
+		return bracketCatalogService.listGroupAll(championshipId, modalityId);
+	}
 
 	@GetMapping("/championship/{championshipId}/modality/{modalityId}/stage/{stageId}/name")
 	public Bracket searchNameBracket(@PathVariable Long championshipId, @PathVariable Long modalityId, @PathVariable Long stageId, @RequestBody Bracket bracket) {

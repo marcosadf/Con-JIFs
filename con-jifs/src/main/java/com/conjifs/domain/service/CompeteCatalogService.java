@@ -1,6 +1,7 @@
 package com.conjifs.domain.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -16,6 +17,7 @@ import com.conjifs.domain.exception.BusinessException;
 import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Bracket;
 import com.conjifs.domain.model.Compete;
+import com.conjifs.domain.model.NameStage;
 import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.model.Team;
 import com.conjifs.domain.repository.CompeteRepository;
@@ -29,6 +31,7 @@ public class CompeteCatalogService {
 	private CompeteRepository competeRepository;
 	private TeamCatalogService teamCatalogService;
 	public StageCatalogService stageCatalogService;
+	private ModalityCatalogService modalityCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 	
 	@Transactional
@@ -63,6 +66,14 @@ public class CompeteCatalogService {
 	public Set<Compete> listAllBracket(Long championshipId, Long modalityId, Long stageId, Long bracketId) {
 		Bracket bracket = bracketCatalogService.search(championshipId, modalityId, stageId, bracketId);
 		return bracket.getCompetes();
+	}
+	
+	public Set<Team> listAllForGroup(Long championshipId, Long modalityId, Long bracketId) {
+		List<Stage> stages = modalityCatalogService.search(championshipId, modalityId).getStages().stream().filter(s -> {return s.getNameStage() == NameStage.GROUP;}).collect(Collectors.toList());
+		if(!stages.isEmpty()){
+			return listAllBracket(championshipId, modalityId, stages.get(0).getId(), bracketId).stream().map(c -> {return c.getTeam();}).collect(Collectors.toSet());
+		}
+		return new HashSet<Team>();
 	}
 	
 	@Transactional

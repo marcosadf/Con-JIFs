@@ -1,8 +1,10 @@
 package com.conjifs.domain.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -13,6 +15,7 @@ import com.conjifs.config.LocaleConfig;
 import com.conjifs.domain.exception.BusinessException;
 import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Bracket;
+import com.conjifs.domain.model.NameStage;
 import com.conjifs.domain.model.Stage;
 import com.conjifs.domain.repository.BracketRepository;
 
@@ -23,6 +26,7 @@ import lombok.AllArgsConstructor;
 public class BracketCatalogService {
 	private BracketRepository bracketRepository;
 	private StageCatalogService stageCatalogService;
+	private ModalityCatalogService modalityCatalogService;
 	private MessageSource messageSource = new LocaleConfig().messageSource();
 
 	@Transactional
@@ -93,6 +97,14 @@ public class BracketCatalogService {
 	@Transactional
 	public Set<Bracket> searchParentBracket(Bracket bracket) {
 		return bracketRepository.findByParentBracket(bracket);
+	}
+
+	public Set<Bracket> listGroupAll(Long championshipId, Long modalityId) {
+		List<Stage> stages = modalityCatalogService.search(championshipId, modalityId).getStages().stream().filter(s -> {return s.getNameStage() == NameStage.GROUP;}).collect(Collectors.toList());
+		if(!stages.isEmpty()){
+			return stages.get(0).getBrackets();
+		}
+		return new HashSet<Bracket>();
 	}
 
 }
