@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -48,8 +49,8 @@ public class ModalityCatalogService {
 	
 	@Transactional
 	public Set<Modality> searchName(Long championshipId, Modality modality) {
-		return new HashSet<>(listAll(championshipId).stream()
-				.filter(m -> m.getName().contains(modality.getName())).toList()); 
+		return new HashSet<>(modalityRepository.findByNameContains(modality.getName()).stream()
+				.filter(m -> m.getChampionship().getId() == championshipId).collect(Collectors.toList())); 
 	}
 	
 	@Transactional

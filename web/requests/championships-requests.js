@@ -94,8 +94,8 @@ function search_championships(id, callback){
 	endpoint = `/championships/${id}`;
 	type = `get`;
 	header = {
-		'Content-Type': `application/json`,
-		'Accept-Language': `pt`,
+		'Content-Type': 'application/json',
+		'Accept-Language': 'pt',
 		'Authorization': `Bearer ` + getData(`token`,false)
 	}
 	body = "";
@@ -118,16 +118,18 @@ function search_championships(id, callback){
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function searchName_championships(name, callback){
+function searchName_championships(nameModali, callback){
 	endpoint = `/championships/name`;
-	type = `get`;
+	type = `post`;
 	header = {
+		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
 		'Content-Type': `application/json`,
 		'Accept-Language': `pt`,
 		'Authorization': `Bearer ` + getData(`token`,false)
 	}
 	body = JSON.stringify({
-	    name: name
+	    name: nameModali
 	});
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){

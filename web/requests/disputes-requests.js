@@ -1,3 +1,52 @@
+function add_disputes(championshipId, modalityId, stageId, bracketId, matchId, teamId, points, callback){
+	endpoint = `/disputes`;
+	type = "post";
+	header = {
+		"Content-Type": "application/json",
+		"Accept-Language": "pt",
+		"Authorization": "Bearer " + getData("token",false)
+	}
+	body =  JSON.stringify({
+		match: {
+			id: matchId,
+			bracket:{
+				id: bracketId,
+				stage:{
+					id: stageId,	
+				    modality: {
+				    	id: modalityId,
+				    	championship: {
+				            id: championshipId
+				        }
+				    }
+				}
+			}
+		},
+		team:{
+			id: teamId
+		},
+		points: points
+       
+    });
+	error = function(jqXHR, textStatus, msg){
+		switch (jqXHR.status){
+			case 404:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break
+			case 400:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;			
+			case 401:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;
+			case 500:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;			
+		}
+	}
+	api_request(endpoint, type, header, body, callback, error);
+}
+
 function searchTeamBracket_disputes(championshipId, modalityId, stageId, bracketId, teamId, callback){
 	endpoint = `/disputes/championship/${championshipId}/modality/${modalityId}/stage/${stageId}/bracket/${bracketId}/team/${teamId}`;
 	type = "get";
@@ -62,9 +111,7 @@ function searchAllMatch_disputes(championshipId, modalityId, stageId, bracketId,
 		"Accept-Language": "pt",
 		"Authorization": "Bearer " + getData("token",false)
 	}
-	body =  JSON.stringify({
-        nameSatge: name
-    });
+	body = "";
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){
 			case 404:
@@ -84,7 +131,7 @@ function searchAllMatch_disputes(championshipId, modalityId, stageId, bracketId,
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function edit_disputes(championshipId, modalityId, stageId, bracketId, disputeId, matchId, points, callback){
+function edit_disputes(championshipId, modalityId, stageId, bracketId, matchId, teamId, disputeId, points, callback){
 	endpoint = `/disputes/${disputeId}`;
 	type = "put";
 	header = {
@@ -107,6 +154,9 @@ function edit_disputes(championshipId, modalityId, stageId, bracketId, disputeId
 				    }
 				}
 			}
+		},
+		team:{
+			id: teamId
 		},
 		points: points
        

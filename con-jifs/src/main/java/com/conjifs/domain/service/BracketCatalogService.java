@@ -2,7 +2,6 @@ package com.conjifs.domain.service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,11 +33,12 @@ public class BracketCatalogService {
 		Stage stage = stageCatalogService.search(championshipId, modalityId, stageId);
 		Set<Bracket> brackets = bracketRepository.findByStage(stage);
 				
-		Optional<List<Bracket>> bracketsList = Optional.of(brackets.stream().filter(t -> t.getId().equals(bracketId)).toList());
-
-		Optional<Bracket> bracket = (bracketsList.isPresent() ? (!bracketsList.get().isEmpty() ? Optional.of(bracketsList.get().get(0)) : Optional.empty()): Optional.empty());
-		return bracket.orElseThrow(() -> new EntityNotFoundException(
-				messageSource.getMessage("bracket.not.found", null, LocaleContextHolder.getLocale())));
+		List<Bracket> bracketsList = brackets.stream().filter(t -> t.getId().equals(bracketId)).collect(Collectors.toList());
+		if(bracketsList.isEmpty()) {
+			throw new EntityNotFoundException(messageSource.getMessage("bracket.not.found", null, LocaleContextHolder.getLocale()));
+		}
+		
+		return bracketsList.get(0); 
 	}
 
 	@Transactional

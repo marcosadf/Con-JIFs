@@ -2,46 +2,51 @@ function manage_modality(){
     let content = $("#screen");
     content.html(`
      <p class="nome"> Modalidade</p>
-    <div>
+     <div class="nav-screen-top">
         <input type="hidden" hidden id="current-page" value="1"/>
         <select class="custom-select btn-verde" id="inputGroupSelect01">
           <option value="0" selected >Campeonato</option>
         </select>
     
-            <div class="dropdown">
-                <div class="divBusca">
-                    <input type="text" class="txtBusca" placeholder="Buscar..." />
-                    <img style="width: 30px;" src="img/lupa.png" id="btnBusca" alt="Buscar" />
-                </div> 
-                
+        <div class="dropdown">
+            <div class="divBusca">
+                <input id="txtBusca" type="text" onkeydown="
+                    if (event.keyCode == 13){
+                        nextModality_page(parseInt($('#current-page').val()));
+                    }"
+                 class="txtBusca" placeholder="Buscar..." />
+                <img src="img/lupa.png" onclick="
+                    nextModality_page(parseInt($('#current-page').val()));
+                    " id="btnBusca" alt="Buscar" />
             </div>
-            </div> 
+        </div>
+     </div> 
          <table class="table table-striped">
             <thead>
                 <th scope="row">
                     <div class="aliamento">
-                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                        <button class="btn" type="button" id="dropdownMenuButton" aria-expanded="false">
                          Nome
                         </button>
                     </div>
                 </th>
                 <th scope="row">
                     <div class="aliamento">
-                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                        <button class="btn" type="button" id="dropdownMenuButton" aria-expanded="false">
                          Tipo
                         </button>
                     </div>
                 </th>
                 <th scope="row">
                     <div class="aliamento">
-                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                        <button class="btn" type="button" id="dropdownMenuButton" aria-expanded="false">
                          Nº de times por grupo
                         </button>
                     </div>
                 </th>
                 <th scope="row">
                     <div class="aliamento">
-                        <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                        <button class="btn" type="button" id="dropdownMenuButton" aria-expanded="false">
                          Nº de times aprovados
                         </button>
                     </div>
@@ -51,10 +56,10 @@ function manage_modality(){
                     
                 </tbody>
             </table>
-            <nav aria-label="Navegação de página exemplo">
-                <ul class="pagination" id="pagination">
-                    
-                </ul>
+            <ul class="pagination" id="pagination">
+                
+            </ul>
+            <nav class="nav-screen">
                 <button type="button" class="button" data-toggle="modal" data-target="#ExemploModalCentralizado">
                     <img style="width: 40px; height: 32px;" src="img/mais.png" height="80" width="100" />
                     Adicionar
@@ -126,13 +131,6 @@ function manage_modality(){
             });
         }
     });
-    document.getElementById("screen").addEventListener('click', function(e) {
-        $.each($('.tab-input'), function(i, input){
-            if(e.target != input && $(input).attr('readonly') != "readonly") {
-                $(input).trigger($.Event("keydown", {keyCode: 13}))
-            } 
-        });      
-    });
 }
 function insert_modalities(modalities, page){
     if(page == 1 || modalities.length / 4 > (page - 1)){
@@ -140,7 +138,7 @@ function insert_modalities(modalities, page){
         for (var i = (page - 1) * 4; i < modalities.length && i < page * 4; i++) {
             trs += `<tr>
                 <th scope="row">
-                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                    <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
                         if (event.keyCode == 13){
                             this.readOnly='true';
                             edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
@@ -148,7 +146,7 @@ function insert_modalities(modalities, page){
                     name="name" id="name-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].name}" />
                 </th>
                 <th scope="row">
-                    <select type="text"  onchange="edit_modality(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});"
+                    <select title="Dê dois cliques para alterar" type="text"  onchange="edit_modality(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});"
                     name="type" id="type-${modalities[i].id}" class="tab-select form-control" value="${modalities[i].typeCompetition}">
                         <option >Selecione</option>
                         <option ${modalities[i].typeCompetition == 'GROUP'? 'selected': ''} value="GROUP">GRUPOS</option>
@@ -157,7 +155,7 @@ function insert_modalities(modalities, page){
                     </select>
                 </th>
                 <th scope="row">
-                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                    <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
                         if (event.keyCode == 13){
                             this.readOnly='true';
                             edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
@@ -165,7 +163,7 @@ function insert_modalities(modalities, page){
                     name="ngroup" id="ngroup-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupTeamsNumber}" />
                 </th>
                 <th scope="row">
-                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                    <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
                         if (event.keyCode == 13){
                             this.readOnly='true';
                             edit_modalities(${parseInt(modalities[i].championship.id)}, ${parseInt(modalities[i].id)}, $('#name-${modalities[i].id}').val(), $('#type-${modalities[i].id}').val(), $('#ngroup-${modalities[i].id}').val(), $('#napprov-${modalities[i].id}').val(), ()=>{});
@@ -173,7 +171,7 @@ function insert_modalities(modalities, page){
                     name="napprov" id="napprov-${modalities[i].id}" class="tab-input form-control" value="${modalities[i].groupApprovedNumber}" />
                 </th>
                 <th scope="row" width="5" rowspan="1">
-                    <a onclick="delete_modality(${page}, ${parseInt(modalities[i].id)})"">
+                    <a title="Clique para excluir os dados dessa linha" onclick="delete_modality(${page}, ${parseInt(modalities[i].id)})"">
                         <img style="width: 30px;" src="img/lixo.png">
                     </a>
                 </th>
@@ -205,9 +203,19 @@ function insert_modalities(modalities, page){
     }
 }
 function nextModality_page(page){
-        list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
-            insert_modalities(modalities, page);
-        });
+    if(parseInt($('#inputGroupSelect01').val()) != 0){
+        if($('#txtBusca').val() == ""){
+            list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
+                insert_modalities(modalities, page);
+            });
+        }else{
+            searchName_modalities(parseInt($('#inputGroupSelect01').val()), $('#txtBusca').val(), function(modalities){
+                insert_modalities(modalities, page);
+            })        
+        }
+    } else{
+        alert('Selecione o campeonato!');
+    }
 }
 function edit_modality(championshipId, modalityId, name, typeCompetition, groupTeamsNumber, groupApprovedNumber){
    edit_modalities(championshipId, modalityId, name, typeCompetition, groupTeamsNumber, groupApprovedNumber, ()=>{});

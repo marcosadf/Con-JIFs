@@ -36,7 +36,7 @@ public class StageController {
 	}
 	
 	@PutMapping("/{stageId}/concluded")
-	public Stage setconcluded(@PathVariable Long stageId, @Valid @RequestBody Stage stage) {
+	public Stage setconcluded(@PathVariable Long stageId, @RequestBody Stage stage) {
 		return stageRulesService.setConcluded(stageId, stage);
 	}
 	

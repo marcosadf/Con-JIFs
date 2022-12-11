@@ -1,9 +1,6 @@
 package com.conjifs.domain.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -55,14 +52,7 @@ public class MatchRulesService {
 							for (Team t : auxTeams) {
 								Match match = new Match();
 								match.setBracket(bracket);
-								SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-								Date date = null;
-								try {
-									date = sdf.parse("0001-01-01");
-								} catch (ParseException e) {
-									e.printStackTrace();
-								}
-								match.setDateTime(date);
+								match.setDateTime("01/01/2000 00:00");
 								match.setLocale("Undefined");
 								match = matchCatalogService.save(match);
 								Dispute d1 = new Dispute();
@@ -84,14 +74,7 @@ public class MatchRulesService {
 						teams = bracket.getCompetes().stream().map(c -> c.getTeam()).collect(Collectors.toSet());
 						Match match = new Match();
 						match.setBracket(bracket);
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-						Date date = null;
-						try {
-							date = sdf.parse("0001-01-01");
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-						match.setDateTime(date);
+						match.setDateTime("01/01/2000 00:00");
 						match.setLocale("Undefined");
 						match = matchCatalogService.save(match);
 						for (Team team : teams) {

@@ -1,10 +1,10 @@
 package com.conjifs.domain.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -52,9 +52,11 @@ public class StageRulesService {
 				int numTeamBracket = modality.getTeams().size();
 
 				if(numTeamBracket <= 2) {
+					stage.setModality(modality);
 					stage.setNameStage(NameStage.FINAL);
 					stage = stageCatalogService.save(stage);
 				} else if(numTeamBracket <= 4) {
+					stage.setModality(modality);
 					stage.setNameStage(NameStage.SEMIFINALS);
 					Stage stageFinal = new Stage();
 					stageFinal.setModality(modality);
@@ -62,6 +64,7 @@ public class StageRulesService {
 					stage.setParentStage(stageCatalogService.save(stageFinal));
 					stage = stageCatalogService.save(stage);
 				} else if(numTeamBracket <= 8) {
+					stage.setModality(modality);
 					stage.setNameStage(NameStage.QUARTERFINALS);
 					Stage stageFinal = new Stage();
 					stageFinal.setModality(modality);
@@ -73,6 +76,7 @@ public class StageRulesService {
 					stage.setParentStage(stageCatalogService.save(stageSemiFinals));
 					stage = stageCatalogService.save(stage);
 				} else if(numTeamBracket <= 16) {
+					stage.setModality(modality);
 					stage.setNameStage(NameStage.ROUNDOF16);
 					Stage stageFinal = new Stage();
 					stageFinal.setModality(modality);
@@ -97,8 +101,7 @@ public class StageRulesService {
 			}
 		} else if (modality.getTypeCompetition() == TypeCompetition.MIXED) {
 			if (stages.size() <= 1) {
-				if(stages.size() != 1) {
-					stage.setModality(modality);
+				if(stages.size() == 0) {
 					stage.setNameStage(NameStage.GROUP);
 				}else if(stages.get(0).getNameStage() == NameStage.GROUP){
 					stage = stages.get(0);
@@ -111,11 +114,14 @@ public class StageRulesService {
 				int numTeamBracket = numGroups * modality.getGroupApprovedNumber();
 				
 				if(numTeamBracket <= 2) {
+					stage.setModality(modality);
 					Stage stageFinal = new Stage();
+					stageFinal.setModality(modality);
 					stageFinal.setNameStage(NameStage.FINAL);
 					stage.setParentStage(stageCatalogService.save(stageFinal));
 					stage = stageCatalogService.save(stage);
 				} else if(numTeamBracket <= 4) {
+					stage.setModality(modality);
 					Stage stageSemiFinals = new Stage();
 					stageSemiFinals.setModality(modality);
 					stageSemiFinals.setNameStage(NameStage.SEMIFINALS);
@@ -126,6 +132,7 @@ public class StageRulesService {
 					stage.setParentStage(stageCatalogService.save(stageSemiFinals));
 					stage = stageCatalogService.save(stage);
 				} else if(numTeamBracket <= 8) {
+					stage.setModality(modality);
 					Stage stageQuarterFinals = new Stage();
 					stageQuarterFinals.setModality(modality);
 					stageQuarterFinals.setNameStage(NameStage.QUARTERFINALS);
@@ -161,7 +168,6 @@ public class StageRulesService {
 					throw new BusinessException(messageSource.getMessage("stage.invalid.modality", null,
 							LocaleContextHolder.getLocale()));
 				}
-				
 			}
 			else {
 				throw new BusinessException(
@@ -196,12 +202,12 @@ public class StageRulesService {
 		if(stage.getNameStage().equals(NameStage.GROUP)) {
 			List<Bracket> bracketsFltGroups = stage.getBrackets().stream().filter(b -> {
 				return !(b.getCompetes().stream().filter(c -> {
-						return c.getResult().equals(Result.APPROVED);
+						return c.getResult() == Result.APPROVED;
 					}).toList().size() == b.getStage().getModality().getGroupApprovedNumber());
 			}).toList();
 			if(bracketsFltGroups.isEmpty()) {
 				stage.setConcluded(true);
-				return stageCatalogService.edit(stage.getId(), stage);
+				return stageCatalogService.save(stage);
 			} else {
 				throw new BusinessException( messageSource.getMessage("stage.not.concluded", null, LocaleContextHolder.getLocale()));
 			}
@@ -209,7 +215,7 @@ public class StageRulesService {
 		else {
 			if(bracketsFltMatchs.isEmpty() && bracketsFltCompetes.isEmpty() ){
 				stage.setConcluded(true);	
-				return stageCatalogService.edit(stage.getId(), stage);
+				return stageCatalogService.save(stage);
 			} else {
 				throw new BusinessException( messageSource.getMessage("stage.not.concluded", null, LocaleContextHolder.getLocale()));
 			}
@@ -218,23 +224,23 @@ public class StageRulesService {
 
 	public Set<Stage> drop(Long championshipId, Long modalityId, Long stageId) {
 		Stage stage = stageCatalogService.search(championshipId, modalityId, stageId);
-		Set<Stage> stages;
-
-		if (stage.getModality().getTypeCompetition().equals(TypeCompetition.MIXED)) {
-			if (stage.getNameStage().equals(NameStage.GROUP)) {
-				stages = stage.getModality().getStages();
-			} else {
-				stages = new HashSet<>(stage.getModality().getStages().stream()
-						.filter(s -> !s.getNameStage().equals(NameStage.GROUP)).toList());
-			}
+		Modality modality = stage.getModality();
+		
+		if (stage.getNameStage().equals(NameStage.GROUP)) {
+			stageRepository.delete(stage);
+			Stream<Stage> listStage = modality.getStages().stream();
+			listStage.forEach(s -> {
+				stageRepository.delete(s);
+			});			
 		} else {
-			stages = stage.getModality().getStages();
+			stageRepository.delete(stage);
+			Stream<Stage> listStage = modality.getStages().stream();
+			listStage.forEach(s -> {
+				if(s.getNameStage() != NameStage.GROUP) {
+					stageRepository.delete(s);
+				}
+			});
 		}
-
-		stages.forEach((s) -> {
-			stageRepository.delete(s);
-		});
-
-		return stages;
+		return null;
 	}
 }

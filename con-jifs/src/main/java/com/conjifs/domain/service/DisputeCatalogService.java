@@ -2,7 +2,6 @@ package com.conjifs.domain.service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -36,13 +35,11 @@ public class DisputeCatalogService {
 	@Transactional
 	public Dispute search(Long championshipId, Long modalityId, Long stageId, Long bracketId, Long matchId, Long disputeId) {
 		Match match = matchCatalogService.searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
-		Set<Dispute> disputes = disputeRepository.findByMatch(match);
-				
-		Optional<List<Dispute>> disputesList = Optional.of(disputes.stream().filter(c -> c.getId().equals(disputeId)).toList());
-
-		Optional<Dispute> dispute = (disputesList.isPresent() ? (!disputesList.get().isEmpty() ? Optional.of(disputesList.get().get(0)) : Optional.empty()): Optional.empty());
-		return dispute.orElseThrow(() -> new EntityNotFoundException(
-				messageSource.getMessage("dispute.not.found", null, LocaleContextHolder.getLocale())));
+		List<Dispute> disputes = disputeRepository.findByMatch(match).stream().filter(c -> c.getId().equals(disputeId)).collect(Collectors.toList());
+		if(disputes.isEmpty()) {	
+			throw new EntityNotFoundException(messageSource.getMessage("dispute.not.found", null, LocaleContextHolder.getLocale()));
+		}
+		return disputes.get(0);
 	}
 	
 	@Transactional
@@ -90,11 +87,12 @@ public class DisputeCatalogService {
 		Team team = teamCatalogService.search(championshipId, modalityId, teamId);
 		Match match = matchCatalogService.searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
 		
-		List<Dispute> disputeResearched = listAllMatch(championshipId, modalityId, stageId, bracketId,matchId).stream().filter(c -> c.getTeam().equals(team)).toList();
+		List<Dispute> disputeResearched = listAllMatch(championshipId, modalityId, stageId, bracketId,matchId).stream().filter(c -> c.getTeam().equals(team)).collect(Collectors.toList());
 		
-		if (!disputeResearched.isEmpty()) {
-			throw new BusinessException(
-					messageSource.getMessage("dispute.invalid.stage", null, LocaleContextHolder.getLocale()));
+		if (!disputeResearched.isEmpty()&& dispute.getId() == null) {
+			throw new BusinessException(messageSource.getMessage("dispute.invalid.stage", null, LocaleContextHolder.getLocale()));
+		}else if(match.getDisputes().size() >= 2 && !match.getDisputes().stream().anyMatch(d -> d.equals(dispute))){
+			throw new BusinessException(messageSource.getMessage("not.add.dispute", null, LocaleContextHolder.getLocale()));
 		}
 		dispute.setTeam(team);
 		dispute.setMatch(match);
@@ -112,7 +110,7 @@ public class DisputeCatalogService {
 		Team team = teamCatalogService.search(championshipId, modalityId, teamId);
 		Match match = matchCatalogService.searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
 
-		Dispute disputeResearched = search(championshipId, modalityId, stageId, bracketId, matchId, bracketId);
+		Dispute disputeResearched = search(championshipId, modalityId, stageId, bracketId, matchId, disputeId);
 
 		dispute.setId(disputeId);
 		dispute.setMatch(match);

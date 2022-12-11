@@ -38,7 +38,7 @@ function searchCurrent_stage(championshipId, modalityId, callback){
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){
 			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				// alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
 				break
 			case 400:
 				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
@@ -206,7 +206,7 @@ function edit_stages(championshipId, modalityId, stageId, nameStage, concluded, 
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function setConcluded_stages(championshipId, modalityId, stageId, nameStage, concluded, callback){
+function setConcluded_stages(championshipId, modalityId, stageId, callback){
 	endpoint = `/stages/${stageId}/concluded`;
 	type = "put";
 	header = {
@@ -220,9 +220,7 @@ function setConcluded_stages(championshipId, modalityId, stageId, nameStage, con
 	    	championship: {
 	            id: championshipId
 	        }
-	    },
-        nameStage: nameStage,
-        concluded: concluded
+	    }
     });
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){
@@ -243,8 +241,8 @@ function setConcluded_stages(championshipId, modalityId, stageId, nameStage, con
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function drop_stages(modalityId, championshipId, stageId){
-	endpoint = `/stages/championship/${championshipId}/modality/${modalityId}/`;
+function drop_stages(championshipId, modalityId, stageId, callback){
+	endpoint = `/stages/championship/${championshipId}/modality/${modalityId}/stage/${stageId}/drop`;
 	type = "delete";
 	header = {
 		"Content-Type": "application/json",

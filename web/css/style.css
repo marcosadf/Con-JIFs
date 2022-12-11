@@ -74,38 +74,64 @@ body{
 .aliamento button{
     color: black;
 }
+.nav-screen-top{
+    display: flex;
+    justify-content: space-between;
+}
+.check-stage{
+    display: flex;
+    width: 20%;
+    font-size: 100%;
+    align-items: center;
+}
+.check-stage label{
+    text-align: center;
+}
+.nav-screen-top div{
+    display: flex;
+    justify-content: flex-start;
+}
+.nav-screen-top .dropdown{
+    display: flex;
+    align-self: flex-end;
+    width: 20%;
+}
+
 .divBusca {
+    display: flex;
+    width: 100%;
     background-color: #ECECEC;
     border: solid 1px #ECECEC;
     border-radius: 15px;
-    width: 200px;
-    margin-left: 850px;
-    margin-bottom: 20px;
 }
-
+#btnBusca{
+    width: 3vw;
+    align-items: center;
+}
 .txtBusca {
     float: left;
     background-color: transparent;
-    padding-left: 5px;
-    font-size: 18px;
+    font-size: 120%;
     border: none;
-    height: 25px;
-    width: 150px;
-    margin-left: 5px;
+    height: 6VH;
+    width: 75%;
+    margin-left: 5%;
 }
 
 .button {
     background-color: #209218;
     color: white;
-    display: flex;
-   justify-content: center;
+    justify-content: center;
     align-items: center;
-    width: 9vw;
+    width: 20%;
     height: 6.6vh;
-    margin-left: 640px;
-    margin-top: 20px;
+    align-self: flex-end;
     border: solid 1px #209218;
     border-radius: 20px;
+}
+.nav-screen{
+    display: flex;
+    justify-content: flex-end;
 }
 
 .buttonfe{
@@ -167,4 +193,21 @@ ul.pagination li a {
 #logo{
     margin-left: 20vw;
     width: 40vw;
+}
+
+.tab-link{
+    overflow:hidden;
+    background-color: #e9ecef;
+    text-decoration: underline;
+    color: #F16868;
+    cursor: pointer;
+}
+.tab-input{
+    cursor: pointer;
+}
+.modal:nth-of-type(even) {
+    z-index: 1042 !important;
+}
+.modal-backdrop.in:nth-of-type(even) {
+    z-index: 1041 !important;
 }

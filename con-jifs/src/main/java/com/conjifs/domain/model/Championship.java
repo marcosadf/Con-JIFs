@@ -1,5 +1,7 @@
 package com.conjifs.domain.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -44,4 +46,15 @@ public class Championship {
 	@JsonIgnore
 	@OneToMany(mappedBy = "championship", cascade = CascadeType.ALL)
 	private Set<Modality> modalities = new LinkedHashSet<>();
+	
+	public void setDate(String date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Date dateFormat = null;
+		try {
+			dateFormat = sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.date = dateFormat;
+	}
 }

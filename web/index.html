@@ -32,19 +32,19 @@
                         <br/> <br/>  <h1 class="font-weight-bold nome" > Login</h1>   <br/><br/>
                             <div class="form-group" style="width: 35rem" >
                                 <label for="login">ADMINSTRADOR</label>
-                                <input type="text" class="form-control campo" id="login"
-                                    placeholder="Digite seu usuario" required> 
+                                <input type="text" onkeydown = "
+                                    if (event.keyCode == 13){
+                                        login_api($('#login').val() ,$('#password').val(), function(data){setData('token', data ,1); window.location.replace('./menu.html');})
+                                    }"
+                                class="form-control campo" id="login" placeholder="Digite seu usuario" required/> 
                             </div>
                             <div class="form-group" style="width: 35rem" >
                                 <label for="password">Senha:</label>
-                                <input type="password" class="form-control campo" id="password"
-                                    placeholder="Digite sua senha" required>
-                            </div>
-                            <div class="support">
-                                <div class= "remember">
-                                    <span><input type="checkbox" style="margin: 0; padding: 0; height: 13px;"></span>
-                                    <span> Mante-me conectato</span> <br/> <br/>
-                                </div>
+                                <input type="password" onkeydown = "
+                                    if (event.keyCode == 13){
+                                        login_api($('#login').val() ,$('#password').val(), function(data){setData('token', data ,1); window.location.replace('./menu.html');})
+                                    }"
+                                    class="form-control campo" id="password" placeholder="Digite sua senha" required/>
                             </div>
                             <button id="entrarLogin" onclick="login_api($('#login').val() ,$('#password').val(), function(data){setData('token', data ,1); window.location.replace('./menu.html');})" type="submit" class="btn btn-success btn-block btn-lg">
                                 Entrar

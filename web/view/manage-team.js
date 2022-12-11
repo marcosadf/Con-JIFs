@@ -2,40 +2,38 @@ function manage_team(){
     let content = $("#screen");
     content.html(`
     <p class="nome"> Time</p>
-    <div>
-        <input type="hidden" hidden id="current-page" value="1"/>
-        <select class="custom-select btn-verde" id="inputGroupSelect01">
-            <option selected value="0">Campeonato</option>
-          </select>
-          <select class="custom-select btn-verde" id="inputGroupSelect02">
-            <option selected value="0">Modalidade</option>
-          </select>
-          <select class="custom-select btn-verde" id="inputGroupSelect03">
-            <option selected value="0">Grupo</option>
-          </select>
-            </div>
-        </div>
+    <div class="nav-screen-top">
+        <div>
+            <input type="hidden" hidden id="current-page" value="1"/>
+            <select class="custom-select btn-verde" id="inputGroupSelect01">
+                <option selected value="0">Campeonato</option>
+            </select>
+            <select class="custom-select btn-verde" id="inputGroupSelect02">
+                <option selected value="0">Modalidade</option>
+            </select>
+            <select class="custom-select btn-verde" id="inputGroupSelect03">
+                <option selected value="0">Grupo</option>
+            </select>
         </div>
         <div class="dropdown">
             <div class="divBusca">
                 <input type="text" class="txtBusca" placeholder="Buscar..." />
-                <img style="width: 30px;" src="img/lupa.png" id="btnBusca" alt="Buscar" />
+                <img src="img/lupa.png" id="btnBusca" alt="Buscar" />
             </div> 
-        </div>
-        
-        </div>
+        </div>    
+    </div>
         <table class="table table-striped">
             <thead>
                 <th scope="row">
                     <div class="aliamento">
-                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                    <button class="btn" type="button" id="dropdownMenuButton" aria-expanded="false">
                      Campus
                     </button>
                    </div>
                 </th>
                 <th scope="row">
                     <div class="aliamento">
-                    <button class="btn  dropdown-toggle " type="button" id="dropdownMenuButton" aria-expanded="false">
+                    <button class="btn" type="button" id="dropdownMenuButton" aria-expanded="false">
                      Nome
                     </button>
                 </div>
@@ -45,10 +43,10 @@ function manage_team(){
             
             </tbody>
         </table>
-        <nav aria-label="Navegação de página exemplo">
-            <ul class="pagination">
-                
-            </ul>
+        <ul id="pagination" class="pagination">
+            
+        </ul>
+        <nav class="nav-screen">
             <button type="button" class="button" data-toggle="modal" data-target="#ExemploModalCentralizado">
                 <img style="width: 40px; height: 32px;" src="img/mais.png" height="80" width="100" />
                 Adicionar
@@ -98,6 +96,7 @@ function manage_team(){
         });
     });
     $('#inputGroupSelect01').change(function() {
+        insert_teams([], 1);
         $('#inputGroupSelect02').html(`<option selected value="0">Modalidade</option>`);
         if ($(this).val() != "0") {
             list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
@@ -111,6 +110,7 @@ function manage_team(){
         }
     });
     $('#inputGroupSelect02').change(function() {
+        insert_teams([], 1);
         $('#inputGroupSelect03').html(`<option selected value="0">Grupo</option>`);
         if ($(this).val() != "0") { 
             listGroup_brackets($('#inputGroupSelect01').val(), $(this).val(), function(groups){
@@ -131,39 +131,40 @@ function manage_team(){
             listAllForGroup_teams($('#inputGroupSelect01').val(), $('#inputGroupSelect02').val(), $(this).val(), function(teams){
                 insert_teams(teams, 1);
             });            
+        }else{
+            $('#inputGroupSelect02').trigger("change");
         }
     });
 }
 
 function insert_teams(teams, page){
+    var trs = ``;
     if(page == 1 || teams.length / 4 > (page - 1)){
-        var trs = ``;
         for (var i = (page - 1) * 4; i < teams.length && i < page * 4; i++) {
             trs += `<tr>
                 <th scope="row">
-                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                    <input type="text" title="Dê dois cliques para alterar" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
                         if (event.keyCode == 13){
                             this.readOnly='true';
-                            edit_teams(${parseInt(teams[i].modality.championship.id)}, ${parseInt(teams[i].modality.id)}, ${parseInt(teams[i].id)}, $('#name-${teams[i].id}').val(), $('#campus-${teams[i].id}').val(), ()=>{});
+                            edit_teams(${teams[i].modality.championship.id}, ${teams[i].modality.id}, ${teams[i].id}, $('#name-${teams[i].id}').val(), $('#campus-${teams[i].id}').val(), ()=>{});
                         }"
                     name="campus" id="campus-${teams[i].id}" class="tab-input form-control" value="${teams[i].campus}" />
                 </th>
                 <th scope="row">
-                    <input type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                    <input type="text" title="Dê dois cliques para alterar" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
                         if (event.keyCode == 13){
                             this.readOnly='true';
-                            edit_teams(${parseInt(teams[i].modality.championship.id)}, ${parseInt(teams[i].modality.id)}, ${parseInt(teams[i].id)}, $('#name-${teams[i].id}').val(), $('#campus-${teams[i].id}').val(), ()=>{});
+                            edit_teams(${teams[i].modality.championship.id}, ${teams[i].modality.id}, ${teams[i].id}, $('#name-${teams[i].id}').val(), $('#campus-${teams[i].id}').val(), ()=>{});
                         }"
                     name="name" id="name-${teams[i].id}" class="tab-input form-control" value="${teams[i].name}" />
                 </th>
-                <th scope="row" width="5" rowspan="1">
+                <th scope="row" title="Clique para excluir os dados dessa linha" width="5" rowspan="1">
                     <a onclick="delete_team(${page}, ${parseInt(teams[i].id)})"">
                         <img style="width: 30px;" src="img/lixo.png">
                     </a>
                 </th>
             </tr>`;          
         };
-        $('#tab-teams').html(trs);
         var nPages = parseInt(teams.length / 4) + (teams.length % 4 != 0 ? 1: 0);
         var btnPages = page != 1 ? `
             <li class="page-item">
@@ -187,6 +188,7 @@ function insert_teams(teams, page){
         $('#current-page').val(page);
         $('#pagination').html(btnPages);
     }
+    $('#tab-teams').html(trs);
 }
 function nextTeam_page(page){
     if(parseInt($('#inputGroupSelect03').val()) > 0){

@@ -1,12 +1,10 @@
 package com.conjifs.domain.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -41,11 +39,12 @@ public class MatchCatalogService {
 		Bracket bracket = bracketCatalogService.search(championshipId, modalityId, stageId, bracketId);
 		Set<Match> matchs = matchRepository.findByBracket(bracket);
 				
-		Optional<List<Match>> matchsList = Optional.of(matchs.stream().filter(c -> c.getId().equals(matchId)).toList());
+		List<Match> matchsList = matchs.stream().filter(c -> c.getId().equals(matchId)).collect(Collectors.toList());
 
-		Optional<Match> match = (matchsList.isPresent() ? (!matchsList.get().isEmpty() ? Optional.of(matchsList.get().get(0)) : Optional.empty()): Optional.empty());
-		return match.orElseThrow(() -> new EntityNotFoundException(
-				messageSource.getMessage("match.not.found", null, LocaleContextHolder.getLocale())));
+		if(matchsList.isEmpty()) {
+			throw new EntityNotFoundException(messageSource.getMessage("match.not.found", null, LocaleContextHolder.getLocale()));
+		}
+		return matchsList.get(0);
 	}
 	
 	@Transactional
@@ -88,7 +87,7 @@ public class MatchCatalogService {
 		Bracket bracket = bracketCatalogService.search(championshipId, modalityId, stageId, bracketId);
 		match.setBracket(bracket);
 		
-		List<Match> matchResearched = listAllBracket(championshipId, modalityId, stageId, bracketId).stream().toList();
+		List<Match> matchResearched = listAllBracket(championshipId, modalityId, stageId, bracketId).stream().collect(Collectors.toList());
 		
 		if (!matchResearched.isEmpty()&& match.getId() != null) {
 			if(bracket.getStage().getNameStage() != NameStage.GROUP && !matchResearched.get(0).equals(match)) {
@@ -96,28 +95,14 @@ public class MatchCatalogService {
 					messageSource.getMessage("match.invalid.stage", null, LocaleContextHolder.getLocale()));
 			}
 		}
+		System.out.println(match.getLocale());
 		return matchRepository.save(match);
 	}
 	
 	@Transactional
 	public Match edit(Long matchId, Match match) {
-		Bracket bracket = bracketCatalogService.search(match.getBracket().getStage().getModality().getChampionship().getId(),
-				match.getBracket().getStage().getModality().getId(),
-				match.getBracket().getStage().getId(),
-				match.getId());
-
-		Match matchResearched = searchForBracket(bracket.getStage().getModality().getChampionship().getId(),
-				bracket.getStage().getModality().getId(),
-				bracket.getStage().getId(),
-				bracket.getId(),
-				matchId);
-
 		match.setId(matchId);
-
-		if (match.equals(matchResearched)) {
-			matchResearched = save(match);
-		}
-		return matchResearched;
+		return save(match);
 	}
 	
 	@Transactional
@@ -138,14 +123,7 @@ public class MatchCatalogService {
 	@Transactional
 	public Match clear(Long championshipId, Long modalityId, Long stageId, Long bracketId, Long matchId) {
 		Match match = searchForBracket(championshipId, modalityId, stageId, bracketId, matchId);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = null;
-		try {
-			date = sdf.parse("0001-01-01");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		match.setDateTime(date);
+		match.setDateTime("01/01/2000 00:00");
 		match.setLocale("Undefined");
 		match.getDisputes().forEach(d -> {
 			d.setPoints(0);
@@ -163,14 +141,7 @@ public class MatchCatalogService {
 						d.setPoints(0);
 						disputeRepository.save(d);
 					});
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-					Date date = null;
-					try {
-						date = sdf.parse("0001-01-01");
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-					m.setDateTime(date);
+					m.setDateTime("01/01/2000 00:00");
 					m.setLocale("Undefined");
 					save(m);
 				});

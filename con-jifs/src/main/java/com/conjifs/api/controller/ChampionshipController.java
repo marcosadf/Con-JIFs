@@ -44,7 +44,8 @@ public class ChampionshipController {
 		return championshipCatalogService.listAll();
 	}
 	
-	@GetMapping("/name")
+	@CrossOrigin(origins = "http://localhost:8080")
+	@PostMapping("/name")
 	public Set<Championship> searchName(@RequestBody Championship championship){
 		return championshipCatalogService.searchName(championship);
 	}

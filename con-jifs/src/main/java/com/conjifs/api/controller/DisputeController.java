@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,10 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/disputes")
 public class DisputeController {
 	private DisputeCatalogService disputeCatalogService;
-	
+	@PostMapping()
+	public Dispute save(@Valid @RequestBody Dispute dispute) {
+		return disputeCatalogService.save(dispute);
+	}
 	@PutMapping("/{disputeId}")
 	public Dispute edit(@PathVariable Long disputeId, @Valid @RequestBody Dispute dispute) {
 		return disputeCatalogService.edit(disputeId, dispute);

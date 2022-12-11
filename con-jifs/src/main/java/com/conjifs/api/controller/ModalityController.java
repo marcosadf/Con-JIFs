@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,8 +41,9 @@ public class ModalityController {
 	public Set<Modality> listAll(@PathVariable Long championshipId) {
 		return modalityCatalogService.listAll(championshipId);
 	}
-
-	@GetMapping("/championship/{championshipId}/name")
+	
+	@CrossOrigin(origins = "http://localhost:8080")
+	@PostMapping("/championship/{championshipId}/name")
 	public Set<Modality> searchName(@PathVariable Long championshipId, @RequestBody Modality modality) {
 		return modalityCatalogService.searchName(championshipId, modality);
 	}

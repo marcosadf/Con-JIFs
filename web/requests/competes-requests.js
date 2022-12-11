@@ -110,8 +110,8 @@ function searchTeamStage_competes(championshipId, modalityId, stageId, teamId, c
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function edit_competes(championshipId, modalityId, stageId, bracketId, name, concluded, callback){
-	endpoint = `/competes/${stageId}`;
+function edit_competes(championshipId, modalityId, stageId, bracketId, teamId, competeId, points, result, callback){
+	endpoint = `/competes/${competeId}`;
 	type = "put";
 	header = {
 		"Content-Type": "application/json",
@@ -119,7 +119,7 @@ function edit_competes(championshipId, modalityId, stageId, bracketId, name, con
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body =  JSON.stringify({
-		bracket:{
+		bracket: {
 			id: bracketId,
 			stage:{
 				id: stageId,	
@@ -130,6 +130,9 @@ function edit_competes(championshipId, modalityId, stageId, bracketId, name, con
 			        }
 			    }
 			}
+		},
+		team: {
+			id: teamId
 		},
 		points: points,
 		result: result

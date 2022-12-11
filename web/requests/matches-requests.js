@@ -27,7 +27,7 @@ function create_matches(championshipId, modalityId, callback){
 }
 
 function listAllBracket_matches(championshipId, modalityId, stageId, bracketId, callback){
-	endpoint = `/matches/championship/${championshipId}/modality/${modalityId}/stages/${stageId}/bracket/${bracketId}`;
+	endpoint = `/matches/championship/${championshipId}/modality/${modalityId}/stage/${stageId}/bracket/${bracketId}`;
 	type = "get";
 	header = {
 		"Content-Type": "application/json",
@@ -112,8 +112,8 @@ function searchForBracket_matches(championshipId, modalityId, stageId, name, cal
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function edit_matches(championshipId, modalityId, stageId, bracketId, matchId, locale, dateTime, callback){
-	endpoint = `/matches/${stageId}`;
+function edit_matches(championshipId, modalityId, stageId, bracketId, matchId, dateTime, locale, callback){
+	endpoint = `/matches/${matchId}`;
 	type = "put";
 	header = {
 		"Content-Type": "application/json",
@@ -156,8 +156,8 @@ function edit_matches(championshipId, modalityId, stageId, bracketId, matchId, l
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function clear_matches(modalityId, championshipId, stageId, bracketId, callback){
-	endpoint = `/matches/championship/${championshipId}/modality/${modalityId}/stage/{stageId}/bracket/${bracketId}/${matchId}`;
+function clear_matches(championshipId, modalityId, stageId, bracketId, matchId, callback){
+	endpoint = `/matches/championship/${championshipId}/modality/${modalityId}/stage/${stageId}/bracket/${bracketId}/${matchId}`;
 	type = "delete";
 	header = {
 		"Content-Type": "application/json",
@@ -168,13 +168,13 @@ function clear_matches(modalityId, championshipId, stageId, bracketId, callback)
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){
 			case 400:
-				alert("ERROR ${jqXHR.status}: ${JSON.parse(msg).title)} /n ${JSON.parse(msg).fields)}");
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
 				break;			
 			case 401:
-				alert("ERROR ${jqXHR.status}: ${JSON.parse(msg).title)}");
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
 				break;
 			case 500:
-				alert("ERROR ${jqXHR.status}: ${JSON.parse(msg).title)}");
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
 				break;			
 		}
 	}

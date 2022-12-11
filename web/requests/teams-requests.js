@@ -150,7 +150,7 @@ function searchName_teams(championshipId, modalityId, name, callback){
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function edit_teams(teamId, modalityId, championshipId, name, campus, callback){
+function edit_teams(championshipId, modalityId, teamId, name, campus, callback){
 	endpoint = `/teams/${teamId}`;
 	type = "put";
 	header = {

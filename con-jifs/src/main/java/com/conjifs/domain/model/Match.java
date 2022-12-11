@@ -1,5 +1,7 @@
 package com.conjifs.domain.model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -54,5 +56,16 @@ public class Match {
 	@JoinColumn(name = "bracket_id")
 	@ConvertGroup(from = Default.class, to = ValidationGroups.BracketId.class)
 	private Bracket bracket;
+
+	public void setDateTime(String datetime) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		Date dateFormat = null;
+		try {
+			dateFormat = sdf.parse(datetime);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.dateTime = dateFormat;
+	}
 	
 }

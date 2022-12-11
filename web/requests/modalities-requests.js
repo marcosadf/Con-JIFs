@@ -90,16 +90,18 @@ function search_modalities(championshipId, modalityId, callback){
 	api_request(endpoint, type, header, body, callback, error);
 }
 
-function searchName_modalities(championshipId, name, callback){
+function searchName_modalities(championshipId, nameModali, callback){
 	endpoint = `/modalities/championship/${championshipId}/name`;
-	type = "get";
+	type = "post";
 	header = {
+		'Access-Control-Allow-Origin': '*',
+		'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
 		"Content-Type": "application/json",
 		"Accept-Language": "pt",
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body =  JSON.stringify({
-        name: name
+        name: nameModali
     });
 	error = function(jqXHR, textStatus, msg){
 		switch (jqXHR.status){

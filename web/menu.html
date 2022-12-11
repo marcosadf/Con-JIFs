@@ -5,31 +5,31 @@
         <link rel="stylesheet" href="./css/bootstrap.min.css.map">
         <link rel="stylesheet" href="./css/style.css">
         <script src="./core/jquery-1.10.2.js"></script>
-        <script src="./core/util-coockies.js"></script>
-        <script src="./core/api-request.js"></script>
-        <script src="./core/screen-ratio.js"></script>
-        <script src="./core/sort-ranking.js"></script>
-        <script src="./core/sort-disputes.js"></script>
-        <script src="./core/sort-brackets.js"></script>
-        <script src="./core/format-date.js"></script>
+        <script async="false" src="./core/util-coockies.js"></script>
+        <script async="false" src="./core/api-request.js"></script>
+        <script async="false" src="./core/screen-ratio.js"></script>
+        <script async="false" src="./core/sort-ranking.js"></script>
+        <script async="false" src="./core/sort-disputes.js"></script>
+        <script async="false" src="./core/sort-brackets.js"></script>
+        <script async="false" src="./core/format-date.js"></script>
         <script src="./js/bootstrap.min.js"></script>
-         <script src="./js/popper.min.js"></script>
-        <script src="./requests/modalities-requests.js"></script>
-        <script src="./requests/login-requests.js"></script>
-        <script src="./requests/championships-requests.js"></script>
-        <script src="./requests/stages-requests.js"></script>
-        <script src="./requests/disputes-requests.js"></script>
-        <script src="./requests/competes-requests.js"></script>
-        <script src="./requests/brackets-requests.js"></script>
-        <script src="./requests/matches-requests.js"></script>
-        <script src="./requests/teams-requests.js"></script>
-        <script src="./view/manage-championship.js"></script>
-        <script src="./view/manage-compete.js"></script>
-        <script src="./view/manage-dispute.js"></script>
-        <script src="./view/manage-group.js"></script>        
-        <script src="./view/manage-match.js"></script>
-        <script src="./view/manage-modality.js"></script>
-        <script src="./view/manage-team.js"></script>
+        <script src="./js/popper.min.js"></script>
+        <script async="false" src="./requests/modalities-requests.js"></script>
+        <script async="false" src="./requests/login-requests.js"></script>
+        <script async="false" src="./requests/championships-requests.js"></script>
+        <script async="false" src="./requests/stages-requests.js"></script>
+        <script async="false" src="./requests/disputes-requests.js"></script>
+        <script async="false" src="./requests/competes-requests.js"></script>
+        <script async="false" src="./requests/brackets-requests.js"></script>
+        <script async="false" src="./requests/matches-requests.js"></script>
+        <script async="false" src="./requests/teams-requests.js"></script>
+        <script async="false" src="./view/manage-championship.js"></script>
+        <script async="false" src="./view/manage-dispute.js"></script>
+        <script async="false" src="./view/manage-group.js"></script>        
+        <script async="false" src="./view/manage-match.js"></script>
+        <script async="false" src="./view/manage-modality.js"></script>
+        <script async="false" src="./view/manage-compete.js"></script>
+        <script async="false" src="./view/manage-team.js"></script>
         <meta name='viewport' content="width=device-width, intial-scale=1">
         <title>Con-JIFs</title>
     </head>
@@ -49,12 +49,12 @@
                 </li>
                 <li>
                     <button onclick='manage_team()'id="menu_btn_team" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal"> 
-                        Times
+                        Time
                     </button>
                 </li>
                 <li>
                     <button onclick='manage_group()'id="menu_btn_group"type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
-                        Grupos
+                        Grupo/Chave
                     </button>
                 </li>
                 <li>
@@ -64,12 +64,7 @@
                 </li>
                 <li>
                     <button onclick='manage_match()' id="menu_btn_match" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
-                        Partidas
-                    </button>
-                </li>
-                <li>
-                    <button onclick='manage_dispute()' id="menu_btn_dispute" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
-                        Disputa
+                        Partida
                     </button>
                 </li>
             </ul>
@@ -80,4 +75,13 @@
             </div>  
         </div>
         </body>
+        <script type="text/javascript">
+            document.getElementById("screen").addEventListener('click', function(e) {
+                $.each($('.tab-input'), function(i, input){
+                    if(e.target != input && $(input).attr('readonly') != "readonly") {
+                        $(input).trigger($.Event("keydown", {keyCode: 13}))
+                    } 
+                });      
+            });            
+        </script>
 </html>

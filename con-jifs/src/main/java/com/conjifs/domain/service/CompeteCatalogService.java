@@ -86,9 +86,9 @@ public class CompeteCatalogService {
 		Team team = teamCatalogService.search(championshipId, modalityId, teamId);
 		Bracket bracket = bracketCatalogService.search(championshipId, modalityId, stageId, bracketId);
 		
-		List<Compete> competeResearched = listAllBracket(championshipId, modalityId, stageId, bracketId).stream().filter(c -> c.getTeam().equals(team)).toList();
+		List<Compete> competeResearched = listAllBracket(championshipId, modalityId, stageId, bracketId).stream().filter(c -> c.getTeam().equals(team)).collect(Collectors.toList());
 		
-		if (!competeResearched.isEmpty()) {
+		if (!competeResearched.isEmpty() && compete.getId() == null) {
 			throw new BusinessException(
 					messageSource.getMessage("compete.invalid.stage", null, LocaleContextHolder.getLocale()));
 		}
@@ -102,7 +102,7 @@ public class CompeteCatalogService {
 		Bracket bracket = bracketCatalogService.search(compete.getBracket().getStage().getModality().getChampionship().getId(),
 				compete.getBracket().getStage().getModality().getId(),
 				compete.getBracket().getStage().getId(),
-				compete.getId());
+				compete.getBracket().getId());
 
 		Compete competeResearched = search(bracket.getStage().getModality().getChampionship().getId(),
 				bracket.getStage().getModality().getId(),

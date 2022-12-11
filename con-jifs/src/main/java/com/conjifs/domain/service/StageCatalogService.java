@@ -31,14 +31,13 @@ public class StageCatalogService {
 	public Stage search(Long championshipId, Long modalityId, Long stageId) {
 		Modality modality = modalityCatalogService.search(championshipId, modalityId);
 		Set<Stage> stages = stageRepository.findByModality(modality);
-		Optional<List<Stage>> stagesList = Optional.of(stages.stream().filter(t -> t.getId().equals(stageId)).toList());
-				
-		Optional<Stage> stage = (stagesList.isPresent() ? (!stagesList.get().isEmpty() ? Optional.of(stagesList.get().get(0)) : Optional.empty()): Optional.empty());
-		return stage.orElseThrow(() -> 
-			new EntityNotFoundException(
-				messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale())
-			)
-		);
+		
+		List<Stage> stagesList = stages.stream().filter(t -> t.getId().equals(stageId)).collect(Collectors.toList());
+
+		if(stagesList.isEmpty()) {
+			throw new EntityNotFoundException(messageSource.getMessage("stage.not.found", null, LocaleContextHolder.getLocale()));
+		}
+		return stagesList.get(0);
 	}
 	
 	@Transactional
@@ -71,19 +70,22 @@ public class StageCatalogService {
 	
 	@Transactional
 	public Stage save(Stage stage) {
-		Modality modality = modalityCatalogService.search(
-				stage.getModality().getChampionship().getId(),
-				stage.getModality().getId());
-		List<Stage> nameUsed = listAll(modality.getChampionship().getId(), modality.getId()).stream()
-				.filter(t -> t.getNameStage().equals(stage.getNameStage())).toList();
+		stage = search(stage.getModality().getChampionship().getId(), stage.getModality().getId(), stage.getId());
+		Stage st = stage;
+		List<Stage> nameUsed = stage.getModality().getStages().stream().filter(s -> s.getNameStage() == st.getNameStage()).collect(Collectors.toList());
 		if (!nameUsed.isEmpty()) {
-			if(nameUsed.get(0).getId() != stage.getId()) {
+			if(stage.getId() != null) {
+				if(nameUsed.get(0).getId() != stage.getId()) {
+					throw new BusinessException(
+						messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
+					);
+				}
+			}else {
 				throw new BusinessException(
-					messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
-				);
+						messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
+					);
 			}
 		}
-		stage.setModality(modality);
 		return stageRepository.save(stage);
 	}
 	
