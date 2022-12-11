@@ -3,56 +3,147 @@
 <head>
     <meta charset ='utf-8'>
     <meta name='viewport' content="width=device-width, intial-scale=1">
-    <title> CON-JIFs</title>
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <title>Con-JIFs</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css.map">
+    <link rel="stylesheet" href="./css/style.css">
+    <script async="false" src="./core/util-coockies.js"></script>
+    <script src="./core/jquery-1.10.2.js"></script>
+    <script type="text/javascript">
+    function openMenu(token){
+        document.body.innerHTML = `
+            <input type="hidden" name="token" value="" id="token-autenction">
+            <nav id="menu">
+            <div id="titulomenu"><h1> Menu</h1></div>
+            <ul style="list-style: none;">
+                <li >
+                    <button onclick='manage_championship()'id="menu_btn_championship" type="submit" class="btn btn-success btn-block btn-lg" style=" margin:center;" target="principal" >
+                        Campeonato
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_modality()'id="menu_btn_modality" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Modalidade
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_team()'id="menu_btn_team" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal"> 
+                        Time
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_group()'id="menu_btn_group"type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Grupo/Chave
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_compete()'id="menu_btn_compete" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Competição
+                    </button>
+                </li>
+                <li>
+                    <button onclick='manage_match()' id="menu_btn_match" type="submit" class="btn btn-success btn-block btn-lg " style="  margin:center" target="principal">
+                        Partida
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <div id="container">
+            <div id="screen">
+                <img src="img/logo.png" id="logo"/>   
+            </div>  
+        </div>`;
+        document.getElementById("screen").addEventListener('click', function(e) {
+            $.each($('.tab-input'), function(i, input){
+                if(e.target != input && $(input).attr('readonly') != "readonly") {
+                    $(input).trigger($.Event("keydown", {keyCode: 13}))
+                } 
+            });      
+        });       
+        $("#token-autenction").val(token);
+    }
+    function login(){
+        login_api($('#login').val(), $('#password').val(), function(data){
+            // setData('token', data ,1); 
+            token = ''+data;
+            console.log(token);
+            openMenu(token);
+        })        
+    }
+    </script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/popper.min.js"></script>
     <script src="./core/api-request.js"></script>
     <script src="./requests/login-requests.js"></script>
     <script src="./core/jquery-1.10.2.js"></script>
     <script src="./core/util-coockies.js"></script>
     <style>
-        .campo {
+        .campoIndex {
             background-color: #EFEFEF;
             padding: 25px;
         }
-        .nome {
+        .nomeIndex {
             color: #73C16D
         }
-        .btn{
+        .btnIndex{
             width: 560px;
         }
     </style>
+    <script async="false" src="./core/api-request.js"></script>
+    <script async="false" src="./core/screen-ratio.js"></script>
+    <script async="false" src="./core/sort-ranking.js"></script>
+    <script async="false" src="./core/sort-disputes.js"></script>
+    <script async="false" src="./core/sort-brackets.js"></script>
+    <script async="false" src="./core/format-date.js"></script>
+    <script async="false" src="./requests/modalities-requests.js"></script>
+    <script async="false" src="./requests/login-requests.js"></script>
+    <script async="false" src="./requests/championships-requests.js"></script>
+    <script async="false" src="./requests/stages-requests.js"></script>
+    <script async="false" src="./requests/disputes-requests.js"></script>
+    <script async="false" src="./requests/competes-requests.js"></script>
+    <script async="false" src="./requests/brackets-requests.js"></script>
+    <script async="false" src="./requests/matches-requests.js"></script>
+    <script async="false" src="./requests/teams-requests.js"></script>
+    <script async="false" src="./view/manage-championship.js"></script>
+    <script async="false" src="./view/manage-dispute.js"></script>
+    <script async="false" src="./view/manage-group.js"></script>        
+    <script async="false" src="./view/manage-match.js"></script>
+    <script async="false" src="./view/manage-modality.js"></script>
+    <script async="false" src="./view/manage-compete.js"></script>
+    <script async="false" src="./view/manage-team.js"></script>
 </head>
 <body>
     <div class="main-login">
-            <div class="row">
-            <div class="col-sm-6  align-middle">
-                <div class="left-login nome ml-5 mt-5">
-                    
+        <div class="row">
+            <div class="  ">
+                <div class="left-login nome nomeIndex ml-5 mt-5">  
                     <div class="card-body">
-                        <br/> <br/>  <h1 class="font-weight-bold nome" > Login</h1>   <br/><br/>
-                            <div class="form-group" style="width: 35rem" >
-                                <label for="login">ADMINSTRADOR</label>
-                                <input type="text" onkeydown = "
-                                    if (event.keyCode == 13){
-                                        login_api($('#login').val() ,$('#password').val(), function(data){setData('token', data ,1); window.location.replace('./menu.html');})
-                                    }"
-                                class="form-control campo" id="login" placeholder="Digite seu usuario" required/> 
-                            </div>
-                            <div class="form-group" style="width: 35rem" >
-                                <label for="password">Senha:</label>
-                                <input type="password" onkeydown = "
-                                    if (event.keyCode == 13){
-                                        login_api($('#login').val() ,$('#password').val(), function(data){setData('token', data ,1); window.location.replace('./menu.html');})
-                                    }"
-                                    class="form-control campo" id="password" placeholder="Digite sua senha" required/>
-                            </div>
-                            <button id="entrarLogin" onclick="login_api($('#login').val() ,$('#password').val(), function(data){setData('token', data ,1); window.location.replace('./menu.html');})" type="submit" class="btn btn-success btn-block btn-lg">
-                                Entrar
-                            </button>
+                        <h1 class="font-weight-bold nome nomeIndex" > Login</h1>
+                        <div class="form-group" style="width: 35rem" >
+                            <label for="login">ADMINSTRADOR</label>
+                            <input type="text" onkeydown = "
+                                if (event.keyCode == 13){
+                                    login()
+                                }"
+                            class="form-control campo campoIndex" id="login" placeholder="Digite seu usuario" required/> 
+                        </div>
+                        <div class="form-group" style="width: 35rem" >
+                            <label for="password">Senha:</label>
+                            <input type="password" onkeydown = "
+                                if (event.keyCode == 13){
+                                    login()
+                                }"
+                                class="form-control campo campoIndex" id="password" placeholder="Digite sua senha" required/>
+                        </div>
+                        <button id="entrarLogin" onclick="
+                            login()"
+                         type="submit" class="btn btnIndex btn-success btn-block btn-lg">
+                            Entrar
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="">
                 <div class="text-center" >
                     <img src="img/logo.png" >
                     <img style="width: 200px"  src="img/if.png" >
