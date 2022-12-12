@@ -59,7 +59,7 @@ function list_championships(callback){
 }
 
 function edit_championships(id, name, date, locale, callback){
-	endpoint = '/championships/${id}';
+	endpoint = `/championships/${id}`;
 	type = 'put';
 	header = {
 		'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ function edit_championships(id, name, date, locale, callback){
 }
 
 function search_championships(id, callback){
-	endpoint = '/championships/${id}';
+	endpoint = `/championships/${id}`;
 	type = 'get';
 	header = {
 		'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ function search_championships(id, callback){
 }
 
 function searchName_championships(nameModali, callback){
-	endpoint = '/championships/name';
+	endpoint = `/championships/name`;
 	type = 'post';
 	header = {
 		'Access-Control-Allow-Origin': '*',
@@ -151,7 +151,7 @@ function searchName_championships(nameModali, callback){
 }
 
 function delete_championships(id, callback){
-	endpoint = '/championships/${id}';
+	endpoint = `/championships/${id}`;
 	type = 'delete';
 	header = {
 		'Content-Type': 'application/json',
