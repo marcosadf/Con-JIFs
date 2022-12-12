@@ -70,21 +70,14 @@ public class StageCatalogService {
 	
 	@Transactional
 	public Stage save(Stage stage) {
-		stage = search(stage.getModality().getChampionship().getId(), stage.getModality().getId(), stage.getId());
+		Modality modality = modalityCatalogService.search(stage.getModality().getChampionship().getId(), stage.getModality().getId());
 		Stage st = stage;
-		List<Stage> nameUsed = stage.getModality().getStages().stream().filter(s -> s.getNameStage() == st.getNameStage()).collect(Collectors.toList());
-		if (!nameUsed.isEmpty()) {
-			if(stage.getId() != null) {
-				if(nameUsed.get(0).getId() != stage.getId()) {
+		if (! modality.getStages().stream().filter(s -> s.getNameStage() == st.getNameStage()).toList().isEmpty()) {
+			if(modality.getStages().stream().filter(s -> s.getNameStage() == st.getNameStage()).toList().get(0).getId() != stage.getId()) {
 					throw new BusinessException(
 						messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
 					);
 				}
-			}else {
-				throw new BusinessException(
-						messageSource.getMessage("stage.invalid.modality", null, LocaleContextHolder.getLocale())
-					);
-			}
 		}
 		return stageRepository.save(stage);
 	}

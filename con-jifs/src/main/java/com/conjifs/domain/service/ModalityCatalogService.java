@@ -1,7 +1,6 @@
 package com.conjifs.domain.service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.conjifs.config.LocaleConfig;
 import com.conjifs.domain.exception.BusinessException;
-import com.conjifs.domain.exception.EntityNotFoundException;
 import com.conjifs.domain.model.Championship;
 import com.conjifs.domain.model.Modality;
 import com.conjifs.domain.model.TypeCompetition;
@@ -30,15 +28,14 @@ public class ModalityCatalogService {
 	
 	@Transactional
 	public Modality search(Long championshipId, Long modalityId) {
-		Set<Modality> modalities = listAll(championshipId);
-		Optional<List<Modality>> modalitiesList = Optional.of(modalities.stream().filter(t -> t.getId().equals(modalityId)).toList());
-				
-		Optional<Modality> modality = (modalitiesList.isPresent() ? (!modalitiesList.get().isEmpty() ? Optional.of(modalitiesList.get().get(0)) : Optional.empty()): Optional.empty());
-		return modality.orElseThrow(() -> 
-			new EntityNotFoundException(
+		Optional<Modality> modality = modalityRepository.findById(modalityId);
+		if(modality.isPresent()) {
+			if(modality.get().getChampionship().getId() == championshipId)
+				return modality.get();
+		}
+		throw new BusinessException(
 				messageSource.getMessage("modality.not.found", null, LocaleContextHolder.getLocale())
-			)
-		);
+			);
 	}
 	@Transactional
 	public Set<Modality> listAllActive(Long championshipId) {

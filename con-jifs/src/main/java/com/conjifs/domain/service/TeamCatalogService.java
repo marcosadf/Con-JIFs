@@ -51,10 +51,8 @@ public class TeamCatalogService {
 		Modality modality = modalityCatalogService.search(
 				team.getModality().getChampionship().getId(),
 				team.getModality().getId());
-		List<Team> nameUsed = listAll(team.getModality().getChampionship().getId(), modality.getChampionship().getId()).stream()
-				.filter(t -> t.getName().equals(team.getName())).toList();
-		if (!nameUsed.isEmpty()) {
-			if(nameUsed.get(0).getId() != team.getId()) {
+		if (!modality.getTeams().stream().filter(t -> t.getName() == team.getName()).toList().isEmpty()) {
+			if(modality.getTeams().stream().filter(t -> t.getName() == team.getName()).toList().get(0).getId() != team.getId()) {
 				throw new BusinessException(
 					messageSource.getMessage("name.team.exist", null, LocaleContextHolder.getLocale())
 				);
