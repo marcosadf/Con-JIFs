@@ -1,26 +1,9 @@
-var arr = [];
-function setData(blank1, token, blank2){
-    clearItems()
-    if (localStorage.token){             
-      arr = [];
-    }
-    arr.push(token);
-    localStorage.token = JSON.stringify(arr);
-}
 function getData(blank1, blank2){
-   // if (localStorage.token != "" && localStorage.token != [""]){         
-   //    console.log(JSON.parse(localStorage.getItem('token')));
-   //    return JSON.parse(localStorage.getItem('token')); 
-   // }else 
-   if($("#token-autenction").val() != ""){
-      console.log($("#token-autenction").val());
-      return $("#token-autenction").val();
+   if($("#token-autentication").val() != ""){
+      console.log($("#token-autentication").val());
+      return $("#token-autentication").val();
    }
    return "";
-}
-function clearItems(){
-   arr = [];
-   localStorage.token = JSON.stringify(arr);   
 }
 
 

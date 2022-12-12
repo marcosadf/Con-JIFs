@@ -62,6 +62,34 @@ function list_modalities(championshipId, callback){
 	api_request(endpoint, type, header, body, callback, error);
 }
 
+function listAllActive_modalities(championshipId, callback){
+	endpoint = `/modalities/championship/${championshipId}/active`;
+	type = "get";
+	header = {
+		'Content-Type': `application/json`,
+		'Accept-Language': `pt`,
+		'Authorization': `Bearer ` + getData(`token`,false)
+	}
+	body = "";
+	error = function(jqXHR, textStatus, msg){
+				switch (jqXHR.status){
+			case 404:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break
+			case 400:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;			
+			case 401:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;
+			case 500:
+				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
+				break;			
+		}
+	}
+	api_request(endpoint, type, header, body, callback, error);
+}
+
 function search_modalities(championshipId, modalityId, callback){
 	endpoint = `/modalities/championship/${championshipId}/${modalityId}`;
 	type = "get";

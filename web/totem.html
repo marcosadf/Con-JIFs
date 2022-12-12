@@ -2,17 +2,17 @@
 <html>
 <head>
 	<script type="text/javascript">
-        var token = {
-          token: ""
-        }
-    </script>	
+	    var token = {
+	      token: ""
+	    }
+	</script>	
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Totem</title>
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/bootstrap.css.map">
-    <link rel="stylesheet" href="./css/totem-style.css">
-    <link rel="stylesheet" href="./css/brackets-style.css">
+	<link rel="stylesheet" href="./css/bootstrap.css">
+	<link rel="stylesheet" href="./css/bootstrap.css.map">
+	<link rel="stylesheet" href="./css/totem-style.css">
+	<link rel="stylesheet" href="./css/brackets-style.css">
 	<script src="./core/jquery-1.10.2.js"></script>
 	<script src="./core/util-coockies.js"></script>
 	<script src="./core/api-request.js"></script>
@@ -21,23 +21,27 @@
 	<script src="./core/sort-disputes.js"></script>
 	<script src="./core/sort-brackets.js"></script>
 	<script src="./core/format-date.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
-    <script src="./requests/modalities-requests.js"></script>
-    <script src="./requests/login-requests.js"></script>
-    <script src="./requests/championships-requests.js"></script>
-    <script src="./requests/stages-requests.js"></script>
-    <script src="./requests/disputes-requests.js"></script>
-    <script src="./requests/competes-requests.js"></script>
-    <script src="./requests/brackets-requests.js"></script>
-    <script src="./requests/matches-requests.js"></script>
-    <script src="./requests/teams-requests.js"></script>
-    <script src="./view/totem-tables-groups.js"></script>
-    <script src="./view/totem-ranking-groups.js"></script>
-    <script src="./view/totem-table-brackets.js"></script>
-    <!-- <script src="./test/data.js"></script> -->
-    <!-- <script src="./test/trigger-settest.js"></script> -->
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./requests/modalities-requests.js"></script>
+	<script src="./requests/login-requests.js"></script>
+	<script src="./requests/championships-requests.js"></script>
+	<script src="./requests/stages-requests.js"></script>
+	<script src="./requests/disputes-requests.js"></script>
+	<script src="./requests/competes-requests.js"></script>
+	<script src="./requests/brackets-requests.js"></script>
+	<script src="./requests/matches-requests.js"></script>
+	<script src="./requests/teams-requests.js"></script>
+	<script src="./view/totem-tables-groups.js"></script>
+	<script src="./view/totem-ranking-groups.js"></script>
+	<script src="./view/totem-table-brackets.js"></script>
+	<!-- <script src="./test/data.js"></script> -->
+	<!-- <script src="./test/trigger-settest.js"></script> -->
 </head>
 <body>
+	<input type="hidden" id="token-autentication" name="">
+	<select class="custom-select" id="champs">
+      <option selected value="0">Campeonato</option>
+  </select>	
 	<div id="titleChampionship" class="titleTables"></div>
 	<div id="container" class="container">
 		<div id="containerDataRanking" class="containerData">
@@ -52,27 +56,26 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		function callback(vetModalities) {
-			for (var i = 0; i < vetModalities.length; i++) {
-				list_stages(vetModalities[i].championship.id, vetModalities[i].id ,check_stage);
-			}
-			console.log("oi");
-			let modalitiesIds = JSON.parse(getData("modalitiesIds", false) == ""? "[]": getData("modalitiesIds", false));
-			let modalities = new Array();
-			setData("modalitiesIds", JSON.stringify(modalities), 1);
-			for (var x = 0; x < vetModalities.length; x++) {
-				for(var i = 0; i < modalitiesIds.length; i++){	
-					if(vetModalities[x].id == modalitiesIds[i]){
-						modalities.push(vetModalities[x]);
-						i = modalitiesIds.length;
-					}
+		function selChamps(){
+			list_championships(function(champs){
+	        $.each(champs, function (i, item) {
+	            $('#champs').html(`<option selected value="0">Campeonato</option>`);
+	            $('#champs').append($('<option>', { 
+	                value: item.id,
+	                text : item.name
+	            }));
+	        });
+	    });
+      if(champs.length > 1){
+      	$('#champs').val(champs[0].id);
+      }
+	  }
+		function callback(modalities) {
+				if(modalities.length > 0){
+					renderTotem(modalities, 0, parseInt($('#champs').val()));
+				}else{
+					alert("Não existem modalidades ativas no momento!");
 				}
-			}
-			if(modalities.length > 0){
-				renderTotem(modalities, 0);
-			}else{
-				alert("Não existem modalidades ativas no momento!");
-			}
 		}
 
 		function animateContainer() {			
@@ -82,7 +85,7 @@
 			$("#container").css({"display": "flex"});
 		}
 
-		function renderTotem(modalities, x) {
+		function renderTotem(modalities, x, champs) {
 			$("#titleChampionship").attr("class" , "titleTables");
 			$("#container").attr("class" , "container");
 			$("#titleChampionship").css({"display": "none"});			
@@ -95,13 +98,17 @@
 				x = modalities.length - 1;
 			else
 				x--;
-			setTimeout(renderTotem, 10000, modalities, x);
+			if(parseInt($('#champs').val()) == champs){
+				setTimeout(renderTotem, 10000, modalities, x, champs);
+			}else{
+				setTimeout(listAllActive_modalities, 1000, parseInt($('#champs').val()), callback);
+			}
 		}
 
+		var listModalitiesId = [];
 		function check_stage(stages){
 			for (var i = 0; i < stages.length; i++) {
 				listAllStageForBracket_disputes(stages[i].modality.championship.id, stages[i].modality.id, stages[i].id, function(listDisputesForGroups){
-					let listModalitiesId = JSON.parse(getData("modalitiesIds", false) == ""? "[]": getData("modalitiesIds", false));
 					for (var k = 0; k < listDisputesForGroups.length; k++) {
 						let listDisputes = listDisputesForGroups[k];
 						for(var n = 0; n < listDisputes.length; n++){
@@ -160,9 +167,16 @@
 		var password = "@1234";
 		login_api(login, password, function(data){
 			let token = data;
-		    setData("token",token,1);	
+			$("#token-autentication").val(token);
+			selChamps();
+			list_championships((champs)=>{
+				if(champs.length > 0){
+					setTimeout(listAllActive_modalities, 1000, champs[0].id, callback);
+				}else
+					alert("Não há campeonatos disponivéis!");
+				}
+			);
 		});
-		setTimeout(list_modalities, 1000, 1, callback);
 	</script>
 </body>
 </html>

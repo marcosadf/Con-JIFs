@@ -42,6 +42,11 @@ public class ModalityController {
 		return modalityCatalogService.listAll(championshipId);
 	}
 	
+	@GetMapping("/championship/{championshipId}/active")
+	public Set<Modality> listAllActive(@PathVariable Long championshipId) {
+		return modalityCatalogService.listAllActive(championshipId);
+	}
+	
 	@CrossOrigin(origins = "http://localhost:8080")
 	@PostMapping("/championship/{championshipId}/name")
 	public Set<Modality> searchName(@PathVariable Long championshipId, @RequestBody Modality modality) {

@@ -40,7 +40,20 @@ public class ModalityCatalogService {
 			)
 		);
 	}
-	
+	@Transactional
+	public Set<Modality> listAllActive(Long championshipId) {
+		Championship championship = championshipCatalogService.search(championshipId);
+		Set<Modality> listModalities = modalityRepository.findByChampionship(championship);
+		return listModalities.stream().filter(m -> {
+				return !m.getStages().stream().filter(s ->{
+					return !s.getBrackets().stream().filter(b -> {
+						return !b.getMatchs().stream().filter(mc -> {
+							return mc.getDisputes().size() > 0;
+						}).collect(Collectors.toList()).isEmpty();
+					}).collect(Collectors.toList()).isEmpty();
+				}).collect(Collectors.toList()).isEmpty();
+			}).collect(Collectors.toSet());
+	}
 	@Transactional
 	public Set<Modality> listAll(Long championshipId) {
 		Championship championship = championshipCatalogService.search(championshipId);

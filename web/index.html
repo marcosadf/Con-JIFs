@@ -12,7 +12,7 @@
     <script type="text/javascript">
     function openMenu(token){
         document.body.innerHTML = `
-            <input type="hidden" name="token" value="" id="token-autenction">
+            <input type="hidden" name="token" value="" id="token-autentication">
             <nav id="menu">
             <div id="titulomenu"><h1> Menu</h1></div>
             <ul style="list-style: none;">
@@ -60,7 +60,7 @@
                 } 
             });      
         });       
-        $("#token-autenction").val(token);
+        $("#token-autentication").val(token);
     }
     function login(){
         login_api($('#login').val(), $('#password').val(), function(data){
