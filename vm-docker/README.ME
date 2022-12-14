@@ -1,0 +1,17 @@
+A arquitetura definida constitui-se de um servidor virtualizado criado através da ferramenta Vagrant que possui a finalidade
+de gerenciar imagens e provisionamento de servidores atraves de infrastruture as a code, IaC
+é provisionado o servidor e configurado a rede para compartilharem as mesmas portas do seridor host, para faciliar o acesso
+também nesse momento é instalado e configurado as demais ferramentas que serão utilizadas: docker e ansible
+e a partir de um template de docker-compose é feito deploy de duas aplicações, grafana e Prometheus.
+O Garafana é uma ferramenta open source que recebe dados de demais ferramentas e é possível criar dashboards personalidados e bem visuais
+o Prometheus é também uma ferramenta open source que possui a finalidade de monitorar e coletar métricas relevantes de uma aplicação desde a conexões e dados de desenvolvimento
+até a dados de infraestrutura como: memoria disco.
+a aplicação foi construida para fazer o deploy automatico ao ser provisionada, e essa automação é feita pelo Ansible, basta rodar o comando
+vagrant up # No diretorio onde se encontra o Vagrantfile
+São requisistos para o funcionamento do projeto ter istalado o Virtualbox e o Vagrant.
+após finalização é possível acessar o Grafana atraves da url: localhost:3000 em seu browser.
+e o prometheus encontra se acessivel em localhost:9090.
+Para configurar um monitoramento prévio basta fazer login no grafana utilizando as credenciais default que são: admin admin para user e senha
+e depois configurar o promtheus como datasource com a url http://prometheus:9090, as demais configurações ficam defaul, basta salvar.
+depois já é possível criar bashboards em Criar, como não foi configurado uma aplicação para o prometheus visualizar, ele está por padrão
+coletando métricas de si mesmo.
