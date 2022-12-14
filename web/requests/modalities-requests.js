@@ -40,7 +40,7 @@ function list_modalities(championshipId, callback){
 	header = {
 		'Content-Type': `application/json`,
 		'Accept-Language': `pt`,
-		'Authorization': `Bearer ` + getData(`token`,false)
+		'Authorization': `Bearer ` + getData(`token`)
 	}
 	body = "";
 	error = function(jqXHR, textStatus, msg){

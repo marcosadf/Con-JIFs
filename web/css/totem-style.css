@@ -15,9 +15,15 @@ body {
 	padding: 0;
 }
 #champs{
-	position: absolute;
+	-webkit-appearance: none !important;
 	align-self: flex-start;
-	margin-left: 1%;
+	z-index: 2;
+	position: fixed;
+	margin: 0.5VH;
+	padding: 0.1VW;
+	background-color: #3AC1A3;
+	border: 0.3VH solid #1A826B;
+	border-radius: 100px;
 }
 .containerGroups{
 	display: flex;
@@ -27,20 +33,20 @@ body {
 	border: 0.3VW solid #1A826B;
 	border-radius: 1VW;
 	height: 100%;
-	width: 99%;
+	width: 100%;
 }
 .baseTable{
 	position: relative;
 	float: left;
 	clear:both;
-	align-self: center;
-  			
+	align-self: center;	
 }
-.container{
+
+.containerTotem{
 	display: flex;
-	justify-content: space-between;
+	justify-content: Center;
 	flex-direction: row;
-	height: 90%;
+	height: 100%;
 	max-height: 100%;
 	width: 100%;
 }		
@@ -59,7 +65,7 @@ body {
 .titleTables{
 	margin-top: 1VH;
 	text-align: center;
-	font-size: 3VH;
+	font-size: 150%;
 	font-weight: bold;
 }
 .tabCaption{
@@ -81,9 +87,13 @@ body {
 	width: 100%;
 	border-radius: 5px;
 	padding: 30px;
-	margin-bottom: 30px;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
 	background-color: #6F9996;	
 }  
+.tabBracketTr{
+	height: 100%;
+}
 .tabTd {
 	padding: 1px;
 	position: relative;
@@ -140,7 +150,7 @@ body {
 #tabBracket thead tr th{
 	margin-top: 2%;
 	margin-bottom: 2%;
-	font-size: 95%;
+	font-size: 90%;
 	text-align: center;
 	height: 6%;
 }

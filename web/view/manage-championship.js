@@ -182,7 +182,7 @@ function save_championship(name, date, locale){
 }
 
 function delete_championship(page, championshipId){
-    if(window.confirm('Click em "Ok" para confirmar a exclusão do campeonato.') == true){
+    if(window.confirm('Click em "Ok" para confirmar a exclusão da modalidade.') == true){
         delete_championships(championshipId, ()=>{
             list_championships(function(championships){
                 insert_championships(championships, page);

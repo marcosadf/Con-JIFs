@@ -85,12 +85,12 @@ function renderBrackets(firstStage){
 	for (var i = 0; i < auxRowTab; i++) {
 		let tabBracketTr = $("<tr />", {
 		  id: "tabBracketTr" + i,
-		  "class": "tabBracketTr",
+		  "class": "tabBracketTr"	  
 		});
 		for (var j = 0; j < countStage; j++) {
 			let tabBracketTd = $("<td />", {
 			  id: `tabBracketTd${i}-${j}`,
-			  "class": "tabBracketTr"
+			  "class": "tabBracketTd"
 			});
 			tabBracketTr.append(tabBracketTd)		
 		}
@@ -371,7 +371,10 @@ function renderBrackets(firstStage){
 					});
 					tabTbodyTd.append(tabBracketDivLine);
 					tabTbodyTd.attr("class","tdDivLine")
-					break;				
+					break;
+				case 1:
+					$(`#tabBracketd${i}-${j}`).css("height", tabBracketTbody.height() / auxRowTab + "px");
+					break;	
 			}
 		}	
 	}
