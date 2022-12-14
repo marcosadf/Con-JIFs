@@ -7,22 +7,7 @@ function create_stages(championshipId, modalityId, callback){
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -35,22 +20,7 @@ function searchCurrent_stage(championshipId, modalityId, callback){
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				// alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -63,22 +33,7 @@ function listForTotem_stages(championshipId, modalityId, callback){
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -92,22 +47,7 @@ function list_stages(championshipId, modalityId, callback){
 	}
 	body = "";
 
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -120,22 +60,7 @@ function search_stages(championshipId, modalityId, stageId, callback){
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -150,22 +75,7 @@ function searchName_stages(championshipId, modalityId, nameStage, callback){
 	body =  JSON.stringify({
         nameSatge: nameStage
     });
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -187,22 +97,7 @@ function edit_stages(championshipId, modalityId, stageId, nameStage, concluded, 
         nameStage: nameStage,
         concluded: concluded
     });
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -222,22 +117,7 @@ function setConcluded_stages(championshipId, modalityId, stageId, callback){
 	        }
 	    }
     });
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -250,21 +130,6 @@ function drop_stages(championshipId, modalityId, stageId, callback){
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }

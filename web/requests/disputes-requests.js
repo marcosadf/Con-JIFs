@@ -28,22 +28,7 @@ function add_disputes(championshipId, modalityId, stageId, bracketId, matchId, t
 		points: points
        
     });
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -56,22 +41,7 @@ function searchTeamBracket_disputes(championshipId, modalityId, stageId, bracket
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -84,22 +54,7 @@ function listAllStageForBracket_disputes(championshipId, modalityId, stageId, ca
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -112,22 +67,7 @@ function searchAllMatch_disputes(championshipId, modalityId, stageId, bracketId,
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -161,21 +101,6 @@ function edit_disputes(championshipId, modalityId, stageId, bracketId, matchId, 
 		points: points
        
     });
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }

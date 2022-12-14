@@ -73,7 +73,7 @@ public class JWTValidateFilter extends BasicAuthenticationFilter{
 	    	return true;
 	}
 	public static class ExpiredTokenResponse{
-		public int status = 401;
+		public int status = 403;
 		public String dateTime = LocalDateTime.now().toString();         
 		public String title = messageSource.getMessage("expired.token", null, LocaleContextHolder.getLocale());
 	}

@@ -7,22 +7,7 @@ function create_matches(championshipId, modalityId, callback){
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -35,22 +20,7 @@ function listAllBracket_matches(championshipId, modalityId, stageId, bracketId, 
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -63,22 +33,7 @@ function searchForTeam_matches(championshipId, modalityId, teamId, matchId, call
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -93,22 +48,7 @@ function searchForBracket_matches(championshipId, modalityId, stageId, name, cal
 	body =  JSON.stringify({
         nameSatge: name
     });
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -137,22 +77,7 @@ function edit_matches(championshipId, modalityId, stageId, bracketId, matchId, d
 		dateTime: dateTime
        
     });
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 404:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
 
@@ -165,18 +90,6 @@ function clear_matches(championshipId, modalityId, stageId, bracketId, matchId, 
 		"Authorization": "Bearer " + getData("token",false)
 	}
 	body = "";
-	error = function(jqXHR, textStatus, msg){
-		switch (jqXHR.status){
-			case 400:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-			case 401:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;
-			case 500:
-				alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);
-				break;			
-		}
-	}
+	error = request_errors;
 	api_request(endpoint, type, header, body, callback, error);
 }
