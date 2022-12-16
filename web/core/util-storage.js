@@ -9,6 +9,7 @@ function setData(cname, cvalue, exdays) {
 
 function getData(cname) {
   valueS = localStorage.getItem(cname);
+  valueC = "";
   let name = cname + "=";
   let ca = document.cookie.split(';');
   for(let i = 0; i < ca.length; i++) {

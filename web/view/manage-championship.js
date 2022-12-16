@@ -71,10 +71,11 @@ function manage_championship(){
                                         <input type="text" class="form-control campo" id="cad-name"
                                             placeholder="Digite nome" required>
                                     </div>
-                                    <div class="form-group cadastro" style="width: 20rem">
+                                    <div id="sandbox-container" class="form-group cadastro" style="width: 20rem">
                                         <label for="groupApprovedNumber">Data</label>
-                                        <input type="text" class="form-control campo" id="cad-date"
-                                            placeholder="Digite data" required>
+                                            <div class="input-group date">
+                                              <input type="text" id="cad-date" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                            </div>
                                     </div>                                    
                                     <div class="form-group cadastro" style="width: 20rem">
                                         <label for="groupTeamsNumber">Local</label>
@@ -94,6 +95,9 @@ function manage_championship(){
     </div>
     `);
     nextChampionship_page(1);
+    $('#sandbox-container .input-group.date').datepicker({
+        format: "dd/mm/yyyy"
+    });
 }
 function insert_championships(championships, page){
     if(page == 1 || championships.length / 4 > (page - 1)){
@@ -109,12 +113,16 @@ function insert_championships(championships, page){
                     name="name" id="name-${championships[i].id}" class="tab-input form-control" value="${championships[i].name}" />
                 </th>
                 <th scope="row">
-                    <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
-                        if (event.keyCode == 13){
-                            this.readOnly='true';
-                            edit_championships( ${championships[i].id}, $('#name-${championships[i].id}').val(), $('#date-${championships[i].id}').val(), $('#locale-${championships[i].id}').val(), ()=>{});
-                        }"
-                    name="date" id="date-${championships[i].id}" class="tab-input form-control" value="${formatDate(championships[i].date, false)}" />
+                    <div class="sandbox-container" class="form-group">
+                        <div class="input-group date">
+                          <input title="Dê dois cliques para alterar" type="text" id="date-${championships[i].id}" value="${formatDate(championships[i].date, false)}" class="tab-input form-control" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                                if (event.keyCode == 13){
+                                    this.readOnly='true';
+                                    edit_championships( ${championships[i].id}, $('#name-${championships[i].id}').val(), $('#date-${championships[i].id}').val(), $('#locale-${championships[i].id}').val(), ()=>{});
+                                }"
+                          ><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        </div>
+                    </div>                 
                 </th>
                 <th scope="row">
                     <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
@@ -154,6 +162,10 @@ function insert_championships(championships, page){
             </li>` : ``;
         $('#current-page').val(page);
         $('#pagination').html(btnPages);
+        $('.sandbox-container .input-group.date').datepicker({
+            format: "dd/mm/yyyy"
+        });        
+           
     }
 }
 function nextChampionship_page(page){
@@ -176,6 +188,7 @@ function save_championship(name, date, locale){
         add_championships(name, date, locale, ()=>{
             list_championships(function(championships){
                 insert_championships(championships, parseInt($('#current-page').val()));
+                $('#Cadastro .campo').val('');
             });            
         });
     }

@@ -173,8 +173,8 @@ function manage_match() {
             }
         });
     list_championships(function(champs){
+        $('#inputGroupSelect01').html(`<option selected value="0">Campeonato</option>`);
         $.each(champs, function (i, item) {
-            $('#inputGroupSelect01').html(`<option selected value="0">Campeonato</option>`);
             $('#inputGroupSelect01').append($('<option>', { 
                 value: item.id,
                 text : item.name
@@ -273,20 +273,33 @@ function insert_matches(matches, page){
                     name="bracket" id="bracket-${matches[i].id}" class="tab-input form-control" value="${matches[i].bracket.name}" />
                 </th>
                 <th scope="row">
-                    <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
-                        if (event.keyCode == 13){
-                            this.readOnly='true';
-                            edit_matches(${matches[i].bracket.stage.modality.championship.id}, ${matches[i].bracket.stage.modality.id}, ${matches[i].bracket.stage.id}, ${matches[i].bracket.id}, ${matches[i].id}, $('#date-${matches[i].id}').val(), $('#locale-${matches[i].id}').val(), ()=>{});
-                        }"
-                    name="date" id="date-${matches[i].id}" class="tab-input form-control" value="${formatDate(matches[i].dateTime, true)}" />
+                    <div class="sandbox-container input-group" class="form-group">
+                        <div class="date datepicker">
+                            <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                                if (event.keyCode == 13){
+                                    this.readOnly='true';
+                                    edit_matches(${matches[i].bracket.stage.modality.championship.id}, ${matches[i].bracket.stage.modality.id}, ${matches[i].bracket.stage.id}, ${matches[i].bracket.id}, ${matches[i].id}, $('#date-${matches[i].id}').val() + ' ' + $('#hours-${matches[i].id}').val(), $('#locale-${matches[i].id}').val(), ()=>{});
+                                }"
+                            name="date" id="date-${matches[i].id}" class="tab-input form-control dateCalendar" value="${formatDate(matches[i].dateTime, false)}"/>
+                            <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-th"></i>
+                            </span>
+                        </div>
+                        <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
+                            if (event.keyCode == 13){
+                                this.readOnly='true';
+                                edit_matches(${matches[i].bracket.stage.modality.championship.id}, ${matches[i].bracket.stage.modality.id}, ${matches[i].bracket.stage.id}, ${matches[i].bracket.id}, ${matches[i].id}, $('#date-${matches[i].id}').val() + ' ' + $('#hours-${matches[i].id}').val(), $('#locale-${matches[i].id}').val(), ()=>{});
+                            }"
+                        name="hours" id="hours-${matches[i].id}" class="tab-input form-control hours" value="${formatDate(matches[i].dateTime, true)}"/>
+                    </div>
                 </th>
                 <th scope="row">
                     <input title="Dê dois cliques para alterar" type="text" readonly="true" ondblclick="this.readOnly='';" onkeydown = "
                         if (event.keyCode == 13){
                             this.readOnly='true';
-                            edit_matches(${matches[i].bracket.stage.modality.championship.id}, ${matches[i].bracket.stage.modality.id}, ${matches[i].bracket.stage.id}, ${matches[i].bracket.id}, ${matches[i].id}, $('#date-${matches[i].id}').val(), $('#locale-${matches[i].id}').val(), ()=>{});
+                            edit_matches(${matches[i].bracket.stage.modality.championship.id}, ${matches[i].bracket.stage.modality.id}, ${matches[i].bracket.stage.id}, ${matches[i].bracket.id}, ${matches[i].id}, $('#date-${matches[i].id}').val() + ' ' + $('#hours-${matches[i].id}').val(), $('#locale-${matches[i].id}').val(), ()=>{});
                         }"
-                    name="locale" id="locale-${matches[i].id}" class="tab-input form-control" value="${matches[i].locale}" />
+                    name="locale" id="locale-${matches[i].id}" class="tab-input form-control"  value="${matches[i].locale}" />
                 </th>
                 <th scope="row">
                     <a title="Clique para formatar os dados da partida" onclick="clear_match(${matches[i].id})">
@@ -319,6 +332,20 @@ function insert_matches(matches, page){
         $('#pagination').html(btnPages);
     }
     $('#tab-matches').html(trs);
+    $('.dateCalendar').mask('99/99/9999');
+    $('.datepicker').datepicker({
+        format: "dd/mm/yyyy"
+    });
+    $('.hours').mask("HH:MM", {
+        'translation': {
+            'H': {
+                pattern: /[0-23]/
+            },
+            'M': {
+                pattern: /[0-59]/
+            }
+        }
+    });       
     $.each(matches, function(i, match){
         searchAllMatch_disputes(match.bracket.stage.modality.championship.id, match.bracket.stage.modality.id, match.bracket.stage.id, match.bracket.id, match.id, (disputes)=>{
             if(disputes.length == 1){

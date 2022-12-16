@@ -225,6 +225,7 @@ function save_modality(name, typeCompetition, groupTeamsNumber, groupApprovedNum
         add_modalities(parseInt($('#inputGroupSelect01').val()) , name, typeCompetition, groupTeamsNumber, groupApprovedNumber, ()=>{
             list_modalities(parseInt($('#inputGroupSelect01').val()), function(modalities){
                 insert_modalities(modalities, $('#current-page').val());
+                $('#Cadastro .campo').val('');
             });            
         });
     }

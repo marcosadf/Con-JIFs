@@ -1,4 +1,4 @@
-function formatDate(date, hours) {
+function formatDate(date, instHours) {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -10,8 +10,8 @@ function formatDate(date, hours) {
         month = '0' + month;
     if (day.length < 2) 
         day = '0' + day;
-    if(hours){
-        return `${day}/${month}/${year} ${hours}:${min}`;
+    if(instHours){
+        return `${hours}:${min}`;
     }else{
         return `${day}/${month}/${year}`;
     }

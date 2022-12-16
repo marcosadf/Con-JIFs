@@ -87,8 +87,8 @@ function manage_team(){
     </div>
    `);
     list_championships(function(champs){
+        $('#inputGroupSelect01').html(`<option selected value="0">Campeonato</option>`);
         $.each(champs, function (i, item) {
-            $('#inputGroupSelect01').html(`<option selected value="0">Campeonato</option>`);
             $('#inputGroupSelect01').append($('<option>', { 
                 value: item.id,
                 text : item.name
@@ -205,6 +205,7 @@ function save_team(name, campus){
     if(window.confirm('Click em "Ok" para confirmar a adição do time.') == true){
         add_teams(parseInt($('#inputGroupSelect01').val()), parseInt($('#inputGroupSelect02').val()) , name, campus, ()=>{
            nextTeam_page(parseInt($('#current-page').val()));
+           $('#Cadastro .campo').val('');
         });
     }
 }
@@ -212,7 +213,15 @@ function save_team(name, campus){
 function delete_team(page, teamId){
     if(window.confirm('Click em "Ok" para confirmar a exclusão do time.') == true){
         delete_teams(parseInt($('#inputGroupSelect01').val()), parseInt($('#inputGroupSelect02').val()), teamId, ()=>{
-            nextTeam_page(parseInt($('#current-page').val()));
+            if(parseInt($('#inputGroupSelect03').val()) > 0){
+                listAllForGroup_teams(parseInt($('#inputGroupSelect01').val()), parseInt($('#inputGroupSelect02').val()), parseInt($('#inputGroupSelect03').val()), function(teams){
+                    insert_teams(teams, (page - 1) * 4 >= teams.length? page - 1: page);
+                }); 
+            }else{
+                list_teams(parseInt($('#inputGroupSelect01').val()), parseInt($('#inputGroupSelect02').val()), function(teams){
+                    insert_teams(teams, (page - 1) * 4 >= teams.length? page - 1: page);
+                });
+            }
         });
     }
 }

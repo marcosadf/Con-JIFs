@@ -75,8 +75,8 @@ function manage_compete() {
     </nav>
     `);
     list_championships(function(champs){
+        $('#inputGroupSelect01').html(`<option selected value="0">Campeonato</option>`);
         $.each(champs, function (i, item) {
-            $('#inputGroupSelect01').html(`<option selected value="0">Campeonato</option>`);
             $('#inputGroupSelect01').append($('<option>', { 
                 value: item.id,
                 text : item.name
