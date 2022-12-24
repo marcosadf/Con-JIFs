@@ -11,7 +11,7 @@ function request_errors(jqXHR, textStatus, msg){
 			break;
 		case 403:
 			alert(`Seu login expirou, logar novamente para continuar acessando!`);
-			window.location.replace('./index.html');
+			window.location.replace('./index.php');
 			break;				
 		case 500:
 			alert(`ERROR ${jqXHR.status}: ${jqXHR.responseJSON.title}`);

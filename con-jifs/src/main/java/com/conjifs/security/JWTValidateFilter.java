@@ -61,7 +61,7 @@ public class JWTValidateFilter extends BasicAuthenticationFilter{
 	    	DecodedJWT jwt = JWT.decode(token);
 	    	ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
 	    	if( jwt.getExpiresAt().before(new Date())) {
-	    		response.setStatus(401);
+	    		response.setStatus(403);
 	    		response.setHeader("Content-Type", "application/json");
 	    		try {
 					response.getOutputStream().print(ow.writeValueAsString(new ExpiredTokenResponse()));

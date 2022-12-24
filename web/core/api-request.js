@@ -1,6 +1,6 @@
 function api_request(endpoint, type, header, body, callback, error) {
     $.ajax({
-	   	url : "http://localhost:8080" + endpoint,
+	   	url : host_request + endpoint,
 	    type : type,
 	    headers: header,
 	    data : body,

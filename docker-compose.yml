@@ -5,6 +5,11 @@ services:
     image: php:8.0-apache
     volumes:
       - ./web:/var/www/html/
+    # entrypoint: [ "bash", "-c", "touch .env
+    #   && echo 'HOST_REQUESTS=192.168.0.102' >> .env
+    #   && echo 'PORT_REQUESTS=8080' >> .env"]
+    env_file:
+      - .env
     ports:
       - 8000:80
 

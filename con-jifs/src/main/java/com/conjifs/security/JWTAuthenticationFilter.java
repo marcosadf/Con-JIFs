@@ -1,8 +1,6 @@
 package com.conjifs.security;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -53,27 +51,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			FilterChain chain, Authentication authResult) throws IOException, ServletException {
 		
 		ManagerDetailsDate managerData = (ManagerDetailsDate) authResult.getPrincipal();
-		Date date = new Date(System.currentTimeMillis());
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dateLimit = null;
-		try {
-			dateLimit = sdf.parse("2022-12-20");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+
 		String token;
-		if(date.before(dateLimit)) {
-			token = JWT.create()
-					.withSubject(managerData.getUsername())
-					.withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACTION))
-					.sign(Algorithm.HMAC512(TOKEN_PASSWORD));
-		}else {
-			token = JWT.create()
-					.withSubject(managerData.getUsername())
-					.withExpiresAt(new Date(System.currentTimeMillis() + 1))
-					.sign(Algorithm.HMAC512(TOKEN_PASSWORD));
-		}
-		
+	
+		token = JWT.create()
+				.withSubject(managerData.getUsername())
+				.withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRACTION))
+				.sign(Algorithm.HMAC512(TOKEN_PASSWORD));
+
 		response.getWriter().write(token);
 		response.getWriter().flush();
 	}
